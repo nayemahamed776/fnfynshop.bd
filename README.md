@@ -1,19 +1,18 @@
-FNFY FINAL PROJECT
+FNFY FINAL ALL-FIXED
+Website order + WhatsApp order
+Admin Confirm / Delivered / Cancel
+Status saved to orders and tracking
+Customer Order ID tracking
+Customer reviews submit/view
+Admin review management
+Product Add/Edit/Delete
+4-image gallery
+Working Color/Size selection
+Category + discount + hero
+Header/footer FNFY logo
+Facebook + WhatsApp + Instagram
+Instagram: https://www.instagram.com/fnfy2026/
+Video option OFF
 
-Upload all files to GitHub Pages root:
-index.html
-admin.html
-firebase-config.js
-database.rules.json
-fnfy-logo.png
-assets/fnfy-logo.png
-
-Firebase:
-- Realtime Database stores products, orders, tracking, categories, reviews and settings.
-- Admin email: nayemahamed776@gmail.com
-- Admin must exist in Firebase Authentication.
-- Paste database.rules.json into Realtime Database Rules.
-
-Features:
-Header/footer logo, wide slideshow, WhatsApp/Facebook, categories, mobile category button, 4 gallery images from phone, image compression, add/edit/delete products, discount %, cart/order, Order ID tracking, order statuses, reviews, settings.
-Video is intentionally disabled.
+Firebase: paste database.rules.json into Realtime Database Rules and Publish.
+Admin email: nayemahamed776@gmail.com
