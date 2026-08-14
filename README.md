@@ -1,18 +1,9 @@
-FNFY FINAL ALL-FIXED
-Website order + WhatsApp order
-Admin Confirm / Delivered / Cancel
-Status saved to orders and tracking
-Customer Order ID tracking
-Customer reviews submit/view
-Admin review management
-Product Add/Edit/Delete
-4-image gallery
-Working Color/Size selection
-Category + discount + hero
-Header/footer FNFY logo
-Facebook + WhatsApp + Instagram
-Instagram: https://www.instagram.com/fnfy2026/
-Video option OFF
+FNFY NEW CLEAN FINAL
+1. Edit firebase-config.js with your Firebase Web App config.
+2. Enable Firebase Authentication Email/Password and create admin: nayemahamed776@gmail.com.
+3. Firebase Realtime Database -> Rules: paste database.rules.json and Publish.
+4. Deploy all files to GitHub Pages.
 
-Firebase: paste database.rules.json into Realtime Database Rules and Publish.
-Admin email: nayemahamed776@gmail.com
+All customer/admin data is intended for Realtime Database: products, orders, tracking, reviews, categories, settings and discounts.
+Website + WhatsApp ordering, Order ID tracking, Confirm/Delivered/Cancel, customer reviews, 4-image gallery, Color/Size selection, category/discount/hero, Facebook/WhatsApp/Instagram are included.
+Video option is OFF.
