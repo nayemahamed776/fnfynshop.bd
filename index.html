@@ -1,68 +1,166 @@
 <!doctype html>
 <html lang="bn">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>FNFY — Men's Clothing</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f6f6f6;color:#111}
-header{background:#080808;color:#fff;position:sticky;top:0;z-index:30}.top{max-width:1150px;margin:auto;padding:9px 15px;display:flex;align-items:center;justify-content:space-between;gap:10px}
-.brand{display:flex;align-items:center;gap:9px}.brand img{width:60px;height:50px;object-fit:contain}.brand b{font-size:24px;letter-spacing:4px}.sub{font-size:10px;letter-spacing:3px;color:#ccc}
-.actions{display:flex;gap:7px}.btn{border:0;border-radius:9px;padding:11px 14px;font-weight:bold;cursor:pointer;background:#111;color:#fff}.white{background:#fff;color:#111}.wa{background:#25D366;color:#fff}.cart{border-radius:20px}
-.hero{max-width:1150px;margin:14px auto;padding:50px 22px;background:#111;color:#fff;border-radius:18px}.hero h1{font-size:42px;margin:8px 0}.hero p{max-width:700px;line-height:1.6}
-.wrap{max-width:1150px;margin:auto;padding:0 15px 50px}.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}.filters button{padding:9px 14px;border:1px solid #ddd;background:#fff;border-radius:20px}.filters .active{background:#111;color:#fff}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 2px 12px #0001}.pic{width:100%;aspect-ratio:1;object-fit:cover;background:#eee}.pad{padding:13px}.price{font-size:20px;font-weight:bold;margin:6px 0}.small{font-size:13px;color:#666}
-footer{background:#080808;color:#fff;margin-top:35px;padding:30px 15px}.foot{max-width:1150px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:20px}.foot a{color:#fff;text-decoration:none}.social{display:inline-block;margin-top:10px;padding:10px 13px;border:1px solid #555;border-radius:8px}
-.modal{position:fixed;inset:0;background:#0009;display:none;z-index:60;align-items:flex-end;justify-content:center}.modal.show{display:flex}.sheet{background:#fff;width:100%;max-width:700px;max-height:94vh;overflow:auto;border-radius:20px 20px 0 0;padding:20px}.close{float:right;border:0;background:#eee;border-radius:50%;width:36px;height:36px;font-size:20px}
-.thumbs{display:flex;gap:7px;overflow:auto;margin:8px 0}.thumbs img{width:68px;height:68px;object-fit:cover;border-radius:8px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-input,select,textarea{width:100%;padding:12px;margin:5px 0 10px;border:1px solid #ddd;border-radius:9px;font:inherit}
-.review{border-bottom:1px solid #eee;padding:10px 0}.empty{text-align:center;background:#fff;padding:25px;border-radius:14px}
-.status{display:inline-block;padding:7px 10px;border-radius:20px;background:#eee;font-weight:bold;margin:7px 0}
-.floatwa{position:fixed;right:15px;bottom:16px;z-index:25;text-decoration:none;padding:13px 17px;border-radius:30px}
-.nav{display:none}
-@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}.foot{grid-template-columns:1fr 1fr}.hero h1{font-size:30px}}
-@media(max-width:520px){.top{padding:7px 10px}.brand img{width:52px;height:43px}.brand b{font-size:21px}.sub{font-size:8px}.waTop{display:none}.hero{margin:9px;padding:40px 18px}.grid{gap:9px}.row{grid-template-columns:1fr}.nav{display:flex;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;z-index:40;justify-content:space-around;padding:9px}.nav button{border:0;background:none;font-size:12px}.floatwa{bottom:62px}.foot{grid-template-columns:1fr}}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f5f5;color:#111}
+header{background:#080808;color:#fff;position:sticky;top:0;z-index:20}.top{max-width:1150px;margin:auto;padding:10px 15px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{display:flex;align-items:center;gap:10px}.brand img{width:62px;height:48px;object-fit:contain}.brand b{font-size:25px;letter-spacing:4px}.sub{font-size:11px;letter-spacing:3px;color:#ccc}
+.actions{display:flex;gap:7px;align-items:center}.btn{background:#111;color:#fff;border:0;border-radius:9px;padding:11px 14px;font-weight:bold;cursor:pointer}.white{background:#fff;color:#111}.wa{background:#25D366;color:#fff}.cart{border-radius:22px;padding:10px 15px}
+.hero{max-width:1150px;margin:15px auto;padding:0;background:#111;color:#fff;border-radius:20px;overflow:hidden;position:relative;min-height:330px}.hero-track{display:flex;transition:transform .6s ease;width:100%}.hero-slide{min-width:100%;min-height:330px;padding:52px 34px;display:flex;align-items:center;position:relative;overflow:hidden}.hero-slide:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.82),rgba(0,0,0,.25));pointer-events:none}.hero-content{position:relative;z-index:1;max-width:760px}.hero h1{font-size:42px;margin:8px 0}.hero p{font-size:18px;line-height:1.6;max-width:700px}.hero-badge{display:inline-block;padding:8px 13px;border-radius:999px;background:#fff;color:#111;font-weight:800;font-size:12px;letter-spacing:2px}.hero-slide:nth-child(1){background:linear-gradient(120deg,#111,#292929)}.hero-slide:nth-child(2){background:linear-gradient(120deg,#151515,#3a3a3a)}.hero-slide:nth-child(3){background:linear-gradient(120deg,#0d0d0d,#252525)}.hero-dots{position:absolute;left:34px;bottom:18px;z-index:3;display:flex;gap:7px}.hero-dot{width:8px;height:8px;border-radius:50%;background:#777;cursor:pointer}.hero-dot.active{background:#fff;transform:scale(1.25)}
+.wrap{max-width:1150px;margin:auto;padding:0 15px 45px}h2{margin-top:28px}.filters{display:flex;gap:8px;flex-wrap:wrap}.filters button{border:1px solid #ddd;background:#fff;border-radius:20px;padding:9px 14px}.filters .active{background:#111;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 2px 12px #00000012}.pic{width:100%;aspect-ratio:1/1;object-fit:cover;background:#eee}.pad{padding:13px}.price{font-size:20px;font-weight:bold;margin:7px 0}.small{font-size:13px;color:#666}
+.modal{position:fixed;inset:0;background:#0008;display:none;z-index:50;align-items:flex-end;justify-content:center}.modal.show{display:flex}.sheet{background:#fff;width:100%;max-width:650px;max-height:93vh;overflow:auto;border-radius:20px 20px 0 0;padding:20px}.close{float:right;border:0;background:#eee;border-radius:50%;width:36px;height:36px;font-size:20px}
+.thumbs{display:flex;gap:7px;overflow:auto;margin:8px 0}.thumbs img{width:65px;height:65px;object-fit:cover;border-radius:7px;cursor:pointer}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:9px;margin:5px 0 10px;font:inherit}.empty{text-align:center;padding:30px;background:#fff;border-radius:15px}
+.review{padding:12px;border-bottom:1px solid #eee}.floatwa{position:fixed;right:16px;bottom:18px;z-index:30;border-radius:30px;padding:13px 18px;text-decoration:none;font-weight:bold}.site-footer{background:#080808;color:#fff;margin-top:35px;padding:38px 16px 90px}.footer-inner{max-width:1150px;margin:auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px}.footer-brand{display:flex;align-items:center;gap:12px}.footer-brand img{width:68px;height:55px;object-fit:contain}.footer-title{font-size:24px;font-weight:900;letter-spacing:3px}.footer-text{color:#bbb;line-height:1.7;margin:12px 0}.socials{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.socials a{width:44px;height:44px;border-radius:12px;background:#fff;display:grid;place-items:center;overflow:hidden}.socials img{width:30px;height:30px;object-fit:contain}.socials img.waicon{width:27px;height:27px}.footer-link{color:#fff;text-decoration:none}.footer-copy{max-width:1150px;margin:28px auto 0;padding-top:18px;border-top:1px solid #333;color:#888;font-size:13px}@media(max-width:700px){.footer-inner{grid-template-columns:1fr}.hero-slide{min-height:300px;padding:40px 22px}.hero h1{font-size:30px}.hero p{font-size:16px}.hero-dots{left:22px}}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:31px}}
+@media(max-width:520px){.top{padding:8px 10px}.brand img{width:52px;height:42px}.brand b{font-size:21px}.sub{font-size:9px}.actions .waTop{display:none}.hero{margin:10px;padding:42px 18px}.hero h1{font-size:28px}.grid{gap:9px}.row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<header><div class="top">
-<div class="brand"><img src="fnfy-logo.png" alt="FNFY"><div><b>FNFY</b><div class="sub">MEN'S CLOTHING</div></div></div>
-<div class="actions"><a class="btn wa waTop" href="https://wa.me/8801965460567" target="_blank">WhatsApp</a><button class="btn white cart" id="cartBtn">Cart (<span id="cc">0</span>)</button></div>
-</div></header>
-<section class="hero"><div class="sub">FNFY COLLECTION</div><h1>Style that speaks for itself.</h1><p>Shirt, pant, denim, cargo & jersey — আপনার পছন্দের product বেছে নিন এবং সরাসরি order করুন।</p></section>
+<header>
+  <div class="top">
+    <div class="brand"><img src="assets/fnfy-logo.png" alt="FNFY Logo"><div><b>FNFY</b><div class="sub">MEN'S CLOTHING</div></div></div>
+    <div class="actions">
+      <a class="btn wa waTop" href="https://wa.me/8801965460567" target="_blank">WhatsApp</a>
+      <button class="btn white cart" id="cartBtn">Cart (<span id="cartCount">0</span>)</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" aria-label="FNFY New Collection slideshow"><div class="hero-track" id="heroTrack">
+  <article class="hero-slide"><div class="hero-content"><span class="hero-badge">NEW COLLECTION 2026</span><h1>Style that speaks for itself.</h1><p>Shirt, pant, denim, cargo and jersey — product দেখুন, size/color বাছুন এবং সরাসরি order করুন।</p></div></article>
+  <article class="hero-slide"><div class="hero-content"><span class="hero-badge">NEW ARRIVALS</span><h1>Fresh styles. Premium look.</h1><p>নতুন product, ৪টি gallery image, discount এবং available color/size একসাথে দেখুন।</p></div></article>
+  <article class="hero-slide"><div class="hero-content"><span class="hero-badge">ORDER YOUR WAY</span><h1>Website + WhatsApp Order</h1><p>Website থেকে order করুন অথবা WhatsApp icon-এ tap করে সরাসরি order পাঠান।</p></div></article>
+</div><div class="hero-dots" id="heroDots"><span class="hero-dot active" data-slide="0"></span><span class="hero-dot" data-slide="1"></span><span class="hero-dot" data-slide="2"></span></div></section>
+
 <main class="wrap">
-<h2>Our Products <span id="pcnt" class="small"></span></h2><div class="filters" id="filters"></div><div class="grid" id="products">Loading...</div>
+<h2>Our Products <span class="small" id="count"></span></h2>
+<div class="filters" id="filters"></div>
+<div class="grid" id="products">Loading...</div>
 
-<section id="tracking"><h2>Track Your Order</h2><div class="card pad">
-<input id="trackId" placeholder="Order ID লিখুন"><button class="btn" id="trackBtn">Check Status</button><div id="trackResult"></div>
-</div></section>
-
-<h2>Customer Reviews</h2><div class="card pad"><div id="reviews"></div><form id="reviewForm"><div class="row"><input id="rn" placeholder="নাম" required><select id="rs"><option value="5">★★★★★</option><option value="4">★★★★☆</option><option value="3">★★★☆☆</option><option value="2">★★☆☆☆</option><option value="1">★☆☆☆☆</option></select></div><textarea id="rt" placeholder="Review" required></textarea><button class="btn">Submit Review</button></form></div>
+<h2>Customer Reviews</h2>
+<div class="card"><div class="pad" id="reviewList">Loading...</div>
+<div class="pad"><form id="reviewForm"><div class="row"><input id="rname" placeholder="আপনার নাম" required><select id="rstar"><option value="5">★★★★★</option><option value="4">★★★★☆</option><option value="3">★★★☆☆</option><option value="2">★★☆☆☆</option><option value="1">★☆☆☆☆</option></select></div><textarea id="rtext" rows="3" placeholder="Review লিখুন" required></textarea><button class="btn">Review Submit</button></form></div></div>
 </main>
 
-<footer><div class="foot"><div><img src="fnfy-logo.png" style="width:80px;height:60px;object-fit:contain"><h3>FNFY Men's Clothing</h3><p>Quality men's fashion at an affordable price.</p></div><div><h3>Contact</h3><p>WhatsApp: 01965460567</p><a href="https://wa.me/8801965460567" target="_blank">WhatsApp Order</a></div><div><h3>Follow Us</h3><a class="social" href="https://www.facebook.com/share/19RWoj5v3K/" target="_blank">Facebook Page — FNFY</a></div></div></footer>
-<a class="floatwa wa" href="https://wa.me/8801965460567" target="_blank">WhatsApp Order</a>
-<div class="nav"><button onclick="scrollTo(0,0)">Home</button><button onclick="document.getElementById('filters').scrollIntoView()">Category</button><button onclick="document.getElementById('cartBtn').click()">Cart</button><button onclick="document.getElementById('tracking').scrollIntoView()">Track Order</button></div>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand"><img src="assets/fnfy-logo.png" alt="FNFY Logo"><div><div class="footer-title">FNFY</div><div class="sub">MEN'S CLOTHING</div></div></div>
+      <p class="footer-text">Quality men's fashion at an affordable price.</p>
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <p class="footer-text">WhatsApp: <a class="footer-link" href="https://wa.me/8801965460567" target="_blank">01965460567</a><br>Website Order + WhatsApp Order</p>
+    </div>
+    <div>
+      <h3>Follow FNFY</h3>
+      <div class="socials">
+        <a href="https://www.facebook.com/share/19RWoj5v3K/" target="_blank" aria-label="FNFY Facebook"><img src="assets/facebook.png" alt="Facebook"></a>
+        <a href="https://wa.me/8801965460567" target="_blank" aria-label="FNFY WhatsApp"><img class="waicon" src="assets/whatsapp.svg" alt="WhatsApp"></a>
+        <a href="https://www.instagram.com/fnfy2026/" target="_blank" aria-label="FNFY Instagram"><img src="assets/instagram.png" alt="Instagram"></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copy">© 2026 FNFY Men's Clothing. All rights reserved.</div>
+</footer>
 
-<div class="modal" id="pm"><div class="sheet"><button class="close" data-close>×</button><div id="pd"></div></div></div>
-<div class="modal" id="cm"><div class="sheet"><button class="close" data-close>×</button><h2>Your Cart</h2><div id="ci"></div><h3>Subtotal: ৳<span id="ct">0</span></h3>
-<form id="of"><input id="cn" placeholder="নাম" required><input id="cp" placeholder="মোবাইল নম্বর" required><textarea id="ca" placeholder="ঠিকানা" required></textarea><select id="dc"><option value="60">ঢাকার ভিতরে — ৳60</option><option value="120">ঢাকার বাইরে — ৳120</option></select><button class="btn">Confirm Order</button></form><p id="om"></p></div></div>
+<a class="floatwa wa" href="https://wa.me/8801965460567" target="_blank">WhatsApp Order</a>
+
+<div class="modal" id="productModal"><div class="sheet"><button class="close" data-close>×</button><div id="productDetail"></div></div></div>
+
+<div class="modal" id="cartModal"><div class="sheet">
+<button class="close" data-close>×</button><h2>Your Cart</h2><div id="cartItems"></div><hr><h3>Subtotal: ৳<span id="cartTotal">0</span></h3>
+<form id="orderForm">
+<input id="cname" placeholder="নাম" required><input id="cphone" placeholder="মোবাইল নম্বর" required>
+<textarea id="caddress" placeholder="সম্পূর্ণ ঠিকানা" required></textarea>
+<select id="delivery"><option value="60">ঢাকার ভিতরে — ৳60</option><option value="120">ঢাকার বাইরে — ৳120</option></select>
+<button class="btn" type="submit">Confirm Order</button>
+</form>
+<button class="btn wa" id="waOrder" style="margin-top:7px">WhatsApp-এ Order পাঠান</button>
+<p id="orderMsg"></p>
+</div></div>
 
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-import{getDatabase,ref,onValue,push,set,get}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+import{getDatabase,ref,onValue,push,set}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
 import{firebaseConfig,WHATSAPP_NUMBER}from"./firebase-config.js";
-const app=initializeApp(firebaseConfig),db=getDatabase(app),$=id=>document.getElementById(id),esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+const app=initializeApp(firebaseConfig),db=getDatabase(app);
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
 let products={},cart=JSON.parse(localStorage.getItem("fnfy_cart")||"[]"),filter="All";
-const save=()=>{localStorage.setItem("fnfy_cart",JSON.stringify(cart));$("cc").textContent=cart.reduce((a,x)=>a+x.qty,0)};save();
 
-onValue(ref(db,"products"),s=>{products=s.val()||{};render()});
-function render(){let a=Object.entries(products).filter(([id,p])=>filter==="All"||p.category===filter);$("pcnt").textContent=`(${a.length})`;$("products").innerHTML=a.length?a.map(([id,p])=>`<div class="card"><img class="pic" src="${esc(p.image||"fnfy-logo.png")}"><div class="pad"><b>${esc(p.name)}</b><div class="price">৳${Number(p.price||0).toLocaleString()}</div><span class="small">${esc(p.category||"")}</span><br><button class="btn" data-v="${esc(id)}" style="margin-top:8px">View / Buy</button></div></div>`).join(""):"<div class='empty'>কোনো product নেই।</div>";document.querySelectorAll("[data-v]").forEach(b=>b.onclick=()=>open(b.dataset.v));let cats=["All",...new Set(Object.values(products).map(x=>x.category).filter(Boolean))];$("filters").innerHTML=cats.map(c=>`<button class="${c===filter?"active":""}" data-c="${esc(c)}">${esc(c)}</button>`).join("");document.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>{filter=b.dataset.c;render()})}
-function open(id){let p=products[id],imgs=p.images?.length?p.images:[p.image].filter(Boolean);$("pd").innerHTML=`<img id="mi" class="pic" src="${esc(imgs[0]||"fnfy-logo.png")}"><div class="thumbs">${imgs.map(x=>`<img data-i="${esc(x)}" src="${esc(x)}">`).join("")}</div><h2>${esc(p.name)}</h2><div class="price">৳${Number(p.price||0).toLocaleString()}</div><p>${esc(p.description||"")}</p>${p.videoUrl?`<h3>Product Video</h3><div style="position:relative;padding-top:56%"><iframe src="${esc(p.videoUrl)}" style="position:absolute;inset:0;width:100%;height:100%;border:0" allowfullscreen></iframe></div>`:""}<label>Size</label><select id="sz">${(p.sizes||["28","30","32","34"]).map(x=>`<option>${esc(x)}</option>`).join("")}</select><label>Color</label><select id="co">${(p.colors||["Default"]).map(x=>`<option>${esc(x)}</option>`).join("")}</select><label>Quantity</label><input id="qt" type="number" min="1" value="1"><button class="btn" id="ac">Add to Cart</button>`;$("pm").classList.add("show");document.querySelectorAll("[data-i]").forEach(x=>x.onclick=()=>$("mi").src=x.dataset.i);$("ac").onclick=()=>{cart.push({name:p.name,price:Number(p.price||0),image:imgs[0],size:$("sz").value,color:$("co").value,qty:Number($("qt").value)||1});save();$("pm").classList.remove("show");$("cm").classList.add("show");renderCart()}}
-function renderCart(){if(!cart.length){$("ci").innerHTML="<div class='empty'>Cart খালি</div>";$("ct").textContent="0";return}$("ci").innerHTML=cart.map((x,i)=>`<div style="padding:10px;border-bottom:1px solid #eee"><b>${esc(x.name)}</b><br>৳${x.price} × ${x.qty} | ${esc(x.size)} | ${esc(x.color)} <button class="btn" data-r="${i}" style="float:right">Remove</button></div>`).join("");$("ct").textContent=cart.reduce((a,x)=>a+x.price*x.qty,0).toLocaleString();document.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{cart.splice(b.dataset.r,1);save();renderCart()})}
-$("cartBtn").onclick=()=>{$("cm").classList.add("show");renderCart()};document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>b.closest(".modal").classList.remove("show"));
-$("of").onsubmit=async e=>{e.preventDefault();if(!cart.length)return alert("Cart খালি");let d=Number($("dc").value),sub=cart.reduce((a,x)=>a+x.price*x.qty,0),o={name:$("cn").value.trim(),phone:$("cp").value.trim(),address:$("ca").value.trim(),items:cart,subtotal:sub,deliveryCharge:d,total:sub+d,status:"Pending",createdAt:Date.now()};try{let r=push(ref(db,"orders"));await set(r,o);cart=[];save();$("of").reset();$("om").innerHTML=`Order successful!<br><b>Order ID: ${esc(r.key)}</b><br>এই ID দিয়ে Track Your Order-এ status দেখুন.<br><a class="btn wa" target="_blank" href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("FNFY Order ID: "+r.key+"\\n"+o.name+"\\nTotal: ৳"+o.total)}">WhatsApp</a>`}catch(e){$("om").textContent=e.message}};
-$("trackBtn").onclick=async()=>{let id=$("trackId").value.trim();if(!id){$("trackResult").textContent="Order ID দিন";return;}$("trackBtn").disabled=true;$("trackResult").textContent="Checking...";try{const s=await get(ref(db,"orders/"+id+"/status"));const st=s.val();const labels={Pending:"Pending — Order received",Confirmed:"Confirmed — Order confirmed",Delivered:"Delivered — Order delivered",Cancelled:"Cancelled — Order cancelled"};$("trackResult").innerHTML=st?`<div class="status">${esc(labels[st]||st)}</div>`:`<div class="status">Order ID পাওয়া যায়নি</div>`}catch(e){console.error(e);$("trackResult").innerHTML=`<div class="status">Tracking কাজ করছে না। Firebase Realtime Database Rules Publish হয়েছে কিনা দেখুন।</div>`}finally{$("trackBtn").disabled=false}};
-onValue(ref(db,"reviews"),s=>{$("reviews").innerHTML=Object.values(s.val()||{}).reverse().map(x=>`<div class="review"><b>${esc(x.name)}</b> ${"★".repeat(x.star||5)}<br>${esc(x.text)}</div>`).join("")||"No reviews"});
-$("reviewForm").onsubmit=async e=>{e.preventDefault();await set(push(ref(db,"reviews")),{name:$("rn").value.trim(),star:Number($("rs").value),text:$("rt").value.trim(),createdAt:Date.now()});e.target.reset();alert("Review submitted")};
+function saveCart(){localStorage.setItem("fnfy_cart",JSON.stringify(cart));updateCount()}
+function updateCount(){$("cartCount").textContent=cart.reduce((a,x)=>a+x.qty,0)}
+
+function renderProducts(){
+ const arr=Object.entries(products).filter(([id,p])=>filter==="All"||String(p.category||"")===filter);
+ $("count").textContent=`(${arr.length})`;
+ $("products").innerHTML=arr.length?arr.map(([id,p])=>`
+ <div class="card"><img class="pic" src="${esc(p.image||"assets/fnfy-logo.png")}" onerror="this.src='assets/fnfy-logo.png'">
+ <div class="pad"><b>${esc(p.name)}</b><div class="price">৳${Number(p.price||0).toLocaleString()}</div><div class="small">${esc(p.category||"")}</div>
+ <button class="btn" data-view="${esc(id)}" style="margin-top:9px">View / Buy</button></div></div>`).join(""):'<div class="empty">কোনো product নেই।</div>';
+ document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>openProduct(b.dataset.view));
+ const cats=["All",...new Set(Object.values(products).map(p=>p.category).filter(Boolean))];
+ $("filters").innerHTML=cats.map(c=>`<button class="${filter===c?"active":""}" data-cat="${esc(c)}">${esc(c)}</button>`).join("");
+ document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{filter=b.dataset.cat;renderProducts()});
+}
+onValue(ref(db,"products"),s=>{products=s.val()||{};renderProducts()},e=>{$("products").textContent="Firebase error: "+e.message});
+
+function openProduct(id){
+ const p=products[id];if(!p)return;
+ const imgs=p.images?.length?p.images:[p.image].filter(Boolean);
+ $("productDetail").innerHTML=`
+ <img class="pic" id="mainImg" src="${esc(imgs[0]||"assets/fnfy-logo.png")}">
+ <div class="thumbs">${imgs.map(x=>`<img src="${esc(x)}" data-img="${esc(x)}">`).join("")}</div>
+ <h2>${esc(p.name)}</h2><div class="price">৳${Number(p.price||0).toLocaleString()}</div><p>${esc(p.description||"")}</p>
+ <label>Size</label><select id="selSize">${(p.sizes||["28","30","32","34"]).map(x=>`<option>${esc(x)}</option>`).join("")}</select>
+ <label>Color</label><select id="selColor">${(p.colors||["Default"]).map(x=>`<option>${esc(x)}</option>`).join("")}</select>
+ <label>Quantity</label><input id="selQty" type="number" min="1" value="1">
+ <button class="btn" id="addCart">Add to Cart</button>`;
+ $("productModal").classList.add("show");
+ document.querySelectorAll("[data-img]").forEach(x=>x.onclick=()=>{$("mainImg").src=x.dataset.img});
+ $("addCart").onclick=()=>{cart.push({id,name:p.name,price:Number(p.price||0),image:p.image||imgs[0],size:$("selSize").value,color:$("selColor").value,qty:Number($("selQty").value)||1});saveCart();$("productModal").classList.remove("show");$("cartModal").classList.add("show");renderCart()};
+}
+
+function renderCart(){
+ if(!cart.length){$("cartItems").innerHTML="<div class='empty'>Cart খালি।</div>";$("cartTotal").textContent="0";return}
+ $("cartItems").innerHTML=cart.map((x,i)=>`<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #eee"><img src="${esc(x.image||"assets/fnfy-logo.png")}" style="width:65px;height:65px;object-fit:cover;border-radius:8px"><div style="flex:1"><b>${esc(x.name)}</b><br>৳${Number(x.price).toLocaleString()} × ${x.qty}<br>${esc(x.size)} / ${esc(x.color)}<br><button class="btn" data-minus="${i}">−</button> <button class="btn" data-plus="${i}">+</button> <button class="btn" data-remove="${i}">Remove</button></div></div>`).join("");
+ const subtotal=cart.reduce((a,x)=>a+x.price*x.qty,0);$("cartTotal").textContent=subtotal.toLocaleString();
+ document.querySelectorAll("[data-minus]").forEach(b=>b.onclick=()=>{cart[b.dataset.minus].qty=Math.max(1,cart[b.dataset.minus].qty-1);saveCart();renderCart()});
+ document.querySelectorAll("[data-plus]").forEach(b=>b.onclick=()=>{cart[b.dataset.plus].qty++;saveCart();renderCart()});
+ document.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>{cart.splice(b.dataset.remove,1);saveCart();renderCart()});
+}
+
+function orderData(){
+ const delivery=Number($("delivery").value),subtotal=cart.reduce((a,x)=>a+x.price*x.qty,0);
+ return {name:$("cname").value.trim(),phone:$("cphone").value.trim(),address:$("caddress").value.trim(),deliveryCharge:delivery,subtotal,total:subtotal+delivery,items:cart,status:"Pending",createdAt:Date.now()};
+}
+function waText(o){return `FNFY Order\nName: ${o.name}\nPhone: ${o.phone}\nAddress: ${o.address}\nDelivery: ৳${o.deliveryCharge}\nTotal: ৳${o.total}\n\nItems:\n`+o.items.map(x=>`${x.name} × ${x.qty} | Size: ${x.size} | Color: ${x.color}`).join("\n")}
+
+$("orderForm").onsubmit=async e=>{
+ e.preventDefault();if(!cart.length)return alert("Cart খালি।");
+ const o=orderData();if(!o.name||!o.phone||!o.address)return;
+ try{await set(push(ref(db,"orders")),o);cart=[];saveCart();e.target.reset();renderCart();$("orderMsg").innerHTML=`<b>Order সফল হয়েছে!</b><br>Status: Pending<br><a class="btn wa" href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText(o))}" target="_blank">WhatsApp-এ পাঠান</a>`}
+ catch(err){$("orderMsg").textContent="Order save হয়নি: "+err.message}
+};
+
+$("waOrder").onclick=()=>{if(!cart.length)return alert("Cart খালি।");const o=orderData();if(!o.name||!o.phone||!o.address){alert("নাম, ফোন ও ঠিকানা পূরণ করুন।");return}window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText(o))}`,"_blank")};
+
+$("cartBtn").onclick=()=>{$("cartModal").classList.add("show");renderCart()};
+document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>b.closest(".modal").classList.remove("show"));
+
+onValue(ref(db,"reviews"),s=>{const d=s.val()||{};$("reviewList").innerHTML=Object.values(d).reverse().map(r=>`<div class="review"><b>${esc(r.name)}</b> ${"★".repeat(Number(r.star||5))}<br>${esc(r.text)}</div>`).join("")||"এখনো কোনো review নেই।"});
+$("reviewForm").onsubmit=async e=>{e.preventDefault();try{await set(push(ref(db,"reviews")),{name:$("rname").value.trim(),star:Number($("rstar").value),text:$("rtext").value.trim(),createdAt:Date.now()});e.target.reset();alert("Review submitted")}catch(err){alert(err.message)}};
+let heroIndex=0;
+const heroTrack=$("heroTrack"),heroDots=[...document.querySelectorAll(".hero-dot")];
+function showHero(i){heroIndex=(i+3)%3;if(heroTrack)heroTrack.style.transform=`translateX(-${heroIndex*100}%)`;heroDots.forEach((d,n)=>d.classList.toggle("active",n===heroIndex));}
+heroDots.forEach(d=>d.onclick=()=>showHero(Number(d.dataset.slide)));
+setInterval(()=>showHero(heroIndex+1),5000);
+updateCount();
 </script>
 </body></html>

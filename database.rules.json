@@ -2,15 +2,12 @@
   "rules": {
     "products": {
       ".read": true,
-      ".write": "auth != null && auth.token.email == 'nayemahamed776@gmail.com'"
+      ".write": "auth != null && auth.token.email === 'nayemahamed776@gmail.com'"
     },
     "orders": {
-      ".read": "auth != null && auth.token.email == 'nayemahamed776@gmail.com'",
+      ".read": "auth != null && auth.token.email === 'nayemahamed776@gmail.com'",
       "$orderId": {
-        ".write": "!data.exists() || (auth != null && auth.token.email == 'nayemahamed776@gmail.com')",
-        "status": {
-          ".read": true
-        }
+        ".write": "auth != null && auth.token.email === 'nayemahamed776@gmail.com' || !data.exists()"
       }
     },
     "reviews": {
