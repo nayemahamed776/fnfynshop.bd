@@ -2,19 +2,20 @@
   "rules": {
     "products": {
       ".read": true,
-      "$id": { ".write": "auth != null && auth.token.email == 'nayemahamed776@gmail.com'" }
+      ".write": "auth != null && auth.token.email == 'nayemahamed776@gmail.com'"
     },
     "orders": {
-      "$id": {
-        ".write": "auth != null && auth.token.email == 'nayemahamed776@gmail.com' || (!data.exists() && newData.exists())",
-        ".read": "auth != null && auth.token.email == 'nayemahamed776@gmail.com'"
+      ".read": "auth != null && auth.token.email == 'nayemahamed776@gmail.com'",
+      "$orderId": {
+        ".write": "!data.exists() || (auth != null && auth.token.email == 'nayemahamed776@gmail.com')",
+        "status": {
+          ".read": true
+        }
       }
     },
-    "tracking": {
-      "$id": { ".read": true, ".write": "auth != null && auth.token.email == 'nayemahamed776@gmail.com' || (!data.exists() && newData.exists())" }
-    },
     "reviews": {
-      "$id": { ".read": true, ".write": "auth != null && auth.token.email == 'nayemahamed776@gmail.com' || (!data.exists() && newData.exists())" }
+      ".read": true,
+      ".write": true
     }
   }
 }
