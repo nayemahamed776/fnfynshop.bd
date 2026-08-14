@@ -1,10 +1,20 @@
 {
   "rules": {
-    "products": {".read": true, ".write": "auth != null && auth.token.email == 'nayemahamed776@gmail.com'"},
-    "categories": {".read": true, ".write": "auth != null && auth.token.email == 'nayemahamed776@gmail.com'"},
-    "settings": {".read": true, ".write": "auth != null && auth.token.email == 'nayemahamed776@gmail.com'"},
-    "orders": {".read": "auth != null && auth.token.email == 'nayemahamed776@gmail.com'", "$id": {".read": true, ".write": "!data.exists() || (auth != null && auth.token.email == 'nayemahamed776@gmail.com')"}},
-    "tracking": {".read": true, "$id": {".read": true, ".write": "!data.exists() || (auth != null && auth.token.email == 'nayemahamed776@gmail.com')"}},
-    "reviews": {".read": true, "$id": {".read": true, ".write": "!data.exists() || (auth != null && auth.token.email == 'nayemahamed776@gmail.com')"}}
+    "products": {
+      ".read": true,
+      "$id": { ".write": "auth != null && auth.token.email == 'nayemahamed776@gmail.com'" }
+    },
+    "orders": {
+      "$id": {
+        ".write": "auth != null && auth.token.email == 'nayemahamed776@gmail.com' || (!data.exists() && newData.exists())",
+        ".read": "auth != null && auth.token.email == 'nayemahamed776@gmail.com'"
+      }
+    },
+    "tracking": {
+      "$id": { ".read": true, ".write": "auth != null && auth.token.email == 'nayemahamed776@gmail.com' || (!data.exists() && newData.exists())" }
+    },
+    "reviews": {
+      "$id": { ".read": true, ".write": "auth != null && auth.token.email == 'nayemahamed776@gmail.com' || (!data.exists() && newData.exists())" }
+    }
   }
 }
