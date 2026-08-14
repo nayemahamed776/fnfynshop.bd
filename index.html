@@ -23,7 +23,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 <body>
 <header>
   <div class="top">
-    <div class="brand"><img src="assets/fnfy-logo.png" alt="FNFY Logo"><div><b>FNFY</b><div class="sub">MEN'S CLOTHING</div></div></div>
+    <div class="brand"><img src="./assets/fnfy-logo.png" onerror="this.onerror=null;this.src='./fnfy-logo.png'" alt="FNFY Logo"><div><b>FNFY</b><div class="sub">MEN'S CLOTHING</div></div></div>
     <div class="actions">
       <a class="btn wa waTop" href="https://wa.me/8801965460567" target="_blank">WhatsApp</a>
       <button class="btn white cart" id="cartBtn">Cart (<span id="cartCount">0</span>)</button>
@@ -50,7 +50,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 <footer class="site-footer">
   <div class="footer-inner">
     <div>
-      <div class="footer-brand"><img src="assets/fnfy-logo.png" alt="FNFY Logo"><div><div class="footer-title">FNFY</div><div class="sub">MEN'S CLOTHING</div></div></div>
+      <div class="footer-brand"><img src="./assets/fnfy-logo.png" onerror="this.onerror=null;this.src='./fnfy-logo.png'" alt="FNFY Logo"><div><div class="footer-title">FNFY</div><div class="sub">MEN'S CLOTHING</div></div></div>
       <p class="footer-text">Quality men's fashion at an affordable price.</p>
     </div>
     <div>
@@ -60,9 +60,9 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
     <div>
       <h3>Follow FNFY</h3>
       <div class="socials">
-        <a href="https://www.facebook.com/share/19RWoj5v3K/" target="_blank" aria-label="FNFY Facebook"><img src="assets/facebook.png" alt="Facebook"></a>
-        <a href="https://wa.me/8801965460567" target="_blank" aria-label="FNFY WhatsApp"><img class="waicon" src="assets/whatsapp.svg" alt="WhatsApp"></a>
-        <a href="https://www.instagram.com/fnfy2026/" target="_blank" aria-label="FNFY Instagram"><img src="assets/instagram.png" alt="Instagram"></a>
+        <a href="https://www.facebook.com/share/19RWoj5v3K/" target="_blank" aria-label="FNFY Facebook"><img src="./assets/facebook.png" onerror="this.onerror=null;this.src='./facebook.png'" alt="Facebook"></a>
+        <a href="https://wa.me/8801965460567" target="_blank" aria-label="FNFY WhatsApp"><img class="waicon" src="./assets/whatsapp.svg" onerror="this.onerror=null;this.src='./whatsapp.svg'" alt="WhatsApp"></a>
+        <a href="https://www.instagram.com/fnfy2026/" target="_blank" aria-label="FNFY Instagram"><img src="./assets/instagram.png" onerror="this.onerror=null;this.src='./instagram.png'" alt="Instagram"></a>
       </div>
     </div>
   </div>
@@ -101,7 +101,7 @@ function renderProducts(){
  const arr=Object.entries(products).filter(([id,p])=>filter==="All"||String(p.category||"")===filter);
  $("count").textContent=`(${arr.length})`;
  $("products").innerHTML=arr.length?arr.map(([id,p])=>`
- <div class="card"><img class="pic" src="${esc(p.image||"assets/fnfy-logo.png")}" onerror="this.src='assets/fnfy-logo.png'">
+ <div class="card"><img class="pic" src="${esc(p.image||"./assets/fnfy-logo.png")}" onerror="this.src='./assets/fnfy-logo.png'">
  <div class="pad"><b>${esc(p.name)}</b><div class="price">৳${Number(p.price||0).toLocaleString()}</div><div class="small">${esc(p.category||"")}</div>
  <button class="btn" data-view="${esc(id)}" style="margin-top:9px">View / Buy</button></div></div>`).join(""):'<div class="empty">কোনো product নেই।</div>';
  document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>openProduct(b.dataset.view));
@@ -115,7 +115,7 @@ function openProduct(id){
  const p=products[id];if(!p)return;
  const imgs=p.images?.length?p.images:[p.image].filter(Boolean);
  $("productDetail").innerHTML=`
- <img class="pic" id="mainImg" src="${esc(imgs[0]||"assets/fnfy-logo.png")}">
+ <img class="pic" id="mainImg" src="${esc(imgs[0]||"./assets/fnfy-logo.png")}">
  <div class="thumbs">${imgs.map(x=>`<img src="${esc(x)}" data-img="${esc(x)}">`).join("")}</div>
  <h2>${esc(p.name)}</h2><div class="price">৳${Number(p.price||0).toLocaleString()}</div><p>${esc(p.description||"")}</p>
  <label>Size</label><select id="selSize">${(p.sizes||["28","30","32","34"]).map(x=>`<option>${esc(x)}</option>`).join("")}</select>
@@ -129,7 +129,7 @@ function openProduct(id){
 
 function renderCart(){
  if(!cart.length){$("cartItems").innerHTML="<div class='empty'>Cart খালি।</div>";$("cartTotal").textContent="0";return}
- $("cartItems").innerHTML=cart.map((x,i)=>`<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #eee"><img src="${esc(x.image||"assets/fnfy-logo.png")}" style="width:65px;height:65px;object-fit:cover;border-radius:8px"><div style="flex:1"><b>${esc(x.name)}</b><br>৳${Number(x.price).toLocaleString()} × ${x.qty}<br>${esc(x.size)} / ${esc(x.color)}<br><button class="btn" data-minus="${i}">−</button> <button class="btn" data-plus="${i}">+</button> <button class="btn" data-remove="${i}">Remove</button></div></div>`).join("");
+ $("cartItems").innerHTML=cart.map((x,i)=>`<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #eee"><img src="${esc(x.image||"./assets/fnfy-logo.png")}" style="width:65px;height:65px;object-fit:cover;border-radius:8px"><div style="flex:1"><b>${esc(x.name)}</b><br>৳${Number(x.price).toLocaleString()} × ${x.qty}<br>${esc(x.size)} / ${esc(x.color)}<br><button class="btn" data-minus="${i}">−</button> <button class="btn" data-plus="${i}">+</button> <button class="btn" data-remove="${i}">Remove</button></div></div>`).join("");
  const subtotal=cart.reduce((a,x)=>a+x.price*x.qty,0);$("cartTotal").textContent=subtotal.toLocaleString();
  document.querySelectorAll("[data-minus]").forEach(b=>b.onclick=()=>{cart[b.dataset.minus].qty=Math.max(1,cart[b.dataset.minus].qty-1);saveCart();renderCart()});
  document.querySelectorAll("[data-plus]").forEach(b=>b.onclick=()=>{cart[b.dataset.plus].qty++;saveCart();renderCart()});
