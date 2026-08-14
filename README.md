@@ -1,30 +1,26 @@
-FNFY PREMIUM FINAL V2
+FNFY PREMIUM FINAL V2 — FINAL CHECKLIST
 
-Includes:
-- Dynamic large hero using newest Firebase products
-- Auto-changing hero slides
+Homepage:
+- Wide hero slideshow
 - New Arrivals
-- Shop Collection + category filters
-- Premium mobile bottom navigation
-- WhatsApp and Facebook icon-only buttons
-- FNFY PNG logo
-- Product gallery, size, color, quantity, cart and order
-- Product Video URL display
-- Customer order tracking
+- Shop collection
+- Product gallery
+- Size / color / quantity
+- Cart / order
+- Visible Track Your Order section
+- Customer order status lookup by Order ID
 - Reviews
-- Admin product management
-- Admin order status: Pending / Confirmed / Delivered / Cancelled
-- Admin product video URL field
+- Product video support in product data
 
-WhatsApp: 01965460567
-Facebook: https://www.facebook.com/share/19RWoj5v3K/
+Brand/contact:
+- FNFY logo in header/footer
+- WhatsApp 01965460567
+- Facebook https://www.facebook.com/share/19RWoj5v3K/
 
-Upload these to GitHub root:
-index.html
-admin.html
-firebase-config.js
-database.rules.json
-fnfy-logo.png
-assets/fnfy-logo.png
+Admin:
+- Login
+- Product add/delete
+- Product edit
+- Order status management
 
-Publish database.rules.json in Firebase Realtime Database > Rules.
+Upload/replace index.html and admin.html in GitHub, plus fnfy-logo.png.
