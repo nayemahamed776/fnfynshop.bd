@@ -1,95 +1,39 @@
 <!doctype html>
-<html lang="bn">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FNFY — Men's Clothing</title>
-<style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f6f6f6;color:#111}
-header{background:#0a0a0a;color:#fff;position:sticky;top:0;z-index:20}.top{max-width:1150px;margin:auto;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}.logo{font-size:27px;font-weight:900;letter-spacing:2px}.sub{font-size:11px;letter-spacing:2px}.cartbtn{background:#fff;color:#111;border:0;border-radius:20px;padding:10px 15px;font-weight:bold}
-.hero{max-width:1150px;margin:16px auto;padding:55px 22px;background:#111;color:#fff;border-radius:18px}.hero h1{font-size:40px;margin:8px 0}.hero p{max-width:650px;line-height:1.6}.wrap{max-width:1150px;margin:auto;padding:0 16px 40px}
-h2{margin-top:28px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 3px 15px #00000010}.pic{width:100%;aspect-ratio:1/1;object-fit:cover;background:#eee}.pad{padding:13px}.price{font-size:20px;font-weight:bold;margin:7px 0}.small{color:#666;font-size:13px}.btn{display:inline-block;background:#111;color:#fff;border:0;border-radius:9px;padding:11px 14px;font-weight:bold;cursor:pointer}.btn2{background:#eee;color:#111}.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.filters button{border:1px solid #ddd;background:#fff;border-radius:20px;padding:8px 12px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:9px;margin:5px 0 10px;font:inherit}
-.modal{position:fixed;inset:0;background:#0008;display:none;z-index:50;align-items:flex-end;justify-content:center}.modal.show{display:flex}.sheet{background:#fff;width:100%;max-width:650px;max-height:92vh;overflow:auto;border-radius:20px 20px 0 0;padding:20px}.close{float:right;border:0;background:#eee;border-radius:50%;width:35px;height:35px}.thumbs{display:flex;gap:7px;overflow:auto}.thumbs img{width:65px;height:65px;object-fit:cover;border-radius:7px;cursor:pointer}.hidden{display:none!important}.empty{text-align:center;padding:30px;background:#fff;border-radius:15px}.review{padding:12px;border-bottom:1px solid #eee}
-@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:30px}}@media(max-width:500px){.grid{grid-template-columns:repeat(2,1fr);gap:9px}.row{grid-template-columns:1fr}.hero{margin:10px}.hero h1{font-size:27px}}
-</style>
-</head>
-<body>
-<header><div class="top"><div><div class="logo">FNFY</div><div class="sub">MEN'S CLOTHING</div></div><button class="cartbtn" id="cartBtn">Cart (<span id="cartCount">0</span>)</button></div></header>
-<section class="hero"><div class="sub">NEW COLLECTION 2026</div><h1>Style that speaks for itself.</h1><p>Shirt, pant, denim, cargo, jersey and men's fashion — সব এক জায়গায়।</p></section>
-<main class="wrap">
-<h2>Our Products <span class="small" id="count"></span></h2><div class="filters" id="filters"></div><div class="grid" id="products"></div>
-<h2>Customer Reviews</h2><div class="card"><div class="pad" id="reviewList">Loading...</div><div class="pad"><form id="reviewForm"><div class="row"><input id="rname" placeholder="আপনার নাম" required><select id="rstar"><option value="5">★★★★★</option><option value="4">★★★★☆</option><option value="3">★★★☆☆</option><option value="2">★★☆☆☆</option><option value="1">★☆☆☆☆</option></select></div><textarea id="rtext" rows="3" placeholder="Review লিখুন" required></textarea><button class="btn">Review Submit</button></form></div></div>
-
-<section class="section" id="track">
-  <div class="sectionHead"><h2>Track Your Order</h2><span>Enter your Order ID</span></div>
-  <div class="track">
-    <input id="trackId" placeholder="Order ID লিখুন" autocomplete="off">
-    <button class="primary" id="trackBtn">Track Order</button>
-    <div id="trackResult" style="margin-top:12px"></div>
-  </div>
-</section>
-</main>
-
-<div class="modal" id="productModal"><div class="sheet"><button class="close" data-close>×</button><div id="productDetail"></div></div></div>
-<div class="modal" id="cartModal"><div class="sheet"><button class="close" data-close>×</button><h2>Your Cart</h2><div id="cartItems"></div><hr><h3>Total: ৳<span id="cartTotal">0</span></h3><form id="orderForm"><input id="cname" placeholder="নাম" required><input id="cphone" placeholder="মোবাইল নম্বর" required><textarea id="caddress" placeholder="সম্পূর্ণ ঠিকানা" required></textarea><select id="delivery"><option value="60">ঢাকার ভিতরে — ৳60</option><option value="120">ঢাকার বাইরে — ৳120</option></select><button class="btn">Place Order</button></form><p id="orderMsg"></p></div></div>
-
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FNFY Men's Clothing</title><link rel="icon" href="fnfy-logo.png"><style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial;background:#f6f6f6;color:#111}header{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid #ddd}.nav,.wrap,.hero{max-width:1200px;margin:auto}.nav{height:70px;display:flex;align-items:center;gap:10px;padding:8px 15px}.logo{height:52px;max-width:170px;object-fit:contain}.sp{flex:1}.btn,.cat{border:1px solid #ddd;background:#fff;padding:10px 13px;border-radius:10px;cursor:pointer;font-weight:700}.primary{background:#111;color:#fff;border:0}.hero{padding:12px}.slides{position:relative;overflow:hidden;border-radius:22px;background:#111}.slide{display:none;position:relative}.slide.active{display:block}.slide img{width:100%;height:430px;object-fit:cover;opacity:.78}.overlay{position:absolute;inset:0;display:flex;align-items:end;padding:35px;color:white;background:linear-gradient(transparent,rgba(0,0,0,.8))}.overlay h1{font-size:clamp(30px,5vw,60px);margin:0 0 8px}.arrow{position:absolute;top:50%;border:0;border-radius:50%;width:42px;height:42px;cursor:pointer}.prev{left:12px}.next{right:12px}.dots{position:absolute;bottom:12px;left:50%;display:flex;gap:6px}.dot{width:9px;height:9px;border-radius:50%;background:#aaa}.dot.on{background:#fff}.wrap{padding:20px 15px}.head{display:flex;justify-content:space-between;align-items:center;margin:18px 0 12px}.cats{display:flex;gap:7px;overflow:auto}.cat.on{background:#111;color:#fff}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.card{background:#fff;border-radius:16px;overflow:hidden;border:1px solid #eee}.pic{aspect-ratio:1/1.1;position:relative}.pic img{width:100%;height:100%;object-fit:cover}.badge{position:absolute;top:9px;left:9px;background:#111;color:#fff;padding:6px 9px;border-radius:20px;font-size:12px}.info{padding:12px}.old{text-decoration:line-through;color:#999;font-size:13px;margin-left:5px}.actions{display:flex;gap:6px;margin-top:9px}.actions .btn{flex:1}.track,.review{background:#fff;border:1px solid #ddd;border-radius:16px;padding:18px}.row{display:flex;gap:8px}.input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;font:inherit}.status{display:inline-block;background:#111;color:#fff;padding:8px 12px;border-radius:20px;margin-top:10px}footer{background:#111;color:#fff;margin-top:35px}.foot{max-width:1200px;margin:auto;padding:35px 15px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:25px}.footlogo{background:#fff;border-radius:10px;height:60px;max-width:170px}.social a{display:inline-flex;width:42px;height:42px;border:1px solid #555;border-radius:50%;align-items:center;justify-content:center;margin-right:7px;color:#fff}.modal{position:fixed;inset:0;background:#0009;display:none;align-items:center;justify-content:center;z-index:30;padding:15px}.modal.on{display:flex}.box{background:#fff;border-radius:18px;padding:20px;width:min(760px,100%);max-height:90vh;overflow:auto}.close{float:right;border:0;border-radius:50%;width:34px;height:34px}.gallery{display:flex;gap:6px;overflow:auto}.thumb{width:58px;height:58px;object-fit:cover;border-radius:8px;border:2px solid transparent}.thumb.on{border-color:#111}.detail{display:grid;grid-template-columns:1fr 1fr;gap:20px}.mainimg{width:100%;aspect-ratio:1;object-fit:cover;border-radius:14px}.empty{text-align:center;padding:30px;color:#777}@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}.slide img{height:350px}.foot{grid-template-columns:1fr 1fr}}@media(max-width:550px){.nav{height:62px}.logo{height:44px}.nav .txt{display:none}.detail{grid-template-columns:1fr}.row{flex-direction:column}.foot{grid-template-columns:1fr}}
+</style></head><body>
+<header><div class="nav"><a href="#"><img class="logo" src="fnfy-logo.png"></a><span class="sp"></span><button class="btn" onclick="shop()">Shop</button><a class="btn" href="https://wa.me/8801965460567" target="_blank">💬 <span class="txt">WhatsApp</span></a><a class="btn" href="https://www.facebook.com/share/19RWoj5v3K/" target="_blank">f <span class="txt">Facebook</span></a><button class="btn" onclick="cartOpen()">🛒 <b id="count">0</b></button></div></header>
+<section class="hero"><div class="slides" id="slides"></div></section>
+<div class="wrap" id="shop">
+<div class="head"><h2>Shop Collection</h2><button class="cat" onclick="moreCats()">••• Categories</button></div><div class="cats" id="cats"></div>
+<div class="head"><h2>New Arrivals</h2></div><div class="grid" id="products"></div>
+<div class="head"><h2>Offers & Discounts</h2></div><div class="grid" id="discounts"></div>
+<div class="head" id="tracking"><h2>Track Your Order</h2></div><div class="track"><div class="row"><input class="input" id="trackId" placeholder="FNFY-XXXXXXXX"><button class="btn primary" onclick="track()">Track Order</button></div><div id="trackResult"></div></div>
+<div class="head"><h2>Customer Reviews</h2></div><div id="reviews"></div>
+</div>
+<footer><div class="foot"><div><img class="footlogo" src="fnfy-logo.png"><p>FNFY Men's Clothing</p></div><div><h3>Contact</h3><p>WhatsApp: 01965460567</p></div><div><h3>Follow & Order</h3><div class="social"><a href="https://wa.me/8801965460567" target="_blank">WA</a><a href="https://www.facebook.com/share/19RWoj5v3K/" target="_blank">f</a></div></div></div></footer>
+<div class="modal" id="productModal"><div class="box"><button class="close" onclick="closeM('productModal')">×</button><div id="detail"></div></div></div>
+<div class="modal" id="cartModal"><div class="box"><button class="close" onclick="closeM('cartModal')">×</button><h2>Cart</h2><div id="cartList"></div><div id="cartTotal"></div><button class="btn primary" onclick="checkout()">Place Order</button></div></div>
+<div class="modal" id="checkoutModal"><div class="box"><button class="close" onclick="closeM('checkoutModal')">×</button><h2>Order</h2><form id="orderForm"><input class="input" id="name" required placeholder="Name"><br><br><input class="input" id="phone" required placeholder="Phone"><br><br><textarea class="input" id="address" required placeholder="Address"></textarea><br><br><select id="delivery" class="input"><option value="60">Dhaka — ৳60</option><option value="120">Outside Dhaka — ৳120</option></select><br><br><button class="btn primary">Confirm Order</button></form><div id="done"></div></div></div>
 <script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-import {getDatabase,ref,onValue,push,set} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
-import {firebaseConfig,WHATSAPP_NUMBER} from "./firebase-config.js";
-const app=initializeApp(firebaseConfig),db=getDatabase(app);
-const $=id=>document.getElementById(id), esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
-let products={},cart=JSON.parse(localStorage.getItem("fnfy_cart")||"[]"),filter="All";
-
-function saveCart(){localStorage.setItem("fnfy_cart",JSON.stringify(cart));updateCartCount()}
-function updateCartCount(){$("cartCount").textContent=cart.reduce((a,x)=>a+x.qty,0)}
-function renderProducts(){
- const arr=Object.entries(products).filter(([id,p])=>filter==="All"||String(p.category||p.cat||"")===filter);
- $("count").textContent=`(${arr.length})`;
- $("products").innerHTML=arr.length?arr.map(([id,p])=>`<div class="card"><img class="pic" src="${esc(p.image||"assets/fnfy-logo.png")}" onerror="this.src='assets/fnfy-logo.png'"><div class="pad"><b>${esc(p.name)}</b><div class="price">৳${Number(p.price||0).toLocaleString()}</div><div class="small">${esc(p.category||p.cat||"")}</div><button class="btn" data-view="${esc(id)}" style="margin-top:9px">View / Buy</button></div></div>`).join(""):'<div class="empty">কোনো product এখনো যোগ করা হয়নি।</div>';
- document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>openProduct(b.dataset.view));
- const cats=["All",...new Set(Object.values(products).map(p=>p.category||p.cat).filter(Boolean))];
- $("filters").innerHTML=cats.map(c=>`<button data-cat="${esc(c)}">${esc(c)}</button>`).join("");
- document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{filter=b.dataset.cat;renderProducts()});
-}
-onValue(ref(db,"products"),s=>{products=s.val()||{};renderProducts()});
-
-$("trackBtn").onclick=()=>{
-  const id=$("trackId").value.trim();
-  if(!id){$("trackResult").textContent="Order ID দিন।";return;}
-  $("trackResult").textContent="Checking...";
-  onValue(ref(db,"orders/"+id),snap=>{
-    const o=snap.val();
-    if(!o){$("trackResult").innerHTML="<div class='status'>Order ID পাওয়া যায়নি</div>";return;}
-    $("trackResult").innerHTML=
-      `<div class="status">Status: ${esc(o.status||"Pending")}</div>
-       <div style="margin-top:10px;color:#ddd">
-       Order ID: <b>${esc(id)}</b><br>
-       Name: ${esc(o.name||"")}<br>
-       Total: ৳${Number(o.total||0).toLocaleString()}
-       </div>`;
-  },{onlyOnce:true});
-};
-onValue(ref(db,"reviews"),s=>{const d=s.val()||{};$("reviewList").innerHTML=Object.values(d).reverse().map(r=>`<div class="review"><b>${esc(r.name)}</b> <span>${"★".repeat(Number(r.star||5))}</span><br>${esc(r.text)}</div>`).join("")||"এখনো কোনো review নেই।"});
-function openProduct(id){
- const p=products[id]; if(!p)return;
- const imgs=p.images?.length?p.images:[p.image].filter(Boolean);
- $("productDetail").innerHTML=`<img class="pic" id="mainImg" src="${esc(imgs[0]||"assets/fnfy-logo.png")}"><div class="thumbs">${imgs.map(x=>`<img src="${esc(x)}" data-img="${esc(x)}">`).join("")}</div><h2>${esc(p.name)}</h2><div class="price">৳${Number(p.price||0).toLocaleString()}</div><p>${esc(p.description||p.desc||"")}</p><label>Size</label><select id="selSize">${(p.sizes||["28","30","32","34"]).map(x=>`<option>${esc(x)}</option>`).join("")}</select><label>Color</label><select id="selColor">${(p.colors||["Default"]).map(x=>`<option>${esc(x)}</option>`).join("")}</select><label>Quantity</label><input id="selQty" type="number" min="1" value="1"><button class="btn" id="addCart">Add to Cart</button>`;
- $("productModal").classList.add("show");
- document.querySelectorAll("[data-img]").forEach(x=>x.onclick=()=>{$("mainImg").src=x.dataset.img});
- $("addCart").onclick=()=>{cart.push({id,name:p.name,price:Number(p.price||0),image:p.image, size:$("selSize").value,color:$("selColor").value,qty:Number($("selQty").value)||1});saveCart();$("productModal").classList.remove("show");$("cartModal").classList.add("show");renderCart()};
-}
-function renderCart(){
- if(!cart.length){$("cartItems").innerHTML="<div class='empty'>Cart খালি।</div>";$("cartTotal").textContent="0";return}
- $("cartItems").innerHTML=cart.map((x,i)=>`<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #eee"><img src="${esc(x.image||"assets/fnfy-logo.png")}" style="width:65px;height:65px;object-fit:cover;border-radius:8px"><div style="flex:1"><b>${esc(x.name)}</b><br>৳${x.price.toLocaleString()} × ${x.qty}<br>${esc(x.size)} / ${esc(x.color)}<br><button class="btn btn2" data-minus="${i}">−</button> <button class="btn btn2" data-plus="${i}">+</button> <button class="btn danger" data-remove="${i}">Remove</button></div></div>`).join("");
- const subtotal=cart.reduce((a,x)=>a+x.price*x.qty,0);$("cartTotal").textContent=subtotal.toLocaleString();
- document.querySelectorAll("[data-minus]").forEach(b=>b.onclick=()=>{cart[b.dataset.minus].qty=Math.max(1,cart[b.dataset.minus].qty-1);saveCart();renderCart()});
- document.querySelectorAll("[data-plus]").forEach(b=>b.onclick=()=>{cart[b.dataset.plus].qty++;saveCart();renderCart()});
- document.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>{cart.splice(b.dataset.remove,1);saveCart();renderCart()});
-}
-$("cartBtn").onclick=()=>{$("cartModal").classList.add("show");renderCart()};
-document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>b.closest(".modal").classList.remove("show"));
-$("orderForm").onsubmit=async e=>{e.preventDefault();if(!cart.length)return alert("Cart খালি।");const delivery=Number($("delivery").value),subtotal=cart.reduce((a,x)=>a+x.price*x.qty,0),order={name:$("cname").value.trim(),phone:$("cphone").value.trim(),address:$("caddress").value.trim(),deliveryCharge:delivery,subtotal,total:subtotal+delivery,items:cart,status:"Pending",createdAt:Date.now()};try{await set(push(ref(db,"orders")),order);const text=`FNFY Order%0AName: ${encodeURIComponent(order.name)}%0APhone: ${encodeURIComponent(order.phone)}%0ATotal: ৳${order.total}`;cart=[];saveCart();e.target.reset();$("orderMsg").innerHTML=`Order সফল হয়েছে। <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${text}" target="_blank">WhatsApp-এ পাঠান</a>`}catch(err){$("orderMsg").textContent="Order save হয়নি: "+err.message}};
-$("reviewForm").onsubmit=async e=>{e.preventDefault();try{await set(push(ref(db,"reviews")),{name:$("rname").value.trim(),star:Number($("rstar").value),text:$("rtext").value.trim(),createdAt:Date.now()});e.target.reset();alert("Review submitted")}catch(err){alert(err.message)}};
-updateCartCount();
-</script>
-</body></html>
+import{initializeApp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import{getDatabase,ref,onValue,get,set}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+import{firebaseConfig}from"./firebase-config.js";
+const app=initializeApp(firebaseConfig),db=getDatabase(app);let products={},cat="All",cart=JSON.parse(localStorage.fnfyCart||"[]"),slide=0,timer;
+const $=x=>document.getElementById(x),esc=x=>String(x??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m])),imgs=p=>Array.isArray(p.images)?p.images:[],price=p=>Number(p.price||0)*(1-Number(p.discount||0)/100);
+function save(){localStorage.fnfyCart=JSON.stringify(cart);$("count").textContent=cart.reduce((a,x)=>a+x.qty,0)}
+function shop(){$("shop").scrollIntoView({behavior:"smooth"})}window.shop=shop;
+function categories(){let a=["All",...new Set(Object.values(products).map(p=>p.category).filter(Boolean))];$("cats").innerHTML=a.map(x=>`<button class="cat ${x===cat?"on":""}" onclick="setCat('${esc(x)}')">${esc(x)}</button>`).join("")}window.setCat=x=>{cat=x;categories();render()};
+function card(id,p){let im=imgs(p)[0]||"",d=Number(p.discount||0);return`<div class="card"><div class="pic"><img src="${im}">${d?`<span class="badge">${d}% OFF</span>`:""}</div><div class="info"><b>${esc(p.name)}</b><div><strong>৳${price(p).toLocaleString()}</strong>${d?` <span class="old">৳${Number(p.price).toLocaleString()}</span>`:""}</div><div class="actions"><button class="btn" onclick="openProduct('${id}')">View</button><button class="btn primary" onclick="add('${id}')">Add</button></div></div></div>`}
+function render(){let a=Object.entries(products).filter(([i,p])=>cat==="All"||p.category===cat);$("products").innerHTML=a.map(x=>card(...x)).join("")||'<div class="empty">No products.</div>';$("discounts").innerHTML=a.filter(x=>Number(x[1].discount)>0).map(x=>card(...x)).join("")||'<div class="empty">No discount products.</div>';renderSlides()}
+function renderSlides(){let a=Object.entries(products).filter(x=>imgs(x[1])[0]).slice(0,6);$("slides").innerHTML=a.length?a.map(([id,p],i)=>`<div class="slide ${i?"":"active"}"><img src="${imgs(p)[0]}"><div class="overlay"><div><h1>${esc(p.name||"FNFY Collection")}</h1><p>${Number(p.discount||0)?p.discount+"% OFF":"FNFY Men's Clothing"}</p><button class="btn primary" onclick="openProduct('${id}')">Shop Now</button> <a class="btn primary" href="https://wa.me/8801965460567?text=${encodeURIComponent("I want to order "+p.name)}" target="_blank">WhatsApp Order</a></div></div></div>`).join("")+`<button class="arrow prev" onclick="slideBy(-1)">‹</button><button class="arrow next" onclick="slideBy(1)">›</button><div class="dots">${a.map((_,i)=>`<i class="dot ${i?"":"on"}"></i>`).join("")}</div>`:`<div class="slide active"><div class="overlay"><div><h1>FNFY Men's Clothing</h1><a class="btn primary" href="https://wa.me/8801965460567" target="_blank">WhatsApp Order</a></div></div></div>`;slide=0;clearInterval(timer);if(a.length>1)timer=setInterval(()=>slideBy(1),5000)}
+window.slideBy=d=>{let a=document.querySelectorAll(".slide");if(!a.length)return;slide=(slide+d+a.length)%a.length;a.forEach((x,i)=>x.classList.toggle("active",i===slide));document.querySelectorAll(".dot").forEach((x,i)=>x.classList.toggle("on",i===slide))};
+window.moreCats=()=>document.querySelector(".cats").scrollIntoView({behavior:"smooth"});
+function openProduct(id){let p=products[id],im=imgs(p),sel=0,q=1,size="",color="";function draw(){$("detail").innerHTML=`<div class="detail"><div><img id="mainimg" class="mainimg" src="${im[sel]||""}"><div class="gallery">${im.map((x,i)=>`<img class="thumb ${i===sel?"on":""}" src="${x}" onclick="ds=${i};drawDetail()">`).join("")}</div></div><div><h2>${esc(p.name)}</h2><p>${esc(p.description||"")}</p><h2>৳${price(p).toLocaleString()} ${Number(p.discount)?`<span class="old">৳${Number(p.price).toLocaleString()}</span>`:""}</h2><p>${p.discount?`<b>${p.discount}% OFF</b>`:""}</p><p>Size</p><div class="actions">${String(p.size||"").split(",").filter(Boolean).map(x=>`<button class="btn" onclick="size='${esc(x.trim())}'">${esc(x.trim())}</button>`).join("")}</div><p>Color</p><div class="actions">${String(p.color||"").split(",").filter(Boolean).map(x=>`<button class="btn" onclick="color='${esc(x.trim())}'">${esc(x.trim())}</button>`).join("")}</div><p>Quantity</p><div class="actions"><button class="btn" onclick="q=Math.max(1,q-1);drawDetail()">−</button><b>${q}</b><button class="btn" onclick="q++;drawDetail()">+</button></div><br><button class="btn primary" onclick="cart.push({id:'${id}',qty:q,size,color});save();closeM('productModal')">Add to Cart</button> <a class="btn primary" href="https://wa.me/8801965460567?text=${encodeURIComponent("I want to order "+p.name)}" target="_blank">WhatsApp Order</a></div></div>`}window.ds=0;window.q=1;window.drawDetail=()=>{sel=window.ds;q=window.q;draw()};draw();$("productModal").classList.add("on")}
+window.openProduct=openProduct;window.add=id=>{cart.push({id,qty:1,size:"",color:""});save();alert("Added to cart")};function closeM(id){$(id).classList.remove("on")}window.closeM=closeM;
+function cartOpen(){$("cartList").innerHTML=cart.map((x,i)=>{let p=products[x.id];return p?`<p><b>${esc(p.name)}</b> × ${x.qty} — ৳${(price(p)*x.qty).toLocaleString()} <button onclick="cart.splice(${i},1);save();cartOpen()">×</button></p>`:""}).join("")||'<div class="empty">Cart empty.</div>';$("cartTotal").innerHTML="<h3>Total: ৳"+cart.reduce((a,x)=>a+(products[x.id]?price(products[x.id])*x.qty:0),0).toLocaleString()+"</h3>";$("cartModal").classList.add("on")}window.cartOpen=cartOpen;
+function checkout(){if(!cart.length)return alert("Cart empty");closeM("cartModal");$("checkoutModal").classList.add("on")}
+$("orderForm").onsubmit=async e=>{e.preventDefault();let id="FNFY-"+Math.random().toString(36).slice(2,10).toUpperCase(),items=cart.map(x=>{let p=products[x.id];return{id:x.id,name:p.name,qty:x.qty,size:x.size,color:x.color,price:price(p),image:imgs(p)[0]||""}}),sub=items.reduce((a,x)=>a+x.price*x.qty,0),dc=Number($("delivery").value),o={id,name:$("name").value,phone:$("phone").value,address:$("address").value,items,subtotal:sub,deliveryCharge:dc,total:sub+dc,status:"Pending",createdAt:Date.now()};try{await set(ref(db,"orders/"+id),o);await set(ref(db,"tracking/"+id),{status:"Pending",name:o.name,total:o.total,createdAt:o.createdAt});$("done").innerHTML=`<h3>Order placed</h3><p>Order ID: <b>${id}</b></p><a class="btn primary" target="_blank" href="https://wa.me/8801965460567?text=${encodeURIComponent("FNFY Order "+id+" | "+o.name+" | "+o.total)}">WhatsApp Order</a>`;cart=[];save();$("orderForm").reset()}catch(x){alert(x.message)}};
+async function track(){let id=$("trackId").value.trim().toUpperCase();if(!id)return;let s=await get(ref(db,"tracking/"+id));$("trackResult").innerHTML=s.exists()?`<span class="status">${esc(s.val().status)}</span><p>Order ID: <b>${esc(id)}</b><br>Customer: ${esc(s.val().name||"")}<br>Total: ৳${Number(s.val().total||0).toLocaleString()}</p>`:"<p>Order ID not found.</p>"}window.track=track;
+onValue(ref(db,"products"),s=>{products=s.val()||{};categories();render()});onValue(ref(db,"reviews"),s=>{$("reviews").innerHTML=Object.values(s.val()||{}).map(r=>`<div class="review"><b>${esc(r.name)}</b><p>${esc(r.text)}</p></div>`).join("")||'<div class="empty">No reviews yet.</div>'});save();
+</script></body></html>

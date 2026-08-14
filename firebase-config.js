@@ -9,5 +9,5 @@ export const firebaseConfig = {
   measurementId: "G-RDZLGVKZDL"
 };
 export const ADMIN_EMAIL = "nayemahamed776@gmail.com";
-export const WHATSAPP_NUMBER = "8801965460567";
-export const FACEBOOK_PAGE = "https://www.facebook.com/share/19RWoj5v3K/";
+export const WHATSAPP = "8801965460567";
+export const FACEBOOK = "https://www.facebook.com/share/19RWoj5v3K/";
