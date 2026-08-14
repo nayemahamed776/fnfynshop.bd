@@ -24,8 +24,9 @@ input,select,textarea{width:100%;padding:12px;margin:5px 0 10px;border:1px solid
 <div id="panel" class="hidden">
 <div class="card"><h2>➕ Add Product</h2><form id="pf">
 <div class="row"><input id="pn" placeholder="Product name" required><input id="pc" placeholder="Category" required></div>
-<div class="row"><input id="pp" type="number" min="0" placeholder="Price" required><input id="pcol" placeholder="Colors: Black, Blue"></div>
-<input id="psz" placeholder="Sizes: 28, 30, 32, 34"><textarea id="pd" placeholder="Description"></textarea>
+<div class="row"><input id="pp" type="number" min="0" placeholder="Price" required><input id="pdiscount" type="number" min="0" max="100" placeholder="Discount % (optional)"></div>
+<div class="row"><input id="pcol" placeholder="Colors: Black, Blue"><input id="psz" placeholder="Sizes: 28, 30, 32, 34"></div>
+<textarea id="pd" placeholder="Description"></textarea>
 <input id="imgs" type="file" accept="image/*" multiple required><div class="preview" id="preview"></div>
 <p id="up" class="msg">Storage লাগবে না — image compressed হয়ে Realtime Database-এ save হবে.</p>
 <button id="add" type="submit">Add Product</button></form></div>
@@ -106,7 +107,7 @@ $("pf").onsubmit=async e=>{
  try{
   const fs=[...$("imgs").files].slice(0,4);if(!fs.length)throw Error("Image নির্বাচন করুন");
   const images=[];for(let i=0;i<fs.length;i++){$("up").textContent=`Image ${i+1}/${fs.length} prepare হচ্ছে...`;images.push(await resizeImage(fs[i]))}
-  await set(push(ref(db,"products")),{name:$("pn").value.trim(),category:$("pc").value.trim(),price:Number($("pp").value),colors:$("pcol").value.split(",").map(x=>x.trim()).filter(Boolean),sizes:$("psz").value.split(",").map(x=>x.trim()).filter(Boolean),description:$("pd").value.trim(),image:images[0],images,createdAt:Date.now()});
+  await set(push(ref(db,"products")),{name:$("pn").value.trim(),category:$("pc").value.trim(),price:Number($("pp").value),discountPercent:Math.max(0,Math.min(100,Number($("pdiscount").value||0))),colors:$("pcol").value.split(",").map(x=>x.trim()).filter(Boolean),sizes:$("psz").value.split(",").map(x=>x.trim()).filter(Boolean),description:$("pd").value.trim(),image:images[0],images,createdAt:Date.now()});
   e.target.reset();$("preview").innerHTML="";$("up").textContent="Product Firebase-এ save হয়েছে!";
  }catch(e){$("up").textContent="Product save হয়নি: "+e.message}
  finally{$("add").disabled=false}

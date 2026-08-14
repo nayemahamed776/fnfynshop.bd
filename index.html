@@ -18,6 +18,8 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 .review{padding:12px;border-bottom:1px solid #eee}.floatwa{position:fixed;right:16px;bottom:18px;z-index:30;border-radius:30px;padding:13px 18px;text-decoration:none;font-weight:bold}.site-footer{background:#080808;color:#fff;margin-top:35px;padding:38px 16px 90px}.footer-inner{max-width:1150px;margin:auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px}.footer-brand{display:flex;align-items:center;gap:12px}.footer-brand img{width:68px;height:55px;object-fit:contain}.footer-title{font-size:24px;font-weight:900;letter-spacing:3px}.footer-text{color:#bbb;line-height:1.7;margin:12px 0}.socials{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.socials a{width:44px;height:44px;border-radius:12px;background:#fff;display:grid;place-items:center;overflow:hidden}.socials img{width:30px;height:30px;object-fit:contain}.socials img.waicon{width:27px;height:27px}.footer-link{color:#fff;text-decoration:none}.footer-copy{max-width:1150px;margin:28px auto 0;padding-top:18px;border-top:1px solid #333;color:#888;font-size:13px}@media(max-width:700px){.footer-inner{grid-template-columns:1fr}.hero-slide{min-height:300px;padding:40px 22px}.hero h1{font-size:30px}.hero p{font-size:16px}.hero-dots{left:22px}}
 @media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:31px}}
 @media(max-width:520px){.top{padding:8px 10px}.brand img{width:52px;height:42px}.brand b{font-size:21px}.sub{font-size:9px}.actions .waTop{display:none}.hero{margin:10px;padding:42px 18px}.hero h1{font-size:28px}.grid{gap:9px}.row{grid-template-columns:1fr}}
+
+.discount-badge{display:inline-block;background:#111;color:#fff;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:800;margin-top:5px}.old-price{text-decoration:line-through;color:#888;font-size:14px;margin-right:6px}.new-price{font-size:20px;font-weight:800}.hero-product-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.72}.hero-product-content{position:relative;z-index:2;max-width:720px}.hero-product-content h1{margin:8px 0;font-size:40px}.hero-product-content p{font-size:18px;line-height:1.5}.hero-product-slide:after{background:linear-gradient(90deg,rgba(0,0,0,.88),rgba(0,0,0,.28))}.hero-product-slide{background:#111}.hero-product-price{font-size:22px;font-weight:800;margin-top:10px}
 </style>
 </head>
 <body>
@@ -35,7 +37,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
   <article class="hero-slide"><div class="hero-content"><span class="hero-badge">NEW COLLECTION 2026</span><h1>Style that speaks for itself.</h1><p>Shirt, pant, denim, cargo and jersey — product দেখুন, size/color বাছুন এবং সরাসরি order করুন।</p></div></article>
   <article class="hero-slide"><div class="hero-content"><span class="hero-badge">NEW ARRIVALS</span><h1>Fresh styles. Premium look.</h1><p>নতুন product, ৪টি gallery image, discount এবং available color/size একসাথে দেখুন।</p></div></article>
   <article class="hero-slide"><div class="hero-content"><span class="hero-badge">ORDER YOUR WAY</span><h1>Website + WhatsApp Order</h1><p>Website থেকে order করুন অথবা WhatsApp icon-এ tap করে সরাসরি order পাঠান।</p></div></article>
-</div><div class="hero-dots" id="heroDots"><span class="hero-dot active" data-slide="0"></span><span class="hero-dot" data-slide="1"></span><span class="hero-dot" data-slide="2"></span></div></section>
+</div><div class="hero-dots" id="heroDots"></div></section>
 
 
 <main class="wrap">
@@ -97,6 +99,9 @@ const app=initializeApp(firebaseConfig),db=getDatabase(app);
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
 let products={},cart=JSON.parse(localStorage.getItem("fnfy_cart")||"[]"),filter="All";
+function discountPercent(p){return Math.max(0,Math.min(100,Number(p.discountPercent||p.discount||0)));}
+function finalPrice(p){const price=Number(p.price||0),d=discountPercent(p);return Math.round(price*(1-d/100));}
+function priceHtml(p){const d=discountPercent(p),price=Number(p.price||0),final=finalPrice(p);return d>0?`<div class="price"><span class="old-price">৳${price.toLocaleString()}</span><span class="new-price">৳${final.toLocaleString()}</span><br><span class="discount-badge">${d}% OFF</span></div>`:`<div class="price">৳${price.toLocaleString()}</div>`;}
 
 function saveCart(){localStorage.setItem("fnfy_cart",JSON.stringify(cart));updateCount()}
 function updateCount(){$("cartCount").textContent=cart.reduce((a,x)=>a+x.qty,0)}
@@ -106,14 +111,14 @@ function renderProducts(){
  $("count").textContent=`(${arr.length})`;
  $("products").innerHTML=arr.length?arr.map(([id,p])=>`
  <div class="card"><img class="pic" src="${esc(p.image||"./assets/fnfy-logo.png")}" onerror="this.src='./assets/fnfy-logo.png'">
- <div class="pad"><b>${esc(p.name)}</b><div class="price">৳${Number(p.price||0).toLocaleString()}</div><div class="small">${esc(p.category||"")}</div>
+ <div class="pad"><b>${esc(p.name)}</b>${priceHtml(p)}<div class="small">${esc(p.category||"")}</div>
  <button class="btn" data-view="${esc(id)}" style="margin-top:9px">View / Buy</button></div></div>`).join(""):'<div class="empty">কোনো product নেই।</div>';
  document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>openProduct(b.dataset.view));
  const cats=["All",...new Set(Object.values(products).map(p=>p.category).filter(Boolean))];
  $("filters").innerHTML=cats.map(c=>`<button class="${filter===c?"active":""}" data-cat="${esc(c)}">${esc(c)}</button>`).join("");
  document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{filter=b.dataset.cat;renderProducts()});
 }
-onValue(ref(db,"products"),s=>{products=s.val()||{};renderProducts();renderShowcase()},e=>{$("products").textContent="Firebase error: "+e.message});
+onValue(ref(db,"products"),s=>{products=s.val()||{};renderProducts();renderHeroProducts()},e=>{$("products").textContent="Firebase error: "+e.message});
 
 function openProduct(id){
  const p=products[id];if(!p)return;
@@ -121,14 +126,14 @@ function openProduct(id){
  $("productDetail").innerHTML=`
  <img class="pic" id="mainImg" src="${esc(imgs[0]||"./assets/fnfy-logo.png")}">
  <div class="thumbs">${imgs.map(x=>`<img src="${esc(x)}" data-img="${esc(x)}">`).join("")}</div>
- <h2>${esc(p.name)}</h2><div class="price">৳${Number(p.price||0).toLocaleString()}</div><p>${esc(p.description||"")}</p>
+ <h2>${esc(p.name)}</h2>${priceHtml(p)}<p>${esc(p.description||"")}</p>
  <label>Size</label><select id="selSize">${(p.sizes||["28","30","32","34"]).map(x=>`<option>${esc(x)}</option>`).join("")}</select>
  <label>Color</label><select id="selColor">${(p.colors||["Default"]).map(x=>`<option>${esc(x)}</option>`).join("")}</select>
  <label>Quantity</label><input id="selQty" type="number" min="1" value="1">
  <button class="btn" id="addCart">Add to Cart</button>`;
  $("productModal").classList.add("show");
  document.querySelectorAll("[data-img]").forEach(x=>x.onclick=()=>{$("mainImg").src=x.dataset.img});
- $("addCart").onclick=()=>{cart.push({id,name:p.name,price:Number(p.price||0),image:p.image||imgs[0],size:$("selSize").value,color:$("selColor").value,qty:Number($("selQty").value)||1});saveCart();$("productModal").classList.remove("show");$("cartModal").classList.add("show");renderCart()};
+ $("addCart").onclick=()=>{cart.push({id,name:p.name,price:finalPrice(p),originalPrice:Number(p.price||0),discountPercent:discountPercent(p),image:p.image||imgs[0],size:$("selSize").value,color:$("selColor").value,qty:Number($("selQty").value)||1});saveCart();$("productModal").classList.remove("show");$("cartModal").classList.add("show");renderCart()};
 }
 
 function renderCart(){
@@ -168,10 +173,23 @@ async function checkTracking(orderId){
 $("trackForm").onsubmit=e=>{e.preventDefault();checkTracking()};
 
 
-let heroIndex=0;
-const heroTrack=$("heroTrack"),heroDots=[...document.querySelectorAll(".hero-dot")];
-function showHero(i){heroIndex=(i+3)%3;if(heroTrack)heroTrack.style.transform=`translateX(-${heroIndex*100}%)`;heroDots.forEach((d,n)=>d.classList.toggle("active",n===heroIndex));}
-heroDots.forEach(d=>d.onclick=()=>showHero(Number(d.dataset.slide)));
+let heroIndex=0,heroCount=3;
+const heroTrack=$("heroTrack"),heroDots=$("heroDots");
+function renderHeroProducts(){
+ const arr=Object.entries(products);
+ const productSlides=arr.map(([id,p])=>{
+   const img=(p.images&&p.images.length?p.images[0]:p.image)||"./fnfy-logo.png";
+   const d=discountPercent(p),price=Number(p.price||0),final=finalPrice(p);
+   return `<article class="hero-slide hero-product-slide"><img class="hero-product-img" src="${esc(img)}" onerror="this.onerror=null;this.src='./fnfy-logo.png'" alt="${esc(p.name)}"><div class="hero-content hero-product-content"><span class="hero-badge">${d?d+'% OFF':'FNFY PRODUCT'}</span><h1>${esc(p.name)}</h1><p>${esc(p.category||'Men’s Clothing')}</p><div class="hero-product-price">${d?`<span class="old-price">৳${price.toLocaleString()}</span> ৳${final.toLocaleString()}`:`৳${price.toLocaleString()}`}</div><button class="btn white" data-hero-view="${esc(id)}" style="margin-top:12px">View / Buy</button></div></article>`;
+ }).join('');
+ heroTrack.innerHTML=`<article class="hero-slide"><div class="hero-content"><span class="hero-badge">NEW COLLECTION 2026</span><h1>Style that speaks for itself.</h1><p>Shirt, pant, denim, cargo and jersey — product দেখুন, size/color বাছুন এবং সরাসরি order করুন।</p></div></article><article class="hero-slide"><div class="hero-content"><span class="hero-badge">NEW ARRIVALS</span><h1>Fresh styles. Premium look.</h1><p>নতুন product, ৪টি gallery image, discount এবং available color/size একসাথে দেখুন।</p></div></article><article class="hero-slide"><div class="hero-content"><span class="hero-badge">ORDER YOUR WAY</span><h1>Website + WhatsApp Order</h1><p>Website থেকে order করুন অথবা WhatsApp icon-এ tap করে সরাসরি order পাঠান।</p></div></article>${productSlides}`;
+ heroCount=3+arr.length; heroIndex=Math.min(heroIndex,heroCount-1);
+ heroDots.innerHTML=Array.from({length:heroCount},(_,i)=>`<span class="hero-dot ${i===heroIndex?'active':''}" data-slide="${i}"></span>`).join('');
+ document.querySelectorAll('.hero-dot').forEach(d=>d.onclick=()=>showHero(Number(d.dataset.slide)));
+ document.querySelectorAll('[data-hero-view]').forEach(b=>b.onclick=()=>openProduct(b.dataset.heroView));
+ showHero(heroIndex);
+}
+function showHero(i){heroIndex=((i%heroCount)+heroCount)%heroCount;if(heroTrack)heroTrack.style.transform=`translateX(-${heroIndex*100}%)`;document.querySelectorAll('.hero-dot').forEach((d,n)=>d.classList.toggle('active',n===heroIndex));}
 setInterval(()=>showHero(heroIndex+1),5000);
 updateCount();
 </script>
