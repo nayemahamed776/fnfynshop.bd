@@ -1,0 +1,19 @@
+FNFY FINAL SETUP
+
+1) Firebase Authentication -> Users: make sure nayemahamed776@gmail.com exists.
+2) Authentication -> Sign-in method: enable Email/Password.
+3) Realtime Database: create database if it does not already exist.
+4) Realtime Database -> Rules: paste database.rules.json and Publish.
+5) Storage -> Rules: use the included storage.rules and Publish.
+6) Upload all website files to GitHub Pages / EdgeOne Makers. Keep images/ folder.
+7) Admin URL: your-site/admin.html
+8) Admin login email is fixed to: nayemahamed776@gmail.com
+9) Forgot password is available on the Admin login screen.
+10) All products, orders, tracking, reviews and discount data use Firebase Realtime Database.
+11) Product images are stored in Firebase Storage. Maximum 4 images per product.
+12) Video option is intentionally removed.
+
+Important: If Realtime Database has not been created, Firebase Console -> Realtime Database -> Create Database first.
+
+
+Instagram: https://www.instagram.com/fnfy2026/
