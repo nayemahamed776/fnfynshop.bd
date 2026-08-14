@@ -10,6 +10,7 @@ header{background:#080808;color:#fff;position:sticky;top:0;z-index:20}.top{max-w
 .brand{display:flex;align-items:center;gap:10px}.brand img{width:62px;height:48px;object-fit:contain}.brand b{font-size:25px;letter-spacing:4px}.sub{font-size:11px;letter-spacing:3px;color:#ccc}
 .actions{display:flex;gap:7px;align-items:center}.btn{background:#111;color:#fff;border:0;border-radius:9px;padding:11px 14px;font-weight:bold;cursor:pointer}.white{background:#fff;color:#111}.wa{background:#25D366;color:#fff}.cart{border-radius:22px;padding:10px 15px}
 .hero{max-width:1150px;margin:15px auto;padding:0;background:#111;color:#fff;border-radius:20px;overflow:hidden;position:relative;min-height:330px}.hero-track{display:flex;transition:transform .6s ease;width:100%}.hero-slide{min-width:100%;min-height:330px;padding:52px 34px;display:flex;align-items:center;position:relative;overflow:hidden}.hero-slide:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.82),rgba(0,0,0,.25));pointer-events:none}.hero-content{position:relative;z-index:1;max-width:760px}.hero h1{font-size:42px;margin:8px 0}.hero p{font-size:18px;line-height:1.6;max-width:700px}.hero-badge{display:inline-block;padding:8px 13px;border-radius:999px;background:#fff;color:#111;font-weight:800;font-size:12px;letter-spacing:2px}.hero-slide:nth-child(1){background:linear-gradient(120deg,#111,#292929)}.hero-slide:nth-child(2){background:linear-gradient(120deg,#151515,#3a3a3a)}.hero-slide:nth-child(3){background:linear-gradient(120deg,#0d0d0d,#252525)}.hero-dots{position:absolute;left:34px;bottom:18px;z-index:3;display:flex;gap:7px}.hero-dot{width:8px;height:8px;border-radius:50%;background:#777;cursor:pointer}.hero-dot.active{background:#fff;transform:scale(1.25)}
+.product-showcase{max-width:1150px;margin:15px auto 28px;background:#111;color:#fff;border-radius:20px;overflow:hidden;position:relative}.showcase-track{display:flex;transition:transform .6s ease}.showcase-slide{min-width:100%;min-height:360px;display:grid;grid-template-columns:1.25fr .75fr;align-items:stretch;background:#111}.showcase-slide img{width:100%;height:360px;object-fit:cover;background:#222}.showcase-info{padding:35px;display:flex;flex-direction:column;justify-content:center}.showcase-info h2{margin:0 0 10px;font-size:30px}.showcase-info p{color:#ccc;line-height:1.6}.showcase-dots{position:absolute;right:25px;bottom:18px;display:flex;gap:7px;z-index:3}.showcase-dot{width:8px;height:8px;border-radius:50%;background:#777;cursor:pointer}.showcase-dot.active{background:#fff;transform:scale(1.25)}.track-card{background:#fff;border-radius:15px;padding:18px;box-shadow:0 2px 12px #00000012}.track-result{margin-top:12px;padding:12px;border-radius:10px;background:#f5f5f5}.status-pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#111;color:#fff;font-weight:bold}@media(max-width:700px){.showcase-slide{grid-template-columns:1fr}.showcase-slide img{height:300px}.showcase-info{padding:22px}.showcase-info h2{font-size:25px}.showcase-dots{right:18px}}
 .wrap{max-width:1150px;margin:auto;padding:0 15px 45px}h2{margin-top:28px}.filters{display:flex;gap:8px;flex-wrap:wrap}.filters button{border:1px solid #ddd;background:#fff;border-radius:20px;padding:9px 14px}.filters .active{background:#111;color:#fff}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 2px 12px #00000012}.pic{width:100%;aspect-ratio:1/1;object-fit:cover;background:#eee}.pad{padding:13px}.price{font-size:20px;font-weight:bold;margin:7px 0}.small{font-size:13px;color:#666}
 .modal{position:fixed;inset:0;background:#0008;display:none;z-index:50;align-items:flex-end;justify-content:center}.modal.show{display:flex}.sheet{background:#fff;width:100%;max-width:650px;max-height:93vh;overflow:auto;border-radius:20px 20px 0 0;padding:20px}.close{float:right;border:0;background:#eee;border-radius:50%;width:36px;height:36px;font-size:20px}
@@ -37,7 +38,12 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
   <article class="hero-slide"><div class="hero-content"><span class="hero-badge">ORDER YOUR WAY</span><h1>Website + WhatsApp Order</h1><p>Website থেকে order করুন অথবা WhatsApp icon-এ tap করে সরাসরি order পাঠান।</p></div></article>
 </div><div class="hero-dots" id="heroDots"><span class="hero-dot active" data-slide="0"></span><span class="hero-dot" data-slide="1"></span><span class="hero-dot" data-slide="2"></span></div></section>
 
+<section class="product-showcase" aria-label="Product image slideshow"><div class="showcase-track" id="showcaseTrack"><div class="showcase-slide"><div class="showcase-info"><span class="hero-badge">PRODUCT SHOWCASE</span><h2>Explore FNFY Products</h2><p>আমাদের product-এর image slideshow দেখুন। Product দেখতে নিচের Our Products section থেকে View / Buy চাপুন।</p></div><img src="./assets/fnfy-logo.png" alt="FNFY" onerror="this.onerror=null;this.src='./fnfy-logo.png'"></div></div><div class="showcase-dots" id="showcaseDots"></div></section>
+
 <main class="wrap">
+<h2>Track Your Order</h2>
+<div class="track-card"><form id="trackForm"><input id="trackId" placeholder="Order ID দিন" required><button class="btn" type="submit">Check Status</button></form><div id="trackResult"></div></div>
+
 <h2>Our Products <span class="small" id="count"></span></h2>
 <div class="filters" id="filters"></div>
 <div class="grid" id="products">Loading...</div>
@@ -87,7 +93,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-import{getDatabase,ref,onValue,push,set}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+import{getDatabase,ref,onValue,push,set,get}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
 import{firebaseConfig,WHATSAPP_NUMBER}from"./firebase-config.js";
 const app=initializeApp(firebaseConfig),db=getDatabase(app);
 const $=id=>document.getElementById(id);
@@ -109,7 +115,7 @@ function renderProducts(){
  $("filters").innerHTML=cats.map(c=>`<button class="${filter===c?"active":""}" data-cat="${esc(c)}">${esc(c)}</button>`).join("");
  document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{filter=b.dataset.cat;renderProducts()});
 }
-onValue(ref(db,"products"),s=>{products=s.val()||{};renderProducts()},e=>{$("products").textContent="Firebase error: "+e.message});
+onValue(ref(db,"products"),s=>{products=s.val()||{};renderProducts();renderShowcase()},e=>{$("products").textContent="Firebase error: "+e.message});
 
 function openProduct(id){
  const p=products[id];if(!p)return;
@@ -145,7 +151,7 @@ function waText(o){return `FNFY Order\nName: ${o.name}\nPhone: ${o.phone}\nAddre
 $("orderForm").onsubmit=async e=>{
  e.preventDefault();if(!cart.length)return alert("Cart খালি।");
  const o=orderData();if(!o.name||!o.phone||!o.address)return;
- try{await set(push(ref(db,"orders")),o);cart=[];saveCart();e.target.reset();renderCart();$("orderMsg").innerHTML=`<b>Order সফল হয়েছে!</b><br>Status: Pending<br><a class="btn wa" href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText(o))}" target="_blank">WhatsApp-এ পাঠান</a>`}
+ try{const orderRef=push(ref(db,"orders"));const orderId=orderRef.key;const order={...o,orderId,status:"Pending"};await set(orderRef,order);await set(ref(db,"tracking/"+orderId),{orderId,status:"Pending",updatedAt:Date.now()});cart=[];saveCart();e.target.reset();renderCart();$("orderMsg").innerHTML=`<b>Order সফল হয়েছে!</b><br>Order ID: <strong>${esc(orderId)}</strong><br>Status: Pending<br><a class="btn wa" href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText(order))}" target="_blank">WhatsApp-এ পাঠান</a>`;$("trackId").value=orderId;checkTracking(orderId)}
  catch(err){$("orderMsg").textContent="Order save হয়নি: "+err.message}
 };
 
@@ -156,6 +162,28 @@ document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>b.closest(".m
 
 onValue(ref(db,"reviews"),s=>{const d=s.val()||{};$("reviewList").innerHTML=Object.values(d).reverse().map(r=>`<div class="review"><b>${esc(r.name)}</b> ${"★".repeat(Number(r.star||5))}<br>${esc(r.text)}</div>`).join("")||"এখনো কোনো review নেই।"});
 $("reviewForm").onsubmit=async e=>{e.preventDefault();try{await set(push(ref(db,"reviews")),{name:$("rname").value.trim(),star:Number($("rstar").value),text:$("rtext").value.trim(),createdAt:Date.now()});e.target.reset();alert("Review submitted")}catch(err){alert(err.message)}};
+async function checkTracking(orderId){
+ const id=String(orderId||$("trackId").value||"").trim();if(!id){$("trackResult").innerHTML="";return}
+ $("trackResult").innerHTML="Checking...";
+ try{const snap=await get(ref(db,"tracking/"+id));if(!snap.exists()){$("trackResult").innerHTML='<div class="track-result">Order ID পাওয়া যায়নি।</div>';return}const t=snap.val()||{};$("trackResult").innerHTML=`<div class="track-result"><b>Order ID:</b> ${esc(t.orderId||id)}<br><b>Status:</b> <span class="status-pill">${esc(t.status||"Pending")}</span><br><small>Last update: ${t.updatedAt?new Date(t.updatedAt).toLocaleString():"—"}</small></div>`}catch(e){$("trackResult").innerHTML=`<div class="track-result">Tracking error: ${esc(e.message)}</div>`}
+}
+$("trackForm").onsubmit=e=>{e.preventDefault();checkTracking()};
+
+let showcaseIndex=0,showcaseSlides=[];
+function renderShowcase(){
+ const arr=[];Object.entries(products).forEach(([id,p])=>{const imgs=Array.isArray(p.images)&&p.images.length?p.images:(p.image?[p.image]:[]);imgs.slice(0,4).forEach((img,i)=>arr.push({id,name:p.name||"FNFY Product",img,i}));});
+ const use=arr.slice(0,12);showcaseSlides=use;
+ const track=$("showcaseTrack"),dots=$("showcaseDots");if(!track||!dots)return;
+ if(!use.length){track.innerHTML='<div class="showcase-slide"><div class="showcase-info"><span class="hero-badge">PRODUCT SHOWCASE</span><h2>FNFY Products</h2><p>Product image এখানে দেখাবে।</p></div><img src="./assets/fnfy-logo.png" alt="FNFY" onerror="this.onerror=null;this.src='./fnfy-logo.png'"></div>';dots.innerHTML="";showcaseIndex=0;return}
+ track.innerHTML=use.map(x=>`<div class="showcase-slide"><img src="${esc(x.img)}" alt="${esc(x.name)}" onerror="this.onerror=null;this.src='./assets/fnfy-logo.png'"><div class="showcase-info"><span class="hero-badge">FNFY PRODUCT</span><h2>${esc(x.name)}</h2><p>Gallery image ${x.i+1} · Product দেখতে View / Buy চাপুন।</p><button class="btn white" data-showcase-view="${esc(x.id)}" style="width:max-content">View / Buy</button></div></div>`).join("");
+ dots.innerHTML=use.map((_,i)=>`<span class="showcase-dot ${i===0?"active":""}" data-showcase-slide="${i}"></span>`).join("");
+ document.querySelectorAll("[data-showcase-view]").forEach(b=>b.onclick=()=>openProduct(b.dataset.showcaseView));
+ document.querySelectorAll("[data-showcase-slide]").forEach(b=>b.onclick=()=>showShowcase(Number(b.dataset.showcaseSlide)));
+ showShowcase(showcaseIndex);
+}
+function showShowcase(i){if(!showcaseSlides.length)return;showcaseIndex=(i+showcaseSlides.length)%showcaseSlides.length;$("showcaseTrack").style.transform=`translateX(-${showcaseIndex*100}%)`;document.querySelectorAll("[data-showcase-slide]").forEach((d,n)=>d.classList.toggle("active",n===showcaseIndex));}
+setInterval(()=>{if(showcaseSlides.length)showShowcase(showcaseIndex+1)},5000);
+
 let heroIndex=0;
 const heroTrack=$("heroTrack"),heroDots=[...document.querySelectorAll(".hero-dot")];
 function showHero(i){heroIndex=(i+3)%3;if(heroTrack)heroTrack.style.transform=`translateX(-${heroIndex*100}%)`;heroDots.forEach((d,n)=>d.classList.toggle("active",n===heroIndex));}

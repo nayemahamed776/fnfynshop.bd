@@ -30,14 +30,14 @@ input,select,textarea{width:100%;padding:12px;margin:5px 0 10px;border:1px solid
 <p id="up" class="msg">Storage লাগবে না — image compressed হয়ে Realtime Database-এ save হবে.</p>
 <button id="add" type="submit">Add Product</button></form></div>
 
-<div class="card"><h2>📦 Orders</h2><div id="orderMsg" class="msg"></div><div class="table"><table><thead><tr><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Action</th></tr></thead><tbody id="orders"><tr><td colspan="5">Loading...</td></tr></tbody></table></div></div>
+<div class="card"><h2>📦 Orders</h2><div id="orderMsg" class="msg"></div><div class="table"><table><thead><tr><th>Order ID</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Action</th></tr></thead><tbody id="orders"><tr><td colspan="6">Loading...</td></tr></tbody></table></div></div>
 <div class="card"><h2>🛍 Products</h2><div id="products">Loading...</div></div>
 </div></div>
 
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import{getAuth,onAuthStateChanged,signInWithEmailAndPassword,signOut}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-import{getDatabase,ref,push,set,onValue,remove,update}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+import{getDatabase,ref,push,set,onValue,remove,update,get}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
 import{firebaseConfig,ADMIN_EMAIL}from"./firebase-config.js";
 
 const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getDatabase(app),$=id=>document.getElementById(id);
@@ -65,15 +65,25 @@ function loadOrders(){
  onValue(ref(db,"orders"),s=>{
   const d=s.val()||{};
   const arr=Object.entries(d).sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0));
+  arr.forEach(async ([id,o])=>{const t=await get(ref(db,"tracking/"+id));if(!t.exists())await set(ref(db,"tracking/"+id),{orderId:o.orderId||id,status:o.status||"Pending",updatedAt:o.updatedAt||o.createdAt||Date.now()});});
   $("orders").innerHTML=arr.map(([id,o])=>{
    const items=(o.items||[]).map(x=>`${esc(x.name)} × ${x.qty}<br><small>Size: ${esc(x.size)} | Color: ${esc(x.color)}</small>`).join("<hr>");
    const status=o.status||"Pending";
-   return `<tr><td><b>${esc(o.name)}</b><br>${esc(o.phone)}<br>${esc(o.address)}</td><td>${items}</td><td>Subtotal ৳${Number(o.subtotal||0).toLocaleString()}<br>Delivery ৳${Number(o.deliveryCharge||0).toLocaleString()}<br><b>Total ৳${Number(o.total||0).toLocaleString()}</b></td><td><select data-status="${esc(id)}">${["Pending","Confirmed","Delivered","Cancelled"].map(x=>`<option ${x===status?"selected":""}>${x}</option>`).join("")}</select></td><td><button class="green" data-confirm="${esc(id)}">Confirm</button><br><button class="danger" data-order-del="${esc(id)}">Delete</button></td></tr>`;
-  }).join("")||'<tr><td colspan="5">No orders yet</td></tr>';
-  document.querySelectorAll("[data-status]").forEach(x=>x.onchange=()=>update(ref(db,"orders/"+x.dataset.status),{status:x.value}).catch(e=>$("orderMsg").textContent=e.message));
-  document.querySelectorAll("[data-confirm]").forEach(b=>b.onclick=async()=>{try{await update(ref(db,"orders/"+b.dataset.confirm),{status:"Confirmed"});$("orderMsg").textContent="Order confirmed successfully."}catch(e){$("orderMsg").textContent="Confirm failed: "+e.message}});
-  document.querySelectorAll("[data-order-del]").forEach(b=>b.onclick=async()=>{if(confirm("Delete order?"))await remove(ref(db,"orders/"+b.dataset.orderDel))});
- },e=>$("orders").innerHTML=`<tr><td colspan="5">Firebase order error: ${esc(e.message)}</td></tr>`);
+   return `<tr><td><b>${esc(o.orderId||id)}</b><br><small>Tracking: ${esc(o.orderId||id)}</small></td><td><b>${esc(o.name)}</b><br>${esc(o.phone)}<br>${esc(o.address)}</td><td>${items}</td><td>Subtotal ৳${Number(o.subtotal||0).toLocaleString()}<br>Delivery ৳${Number(o.deliveryCharge||0).toLocaleString()}<br><b>Total ৳${Number(o.total||0).toLocaleString()}</b></td><td><select data-status="${esc(id)}">${["Pending","Confirmed","Delivered","Cancelled"].map(x=>`<option ${x===status?"selected":""}>${x}</option>`).join("")}</select></td><td><button class="green" data-action="${esc(id)}" data-next="Confirmed">Confirm</button><br><button class="green" data-action="${esc(id)}" data-next="Delivered">Delivered</button><br><button class="danger" data-action="${esc(id)}" data-next="Cancelled">Cancel</button><br><button class="danger" data-order-del="${esc(id)}">Delete</button></td></tr>`;
+  }).join("")||'<tr><td colspan="6">No orders yet</td></tr>';
+  document.querySelectorAll("[data-status]").forEach(x=>x.onchange=()=>syncOrderStatus(x.dataset.status,x.value));
+  document.querySelectorAll("[data-action]").forEach(b=>b.onclick=()=>syncOrderStatus(b.dataset.action,b.dataset.next));
+  document.querySelectorAll("[data-order-del]").forEach(b=>b.onclick=async()=>{if(confirm("Delete order?")){await remove(ref(db,"orders/"+b.dataset.orderDel));await remove(ref(db,"tracking/"+b.dataset.orderDel));}});
+ },e=>$('orders').innerHTML=`<tr><td colspan="6">Firebase order error: ${esc(e.message)}</td></tr>`);
+}
+
+async function syncOrderStatus(orderId,status){
+ try{
+  const now=Date.now();
+  await update(ref(db,"orders/"+orderId),{status,updatedAt:now,orderId});
+  await update(ref(db,"tracking/"+orderId),{orderId,status,updatedAt:now});
+  $("orderMsg").textContent=`Order ${orderId} → ${status} saved in orders + tracking.`;
+ }catch(e){$("orderMsg").textContent="Status update failed: "+e.message}
 }
 
 function resizeImage(file){
