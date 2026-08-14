@@ -17,4 +17,16 @@ function orders(){onValue(ref(db,"orders"),s=>{let d=s.val()||{},a=Object.entrie
 function resize(f){return new Promise((res,rej)=>{let r=new FileReader();r.onload=()=>{let i=new Image();i.onload=()=>{let m=500,s=Math.min(1,m/Math.max(i.width,i.height)),c=document.createElement("canvas");c.width=i.width*s;c.height=i.height*s;c.getContext("2d").drawImage(i,0,0,c.width,c.height);res(c.toDataURL("image/jpeg",.58))};i.onerror=rej;i.src=r.result};r.onerror=rej;r.readAsDataURL(f)})}
 $("im").onchange=async()=>{$("pr").innerHTML="";for(let f of [...$("im").files].slice(0,4)){let x=await resize(f),i=document.createElement("img");i.src=x;$("pr").appendChild(i)}};
 $("pf").onsubmit=async e=>{e.preventDefault();$("ab").disabled=true;try{let fs=[...$("im").files].slice(0,4),imgs=[];for(let f of fs)imgs.push(await resize(f));await set(push(ref(db,"products")),{name:$("pn").value.trim(),category:$("pc").value.trim(),price:Number($("pp").value),colors:$("pco").value.split(",").map(x=>x.trim()).filter(Boolean),sizes:$("psz").value.split(",").map(x=>x.trim()).filter(Boolean),description:$("pd").value.trim(),image:imgs[0],images:imgs,videoUrl:$("vu").value.trim(),createdAt:Date.now()});e.target.reset();$("pr").innerHTML="";alert("Product added")}catch(e){alert("Product save হয়নি: "+e.message)}finally{$("ab").disabled=false}};
-</script></body></html>
+</script>
+<script>
+function editProduct(id,p){
+  const name=prompt("Product name:",p.name||""); if(name===null)return;
+  const price=prompt("Price:",p.price||""); if(price===null)return;
+  const category=prompt("Category:",p.category||p.cat||""); if(category===null)return;
+  const description=prompt("Description:",p.description||p.desc||""); if(description===null)return;
+  update(ref(db,"products/"+id),{...p,name,price:Number(price),category,description})
+    .then(()=>alert("Product updated successfully"))
+    .catch(e=>alert("Update failed: "+e.message));
+}
+</script>
+</body></html>
