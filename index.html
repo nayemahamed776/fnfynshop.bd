@@ -151,7 +151,7 @@ $("buyNow").onclick=()=>{
  if(!item.size||!item.color)return alert("Color ও Size নির্বাচন করুন।");
  checkoutItems=[item];checkoutMode="buy";$("productModal").classList.remove("show");$("cartModal").classList.add("show");renderCart();
 };
-  }
+}
 function activeCheckoutItems(){return checkoutMode==="buy"?checkoutItems:cart;}
 function renderCart(){
  const items=activeCheckoutItems();
@@ -164,7 +164,7 @@ function renderCart(){
   document.querySelectorAll("[data-plus]").forEach(b=>b.onclick=()=>{cart[b.dataset.plus].qty++;saveCart();renderCart()});
   document.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>{cart.splice(b.dataset.remove,1);saveCart();renderCart()});
  }
-}
+
 
 function orderData(){
  const items=activeCheckoutItems();
