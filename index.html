@@ -202,6 +202,7 @@ async function checkTracking(orderId){
  const id=String(orderId||$("trackId").value||"").trim();if(!id){$("trackResult").innerHTML="";return}
  $("trackResult").innerHTML="Checking...";
  try{const snap=await get(ref(db,"tracking/"+id));if(!snap.exists()){$("trackResult").innerHTML='<div class="track-result">Order ID পাওয়া যায়নি।</div>';return}const t=snap.val()||{};$("trackResult").innerHTML=`<div class="track-result"><b>Order ID:</b> ${esc(t.orderId||id)}<br><b>Status:</b> <span class="status-pill">${esc(t.status||"Pending")}</span><br><small>Order Time: ${t.createdAt?new Date(t.createdAt).toLocaleString():"—"}<br>Last update: ${t.updatedAt?new Date(t.updatedAt).toLocaleString():"—"}</small></div>`}catch(e){$("trackResult").innerHTML=`<div class="track-result">Tracking error: ${esc(e.message)}</div>`}
+}
 $("trackForm").onsubmit=e=>{e.preventDefault();checkTracking()};
 
 
