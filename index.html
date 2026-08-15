@@ -111,7 +111,7 @@ function priceHtml(p){const d=discountPercent(p),price=Number(p.price||0),final=
 function saveCart(){localStorage.setItem("fnfy_cart",JSON.stringify(cart));updateCount()}
 function updateCount(){$("cartCount").textContent=cart.reduce((a,x)=>a+x.qty,0)}
 
-function renderProducts(){
+function renderProducts(){}
  const arr=Object.entries(products).filter(([id,p])=>filter==="All"||String(p.category||"")===filter);
  $("count").textContent=`(${arr.length})`;
  $("products").innerHTML=arr.length?arr.map(([id,p])=>`
@@ -187,7 +187,7 @@ $("orderForm").onsubmit=async e=>{
   $("trackId").value=orderId;checkTracking(orderId);
  }catch(err){$("orderMsg").textContent="Order save হয়নি: "+err.message}
 };
-
+  }
 $("waOrder").onclick=()=>{const items=activeCheckoutItems();if(!items.length)return alert("Cart খালি।");const o=orderData();if(!o.name||!o.phone||!o.address||!o.paymentMethod){alert("নাম, ফোন, ঠিকানা ও Payment নির্বাচন করুন।");return}window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText(o))}`,"_blank")};
 
 $("cartBtn").onclick=()=>{checkoutMode="cart";checkoutItems=[];$("cartModal").classList.add("show");renderCart()};
