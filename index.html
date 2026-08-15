@@ -150,7 +150,7 @@ $("buyNow").onclick=()=>{
  if(!item.size||!item.color)return alert("Color ও Size নির্বাচন করুন।");
  checkoutItems=[item];checkoutMode="buy";$("productModal").classList.remove("show");$("cartModal").classList.add("show");renderCart();
 };
-
+  }
 function activeCheckoutItems(){return checkoutMode==="buy"?checkoutItems:cart;}
 function renderCart(){
  const items=activeCheckoutItems();
