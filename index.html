@@ -19,7 +19,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 @media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:31px}}
 @media(max-width:520px){.top{padding:8px 10px}.brand img{width:52px;height:42px}.brand b{font-size:21px}.sub{font-size:9px}.actions .waTop{display:none}.hero{margin:10px;padding:42px 18px}.hero h1{font-size:28px}.grid{gap:9px}.row{grid-template-columns:1fr}}
 
-.discount-badge{display:inline-block;background:#111;color:#fff;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:800;margin-top:5px}.old-price{text-decoration:line-through;color:#888;font-size:14px;margin-right:6px}.new-price{font-size:20px;font-weight:800}.hero-product-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.72}.hero-product-content{position:relative;z-index:2;max-width:720px}.hero-product-content h1{margin:8px 0;font-size:40px}.hero-product-content p{font-size:18px;line-height:1.5}.hero-product-slide:after{background:linear-gradient(90deg,rgba(0,0,0,.88),rgba(0,0,0,.28))}.hero-product-slide{background:#111}.hero-product-price{font-size:22px;font-weight:800;margin-top:10px}
+.discount-badge{display:inline-block;background:#111;color:#fff;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:800;margin-top:5px}.old-price{text-decoration:line-through;color:#888;font-size:14px;margin-right:6px}.new-price{font-size:20px;font-weight:800}.hero-product-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.84}.hero-product-content{position:relative;z-index:2;max-width:720px}.hero-product-content h1{margin:8px 0;font-size:40px}.hero-product-content p{font-size:18px;line-height:1.5}.hero-product-slide:after{background:linear-gradient(90deg,rgba(0,0,0,.52),rgba(0,0,0,.10))}.hero-product-slide{background:#111}.hero-product-price{font-size:22px;font-weight:800;margin-top:10px}
 </style>
 </head>
 <body>
@@ -81,10 +81,13 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 
 <div class="modal" id="cartModal"><div class="sheet">
 <button class="close" data-close>×</button><h2>Your Cart</h2><div id="cartItems"></div><hr><h3>Subtotal: ৳<span id="cartTotal">0</span></h3>
+<div id="checkoutModeMsg" class="small" style="margin-bottom:8px"></div>
 <form id="orderForm">
 <input id="cname" placeholder="নাম" required><input id="cphone" placeholder="মোবাইল নম্বর" required>
 <textarea id="caddress" placeholder="সম্পূর্ণ ঠিকানা" required></textarea>
 <select id="delivery"><option value="60">ঢাকার ভিতরে — ৳60</option><option value="120">ঢাকার বাইরে — ৳120</option></select>
+<select id="payment" required><option value="">Payment নির্বাচন করুন</option><option>Cash on Delivery</option><option>bKash</option><option>Nagad</option></select>
+<div class="small" style="margin:-2px 0 8px">Cash on Delivery / bKash / Nagad থেকে একটি নির্বাচন করুন।</div>
 <button class="btn" type="submit">Confirm Order</button>
 </form>
 <button class="btn wa" id="waOrder" style="margin-top:7px">WhatsApp-এ Order পাঠান</button>
@@ -98,7 +101,7 @@ import{firebaseConfig,WHATSAPP_NUMBER}from"./firebase-config.js";
 const app=initializeApp(firebaseConfig),db=getDatabase(app);
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
-let products={},cart=JSON.parse(localStorage.getItem("fnfy_cart")||"[]"),filter="All";
+let products={},cart=JSON.parse(localStorage.getItem("fnfy_cart")||"[]"),filter="All",checkoutItems=[],checkoutMode="cart";
 function discountPercent(p){return Math.max(0,Math.min(100,Number(p.discountPercent||p.discount||0)));}
 function finalPrice(p){const price=Number(p.price||0),d=discountPercent(p);return Math.round(price*(1-d/100));}
 function priceHtml(p){const d=discountPercent(p),price=Number(p.price||0),final=finalPrice(p);return d>0?`<div class="price"><span class="old-price">৳${price.toLocaleString()}</span><span class="new-price">৳${final.toLocaleString()}</span><br><span class="discount-badge">${d}% OFF</span></div>`:`<div class="price">৳${price.toLocaleString()}</div>`;}
@@ -130,37 +133,61 @@ function openProduct(id){
  <label>Size</label><select id="selSize">${(p.sizes||["28","30","32","34"]).map(x=>`<option>${esc(x)}</option>`).join("")}</select>
  <label>Color</label><select id="selColor">${(p.colors||["Default"]).map(x=>`<option>${esc(x)}</option>`).join("")}</select>
  <label>Quantity</label><input id="selQty" type="number" min="1" value="1">
- <button class="btn" id="addCart">Add to Cart</button>`;
+ <div class="row" style="margin-top:10px"><button class="btn" id="addCart" type="button">Add to Cart</button><button class="btn wa" id="buyNow" type="button">Buy Now</button></div>`;
  $("productModal").classList.add("show");
  document.querySelectorAll("[data-img]").forEach(x=>x.onclick=()=>{$("mainImg").src=x.dataset.img});
- $("addCart").onclick=()=>{cart.push({id,name:p.name,price:finalPrice(p),originalPrice:Number(p.price||0),discountPercent:discountPercent(p),image:p.image||imgs[0],size:$("selSize").value,color:$("selColor").value,qty:Number($("selQty").value)||1});saveCart();$("productModal").classList.remove("show");$("cartModal").classList.add("show");renderCart()};
-}
+ $("addCart").onclick=()=>{
+ const item={id,name:p.name,price:finalPrice(p),originalPrice:Number(p.price||0),discountPercent:discountPercent(p),image:p.image||imgs[0],size:$("selSize").value,color:$("selColor").value,qty:Number($("selQty").value)||1};
+ if(!item.size||!item.color)return alert("Color ও Size নির্বাচন করুন।");
+ cart.push(item);saveCart();$("productModal").classList.remove("show");alert("Product Cart-এ save হয়েছে।");
+};
+$("buyNow").onclick=()=>{
+ const item={id,name:p.name,price:finalPrice(p),originalPrice:Number(p.price||0),discountPercent:discountPercent(p),image:p.image||imgs[0],size:$("selSize").value,color:$("selColor").value,qty:Number($("selQty").value)||1};
+ if(!item.size||!item.color)return alert("Color ও Size নির্বাচন করুন।");
+ checkoutItems=[item];checkoutMode="buy";$("productModal").classList.remove("show");$("cartModal").classList.add("show");renderCart();
+};
 
+function activeCheckoutItems(){return checkoutMode==="buy"?checkoutItems:cart;}
 function renderCart(){
- if(!cart.length){$("cartItems").innerHTML="<div class='empty'>Cart খালি।</div>";$("cartTotal").textContent="0";return}
- $("cartItems").innerHTML=cart.map((x,i)=>`<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #eee"><img src="${esc(x.image||"./assets/fnfy-logo.png")}" style="width:65px;height:65px;object-fit:cover;border-radius:8px"><div style="flex:1"><b>${esc(x.name)}</b><br>৳${Number(x.price).toLocaleString()} × ${x.qty}<br>${esc(x.size)} / ${esc(x.color)}<br><button class="btn" data-minus="${i}">−</button> <button class="btn" data-plus="${i}">+</button> <button class="btn" data-remove="${i}">Remove</button></div></div>`).join("");
- const subtotal=cart.reduce((a,x)=>a+x.price*x.qty,0);$("cartTotal").textContent=subtotal.toLocaleString();
- document.querySelectorAll("[data-minus]").forEach(b=>b.onclick=()=>{cart[b.dataset.minus].qty=Math.max(1,cart[b.dataset.minus].qty-1);saveCart();renderCart()});
- document.querySelectorAll("[data-plus]").forEach(b=>b.onclick=()=>{cart[b.dataset.plus].qty++;saveCart();renderCart()});
- document.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>{cart.splice(b.dataset.remove,1);saveCart();renderCart()});
+ const items=activeCheckoutItems();
+ $("checkoutModeMsg").textContent=checkoutMode==="buy"?"Buy Now checkout — এই item Cart-এ save হবে না।":"Cart checkout — Cart-এ save করা itemগুলো এখন order করতে পারবেন।";
+ if(!items.length){$("cartItems").innerHTML="<div class='empty'>Cart খালি।</div>";$("cartTotal").textContent="0";return}
+ $("cartItems").innerHTML=items.map((x,i)=>`<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #eee"><img src="${esc(x.image||"./assets/fnfy-logo.png")}" style="width:65px;height:65px;object-fit:cover;border-radius:8px"><div style="flex:1"><b>${esc(x.name)}</b><br>৳${Number(x.price).toLocaleString()} × ${x.qty}<br>Size: ${esc(x.size)} | Color: ${esc(x.color)}${checkoutMode==="cart"?`<br><button class="btn" data-minus="${i}">−</button> <button class="btn" data-plus="${i}">+</button> <button class="btn" data-remove="${i}">Remove</button>`:""}</div></div>`).join("");
+ const subtotal=items.reduce((a,x)=>a+x.price*x.qty,0);$("cartTotal").textContent=subtotal.toLocaleString();
+ if(checkoutMode==="cart"){
+  document.querySelectorAll("[data-minus]").forEach(b=>b.onclick=()=>{cart[b.dataset.minus].qty=Math.max(1,cart[b.dataset.minus].qty-1);saveCart();renderCart()});
+  document.querySelectorAll("[data-plus]").forEach(b=>b.onclick=()=>{cart[b.dataset.plus].qty++;saveCart();renderCart()});
+  document.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>{cart.splice(b.dataset.remove,1);saveCart();renderCart()});
+ }
 }
 
 function orderData(){
- const delivery=Number($("delivery").value),subtotal=cart.reduce((a,x)=>a+x.price*x.qty,0);
- return {name:$("cname").value.trim(),phone:$("cphone").value.trim(),address:$("caddress").value.trim(),deliveryCharge:delivery,subtotal,total:subtotal+delivery,items:cart,status:"Pending",createdAt:Date.now()};
+ const items=activeCheckoutItems();
+ const delivery=Number($("delivery").value),subtotal=items.reduce((a,x)=>a+x.price*x.qty,0),now=Date.now();
+ return {name:$('cname').value.trim(),phone:$('cphone').value.trim(),address:$('caddress').value.trim(),deliveryCharge:delivery,subtotal,total:subtotal+delivery,items,paymentMethod:$('payment').value,status:"Pending",createdAt:now,updatedAt:now};
 }
-function waText(o){return `FNFY Order\nName: ${o.name}\nPhone: ${o.phone}\nAddress: ${o.address}\nDelivery: ৳${o.deliveryCharge}\nTotal: ৳${o.total}\n\nItems:\n`+o.items.map(x=>`${x.name} × ${x.qty} | Size: ${x.size} | Color: ${x.color}`).join("\n")}
+function waText(o){return `FNFY Order\nName: ${o.name}\nPhone: ${o.phone}\nAddress: ${o.address}\nPayment: ${o.paymentMethod||"Not selected"}\nDelivery: ৳${o.deliveryCharge}\nTotal: ৳${o.total}\n\nItems:\n`+o.items.map(x=>`${x.name} × ${x.qty} | Size: ${x.size} | Color: ${x.color}`).join("\n")}
 
 $("orderForm").onsubmit=async e=>{
- e.preventDefault();if(!cart.length)return alert("Cart খালি।");
- const o=orderData();if(!o.name||!o.phone||!o.address)return;
- try{const orderRef=push(ref(db,"orders"));const orderId=orderRef.key;const order={...o,orderId,status:"Pending"};await set(orderRef,order);await set(ref(db,"tracking/"+orderId),{orderId,status:"Pending",updatedAt:Date.now()});cart=[];saveCart();e.target.reset();renderCart();$("orderMsg").innerHTML=`<b>Order সফল হয়েছে!</b><br>Order ID: <strong>${esc(orderId)}</strong><br>Status: Pending<br><a class="btn wa" href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText(order))}" target="_blank">WhatsApp-এ পাঠান</a>`;$("trackId").value=orderId;checkTracking(orderId)}
- catch(err){$("orderMsg").textContent="Order save হয়নি: "+err.message}
+ e.preventDefault();
+ const items=activeCheckoutItems();if(!items.length)return alert("Cart খালি।");
+ const o=orderData();if(!o.name||!o.phone||!o.address||!o.paymentMethod)return alert("নাম, ফোন, ঠিকানা ও Payment নির্বাচন করুন।");
+ try{
+  const orderRef=push(ref(db,"orders"));const orderId=orderRef.key;const now=Date.now();
+  const order={...o,orderId,status:"Pending",createdAt:now,updatedAt:now};
+  await set(orderRef,order);
+  await set(ref(db,"tracking/"+orderId),{orderId,status:"Pending",createdAt:now,updatedAt:now});
+  if(checkoutMode==="cart"){cart=[];saveCart();}
+  checkoutItems=[];checkoutMode="cart";e.target.reset();renderCart();
+  $("orderMsg").innerHTML=`<b>Order সফল হয়েছে!</b><br>Order ID: <strong>${esc(orderId)}</strong><br>Status: Pending<br>Order Time: ${new Date(now).toLocaleString()}<br><a class="btn wa" href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText(order))}" target="_blank">WhatsApp-এ পাঠান</a>`;
+  $("trackId").value=orderId;checkTracking(orderId);
+ }catch(err){$("orderMsg").textContent="Order save হয়নি: "+err.message}
 };
 
-$("waOrder").onclick=()=>{if(!cart.length)return alert("Cart খালি।");const o=orderData();if(!o.name||!o.phone||!o.address){alert("নাম, ফোন ও ঠিকানা পূরণ করুন।");return}window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText(o))}`,"_blank")};
+$("waOrder").onclick=()=>{const items=activeCheckoutItems();if(!items.length)return alert("Cart খালি।");const o=orderData();if(!o.name||!o.phone||!o.address||!o.paymentMethod){alert("নাম, ফোন, ঠিকানা ও Payment নির্বাচন করুন।");return}window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText(o))}`,"_blank")};
 
-$("cartBtn").onclick=()=>{$("cartModal").classList.add("show");renderCart()};
+$("cartBtn").onclick=()=>{checkoutMode="cart";checkoutItems=[];$("cartModal").classList.add("show");renderCart()};
+
 document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>b.closest(".modal").classList.remove("show"));
 
 onValue(ref(db,"reviews"),s=>{const d=s.val()||{};$("reviewList").innerHTML=Object.values(d).reverse().map(r=>`<div class="review"><b>${esc(r.name)}</b> ${"★".repeat(Number(r.star||5))}<br>${esc(r.text)}</div>`).join("")||"এখনো কোনো review নেই।"});
@@ -168,8 +195,7 @@ $("reviewForm").onsubmit=async e=>{e.preventDefault();try{await set(push(ref(db,
 async function checkTracking(orderId){
  const id=String(orderId||$("trackId").value||"").trim();if(!id){$("trackResult").innerHTML="";return}
  $("trackResult").innerHTML="Checking...";
- try{const snap=await get(ref(db,"tracking/"+id));if(!snap.exists()){$("trackResult").innerHTML='<div class="track-result">Order ID পাওয়া যায়নি।</div>';return}const t=snap.val()||{};$("trackResult").innerHTML=`<div class="track-result"><b>Order ID:</b> ${esc(t.orderId||id)}<br><b>Status:</b> <span class="status-pill">${esc(t.status||"Pending")}</span><br><small>Last update: ${t.updatedAt?new Date(t.updatedAt).toLocaleString():"—"}</small></div>`}catch(e){$("trackResult").innerHTML=`<div class="track-result">Tracking error: ${esc(e.message)}</div>`}
-}
+ try{const snap=await get(ref(db,"tracking/"+id));if(!snap.exists()){$("trackResult").innerHTML='<div class="track-result">Order ID পাওয়া যায়নি।</div>';return}const t=snap.val()||{};$("trackResult").innerHTML=`<div class="track-result"><b>Order ID:</b> ${esc(t.orderId||id)}<br><b>Status:</b> <span class="status-pill">${esc(t.status||"Pending")}</span><br><small>Order Time: ${t.createdAt?new Date(t.createdAt).toLocaleString():"—"}<br>Last update: ${t.updatedAt?new Date(t.updatedAt).toLocaleString():"—"}</small></div>`}catch(e){$("trackResult").innerHTML=`<div class="track-result">Tracking error: ${esc(e.message)}</div>`}
 $("trackForm").onsubmit=e=>{e.preventDefault();checkTracking()};
 
 

@@ -7,7 +7,8 @@
     "orders": {
       ".read": "auth != null && auth.token.email === 'nayemahamed776@gmail.com'",
       "$orderId": {
-        ".write": "auth != null && auth.token.email === 'nayemahamed776@gmail.com' || !data.exists()"
+        ".read": "auth != null && auth.token.email === 'nayemahamed776@gmail.com'",
+        ".write": "(auth != null && auth.token.email === 'nayemahamed776@gmail.com') || (!data.exists() && newData.exists())"
       }
     },
     "tracking": {

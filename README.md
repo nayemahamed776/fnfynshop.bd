@@ -1,23 +1,15 @@
-# FNFY PREMIUM — WIDE HERO + INSTAGRAM FINAL
+FNFY Premium Website
 
-This update adds:
-- Wide New Collection hero slideshow
-- Each hero slide changes automatically every 5 seconds
-- Premium mobile/desktop hero layout
-- FNFY PNG logo in header/footer
-- Facebook, WhatsApp and Instagram icon buttons in footer
-- Instagram button opens: https://www.instagram.com/fnfy2026/
-- Facebook button opens: https://www.facebook.com/share/19RWoj5v3K/
-- WhatsApp button opens: https://wa.me/8801965460567
+Features in this build:
+- Firebase Realtime Database products, orders, tracking and reviews
+- Customer Order ID + status tracking with order/update date-time
+- Admin Confirm / Delivered / Cancel synced to orders + tracking
+- Add to Cart saves only to cart; Buy Now orders without adding to cart
+- Cart items can be ordered later
+- Cash on Delivery, bKash and Nagad payment selection saved with order
+- Selected color, size and quantity saved with cart/order
+- Website order + WhatsApp order
+- 4-image product gallery, category filter, discount and product hero slideshow
+- Facebook, WhatsApp and Instagram footer icons
 
-Keep these files in the same GitHub root/folder:
-- index.html
-- admin.html
-- firebase-config.js
-- database.rules.json
-- assets/fnfy-logo.png
-- assets/facebook.png
-- assets/instagram.png
-- assets/whatsapp.svg
-
-Firebase configuration and existing database rules are kept from the base FNFY package.
+Firebase rules: publish database.rules.json in Realtime Database > Rules.
