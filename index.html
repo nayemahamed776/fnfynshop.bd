@@ -144,7 +144,8 @@ function openProduct(id){
  const item={id,name:p.name,price:finalPrice(p),originalPrice:Number(p.price||0),discountPercent:discountPercent(p),image:p.image||imgs[0],size:$("selSize").value,color:$("selColor").value,qty:Number($("selQty").value)||1};
  if(!item.size||!item.color)return alert("Color ও Size নির্বাচন করুন।");
  cart.push(item);saveCart();$("productModal").classList.remove("show");alert("Product Cart-এ save হয়েছে।");
-};}
+};
+}
 $("buyNow").onclick=()=>{
  const item={id,name:p.name,price:finalPrice(p),originalPrice:Number(p.price||0),discountPercent:discountPercent(p),image:p.image||imgs[0],size:$("selSize").value,color:$("selColor").value,qty:Number($("selQty").value)||1};
  if(!item.size||!item.color)return alert("Color ও Size নির্বাচন করুন।");
