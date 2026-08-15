@@ -25,7 +25,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 <body>
 <header>
   <div class="top">
-    <div class="brand"><img src="./fnfy-logo.png" onerror="this.onerror=null;this.src='./fnfy-logo.png'" alt="FNFY Logo"><div><b>FNFY</b><div class="sub">MEN'S CLOTHING</div></div></div>
+    <div class="brand"><img src="./assets/fnfy-logo.png" onerror="this.onerror=null;this.src='./fnfy-logo.png'" alt="FNFY Logo"><div><b>FNFY</b><div class="sub">MEN'S CLOTHING</div></div></div>
     <div class="actions">
       <a class="btn wa waTop" href="https://wa.me/8801965460567" target="_blank">WhatsApp</a>
       <button class="btn white cart" id="cartBtn">Cart (<span id="cartCount">0</span>)</button>
@@ -46,17 +46,17 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 
 <h2>Our Products <span class="small" id="count"></span></h2>
 <div class="filters" id="filters"></div>
-<div class="grid" id="products"></div>
+<div class="grid" id="products">Loading...</div>
 
 <h2>Customer Reviews</h2>
-<div class="card"><div class="pad" id="reviewList"</div>
+<div class="card"><div class="pad" id="reviewList">Loading...</div>
 <div class="pad"><form id="reviewForm"><div class="row"><input id="rname" placeholder="আপনার নাম" required><select id="rstar"><option value="5">★★★★★</option><option value="4">★★★★☆</option><option value="3">★★★☆☆</option><option value="2">★★☆☆☆</option><option value="1">★☆☆☆☆</option></select></div><textarea id="rtext" rows="3" placeholder="Review লিখুন" required></textarea><button class="btn">Review Submit</button></form></div></div>
 </main>
 
 <footer class="site-footer">
   <div class="footer-inner">
     <div>
-      <div class="footer-brand"><img src="./fnfy-logo.png" onerror="this.onerror=null;this.src='./fnfy-logo.png'" alt="FNFY Logo"><div><div class="footer-title">FNFY</div><div class="sub">MEN'S CLOTHING</div></div></div>
+      <div class="footer-brand"><img src="./assets/fnfy-logo.png" onerror="this.onerror=null;this.src='./fnfy-logo.png'" alt="FNFY Logo"><div><div class="footer-title">FNFY</div><div class="sub">MEN'S CLOTHING</div></div></div>
       <p class="footer-text">Quality men's fashion at an affordable price.</p>
     </div>
     <div>
@@ -86,7 +86,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 <input id="cname" placeholder="নাম" required><input id="cphone" placeholder="মোবাইল নম্বর" required>
 <textarea id="caddress" placeholder="সম্পূর্ণ ঠিকানা" required></textarea>
 <select id="delivery"><option value="60">ঢাকার ভিতরে — ৳60</option><option value="120">ঢাকার বাইরে — ৳120</option></select>
-<select id="payment" required><option value="">Payment নির্বাচন করুন</option><option>Cash on Delivery</option><option>bKash</option><option>Nagad</option></select>
+<select id="payment" required><option value="">Payment নির্বাচন করুন</option><option>Cash on Delivery</option><option>bKash</option><option>Nagad</option><option value="Rocket">Rocket</option></select>
 <div class="small" style="margin:-2px 0 8px">Cash on Delivery / bKash / Nagad থেকে একটি নির্বাচন করুন।</div>
 <button class="btn" type="submit">Confirm Order</button>
 </form>
@@ -97,7 +97,8 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import{getDatabase,ref,onValue,push,set,get,update}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
-import{firebaseConfig,WHATSAPP_NUMBER}from"./firebase-config.js";
+const firebaseConfig={apiKey:"AIzaSyCJCRm19whUUqEmTR3Mf1o5P8jAK2UhBxE",authDomain:"fnfynshop.firebaseapp.com",databaseURL:"https://fnfynshop-default-rtdb.asia-southeast1.firebasedatabase.app",projectId:"fnfynshop",storageBucket:"fnfynshop.firebasestorage.app",messagingSenderId:"146671106800",appId:"1:146671106800:web:9a389ba7c418e8289fe035",measurementId:"G-RDZLGVKZDL"};
+const WHATSAPP_NUMBER="8801965460567";
 const app=initializeApp(firebaseConfig),db=getDatabase(app);
 const DB_URL=String(firebaseConfig.databaseURL||"").replace(/\/$/,"");
 async function restGet(path){const r=await fetch(`${DB_URL}/${path}.json`);if(!r.ok)throw Error(`HTTP ${r.status}`);return await r.json()}
@@ -111,11 +112,12 @@ function priceHtml(p){const d=discountPercent(p),price=Number(p.price||0),final=
 function saveCart(){localStorage.setItem("fnfy_cart",JSON.stringify(cart));updateCount()}
 function updateCount(){$("cartCount").textContent=cart.reduce((a,x)=>a+x.qty,0)}
 
-function renderProducts(){}
+function productImage(p){return p?.images?.[0]?.image||p?.images?.[0]||p?.image||"./fnfy-logo.png";}
+function renderProducts(){
  const arr=Object.entries(products).filter(([id,p])=>filter==="All"||String(p.category||"")===filter);
  $("count").textContent=`(${arr.length})`;
  $("products").innerHTML=arr.length?arr.map(([id,p])=>`
- <div class="card"><img class="pic" src="${esc(p.image||"./fnfy-logo.png")}" onerror="this.src='./fnfy-logo.png'">
+ <div class="card"><img class="pic" src="${esc(productImage(p))}" onerror="this.src='./assets/fnfy-logo.png'">
  <div class="pad"><b>${esc(p.name)}</b>${priceHtml(p)}<div class="small">${esc(p.category||"")}</div>
  <button class="btn" data-view="${esc(id)}" style="margin-top:9px">View / Buy</button></div></div>`).join(""):'<div class="empty">কোনো product নেই।</div>';
  document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>openProduct(b.dataset.view));
@@ -131,7 +133,7 @@ function openProduct(id){
  const p=products[id];if(!p)return;
  const imgs=p.images?.length?p.images:[p.image].filter(Boolean);
  $("productDetail").innerHTML=`
- <img class="pic" id="mainImg" src="${esc(imgs[0]||"./fnfy-logo.png")}">
+ <img class="pic" id="mainImg" src="${esc(imgs[0]||"./assets/fnfy-logo.png")}">
  <div class="thumbs">${imgs.map(x=>`<img src="${esc(x)}" data-img="${esc(x)}">`).join("")}</div>
  <h2>${esc(p.name)}</h2>${priceHtml(p)}<p>${esc(p.description||"")}</p>
  <label>Size</label><select id="selSize">${(p.sizes||["28","30","32","34"]).map(x=>`<option>${esc(x)}</option>`).join("")}</select>
@@ -141,17 +143,17 @@ function openProduct(id){
  $("productModal").classList.add("show");
  document.querySelectorAll("[data-img]").forEach(x=>x.onclick=()=>{$("mainImg").src=x.dataset.img});
  $("addCart").onclick=()=>{
- const item={id,name:p.name,price:finalPrice(p),originalPrice:Number(p.price||0),discountPercent:discountPercent(p),image:p.image||imgs[0],size:$("selSize").value,color:$("selColor").value,qty:Number($("selQty").value)||1};
+ const item={id,name:p.name,price:finalPrice(p),originalPrice:Number(p.price||0),discountPercent:discountPercent(p),image:productImage(p),size:$("selSize").value,color:$("selColor").value,qty:Number($("selQty").value)||1};
  if(!item.size||!item.color)return alert("Color ও Size নির্বাচন করুন।");
  cart.push(item);saveCart();$("productModal").classList.remove("show");alert("Product Cart-এ save হয়েছে।");
 };
-}
 $("buyNow").onclick=()=>{
- const item={id,name:p.name,price:finalPrice(p),originalPrice:Number(p.price||0),discountPercent:discountPercent(p),image:p.image||imgs[0],size:$("selSize").value,color:$("selColor").value,qty:Number($("selQty").value)||1};
+ const item={id,name:p.name,price:finalPrice(p),originalPrice:Number(p.price||0),discountPercent:discountPercent(p),image:productImage(p),size:$("selSize").value,color:$("selColor").value,qty:Number($("selQty").value)||1};
  if(!item.size||!item.color)return alert("Color ও Size নির্বাচন করুন।");
  checkoutItems=[item];checkoutMode="buy";$("productModal").classList.remove("show");$("cartModal").classList.add("show");renderCart();
 };
 }
+
 function activeCheckoutItems(){return checkoutMode==="buy"?checkoutItems:cart;}
 function renderCart(){
  const items=activeCheckoutItems();
@@ -172,7 +174,7 @@ function orderData(){
  return {name:$('cname').value.trim(),phone:$('cphone').value.trim(),address:$('caddress').value.trim(),deliveryCharge:delivery,subtotal,total:subtotal+delivery,items,paymentMethod:$('payment').value,status:"Pending",createdAt:now,updatedAt:now};
 }
 function waText(o){return `FNFY Order\nName: ${o.name}\nPhone: ${o.phone}\nAddress: ${o.address}\nPayment: ${o.paymentMethod||"Not selected"}\nDelivery: ৳${o.deliveryCharge}\nTotal: ৳${o.total}\n\nItems:\n`+o.items.map(x=>`${x.name} × ${x.qty} | Size: ${x.size} | Color: ${x.color}`).join("\n")}
-  }
+
 $("orderForm").onsubmit=async e=>{
  e.preventDefault();
  const items=activeCheckoutItems();if(!items.length)return alert("Cart খালি।");
@@ -188,7 +190,7 @@ $("orderForm").onsubmit=async e=>{
   $("trackId").value=orderId;checkTracking(orderId);
  }catch(err){$("orderMsg").textContent="Order save হয়নি: "+err.message}
 };
- } 
+
 $("waOrder").onclick=()=>{const items=activeCheckoutItems();if(!items.length)return alert("Cart খালি।");const o=orderData();if(!o.name||!o.phone||!o.address||!o.paymentMethod){alert("নাম, ফোন, ঠিকানা ও Payment নির্বাচন করুন।");return}window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText(o))}`,"_blank")};
 
 $("cartBtn").onclick=()=>{checkoutMode="cart";checkoutItems=[];$("cartModal").classList.add("show");renderCart()};
@@ -196,8 +198,8 @@ $("cartBtn").onclick=()=>{checkoutMode="cart";checkoutItems=[];$("cartModal").cl
 document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>b.closest(".modal").classList.remove("show"));
 
 let reviewsRealtime=false;
-onValue(ref(db,"reviews"),s=>{reviewsRealtime=true;const d=s.val()||{};$("reviewList").innerHTML=Object.values(d).reverse().map(r=>`<div class="review"><b>${esc(r.name)}</b> ${"★".repeat(Number(r.star||5))}<br>${esc(r.text)}</div>`).join("")||"এখনো কোনো review নেই।"},e=>{$("reviewList").innerHTML=`<div class="review">Review load হয়নি: ${esc(e.message)}</div>`});
-setTimeout(async()=>{if(reviewsRealtime)return;try{const d=await restGet("reviews")||{};$("reviewList").innerHTML=Object.values(d).reverse().map(r=>`<div class="review"><b>${esc(r.name)}</b> ${"★".repeat(Number(r.star||5))}<br>${esc(r.text)}</div>`).join("")||"এখনো কোনো review নেই।"}catch(e){$("reviewList").innerHTML=`<div class="review">Review load হয়নি: ${esc(e.message)}</div>`}},3500);
+onValue(ref(db,"reviews"),s=>{reviewsRealtime=true;const d=s.val()||{};$("reviewList").innerHTML=Object.values(d).reverse().map(r=>`<div class="review"><b>${esc(r.name)}</b> ${"★".repeat(Number(r.star??r.rating??5))}<br>${esc(r.text)}</div>`).join("")||"এখনো কোনো review নেই।"},e=>{$("reviewList").innerHTML=`<div class="review">Review load হয়নি: ${esc(e.message)}</div>`});
+setTimeout(async()=>{if(reviewsRealtime)return;try{const d=await restGet("reviews")||{};$("reviewList").innerHTML=Object.values(d).reverse().map(r=>`<div class="review"><b>${esc(r.name)}</b> ${"★".repeat(Number(r.star??r.rating??5))}<br>${esc(r.text)}</div>`).join("")||"এখনো কোনো review নেই।"}catch(e){$("reviewList").innerHTML=`<div class="review">Review load হয়নি: ${esc(e.message)}</div>`}},3500);
 $("reviewForm").onsubmit=async e=>{e.preventDefault();try{await set(push(ref(db,"reviews")),{name:$("rname").value.trim(),star:Number($("rstar").value),text:$("rtext").value.trim(),createdAt:Date.now()});e.target.reset();alert("Review submitted")}catch(err){alert(err.message)}};
 async function checkTracking(orderId){
  const id=String(orderId||$("trackId").value||"").trim();if(!id){$("trackResult").innerHTML="";return}
@@ -212,7 +214,7 @@ const heroTrack=$("heroTrack"),heroDots=$("heroDots");
 function renderHeroProducts(){
  const arr=Object.entries(products);
  const productSlides=arr.map(([id,p])=>{
-   const img=(p.images&&p.images.length?p.images[0]:p.image)||"./fnfy-logo.png";
+   const img=productImage(p);
    const d=discountPercent(p),price=Number(p.price||0),final=finalPrice(p);
    return `<article class="hero-slide hero-product-slide"><img class="hero-product-img" src="${esc(img)}" onerror="this.onerror=null;this.src='./fnfy-logo.png'" alt="${esc(p.name)}"><div class="hero-content hero-product-content"><span class="hero-badge">${d?d+'% OFF':'FNFY PRODUCT'}</span><h1>${esc(p.name)}</h1><p>${esc(p.category||'Men’s Clothing')}</p><div class="hero-product-price">${d?`<span class="old-price">৳${price.toLocaleString()}</span> ৳${final.toLocaleString()}`:`৳${price.toLocaleString()}`}</div><button class="btn white" data-hero-view="${esc(id)}" style="margin-top:12px">View / Buy</button></div></article>`;
  }).join('');
@@ -227,4 +229,12 @@ function showHero(i){heroIndex=((i%heroCount)+heroCount)%heroCount;if(heroTrack)
 setInterval(()=>showHero(heroIndex+1),5000);
 updateCount();
 </script>
-</body></html>
+<script>
+(function(){
+ const sel=document.getElementById("paymentMethod"), info=document.getElementById("paymentInfo");
+ if(!sel||!info)return;
+ const numbers={bKash:"Contact seller for bKash number",Nagad:"Contact seller for Nagad number",Rocket:"019654605676"};
+ function show(){const v=sel.value;info.innerHTML=v==="COD"?"Cash on Delivery":`Send Money via <b>${v}</b> to <b>${numbers[v]}</b>`;}
+ sel.addEventListener("change",show); show();
+})();
+</script></body></html>
