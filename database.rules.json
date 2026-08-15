@@ -14,7 +14,7 @@
     "tracking": {
       ".read": true,
       "$orderId": {
-        ".write": "auth != null && auth.token.email === 'nayemahamed776@gmail.com'"
+        ".write": "(auth != null && auth.token.email === 'nayemahamed776@gmail.com') || (!data.exists() && newData.exists())"
       }
     },
     "reviews": {

@@ -82,7 +82,7 @@ async function syncOrderStatus(orderId,status){
  try{
   const now=Date.now();
   await update(ref(db,"orders/"+orderId),{status,updatedAt:now,orderId});
-  await update(ref(db,"tracking/"+orderId),{orderId,status,updatedAt:now});
+  await update(ref(db,"tracking/"+orderId),{orderId,status,updatedAt:now,updatedBy:ADMIN_EMAIL});
   $("orderMsg").textContent=`Order ${orderId} → ${status} saved in orders + tracking.`;
  }catch(e){$("orderMsg").textContent="Status update failed: "+e.message}
 }
