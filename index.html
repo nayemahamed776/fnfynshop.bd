@@ -49,14 +49,14 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 <div class="grid" id="products"></div>
 
 <h2>Customer Reviews</h2>
-<div class="card"><div class="pad" id="reviewList">Loading...</div>
+<div class="card"><div class="pad" id="reviewList"</div>
 <div class="pad"><form id="reviewForm"><div class="row"><input id="rname" placeholder="আপনার নাম" required><select id="rstar"><option value="5">★★★★★</option><option value="4">★★★★☆</option><option value="3">★★★☆☆</option><option value="2">★★☆☆☆</option><option value="1">★☆☆☆☆</option></select></div><textarea id="rtext" rows="3" placeholder="Review লিখুন" required></textarea><button class="btn">Review Submit</button></form></div></div>
 </main>
 
 <footer class="site-footer">
   <div class="footer-inner">
     <div>
-      <div class="footer-brand"><img src="./assets/fnfy-logo.png" onerror="this.onerror=null;this.src='./fnfy-logo.png'" alt="FNFY Logo"><div><div class="footer-title">FNFY</div><div class="sub">MEN'S CLOTHING</div></div></div>
+      <div class="footer-brand"><img src="./fnfy-logo.png" onerror="this.onerror=null;this.src='./fnfy-logo.png'" alt="FNFY Logo"><div><div class="footer-title">FNFY</div><div class="sub">MEN'S CLOTHING</div></div></div>
       <p class="footer-text">Quality men's fashion at an affordable price.</p>
     </div>
     <div>
@@ -115,7 +115,7 @@ function renderProducts(){
  const arr=Object.entries(products).filter(([id,p])=>filter==="All"||String(p.category||"")===filter);
  $("count").textContent=`(${arr.length})`;
  $("products").innerHTML=arr.length?arr.map(([id,p])=>`
- <div class="card"><img class="pic" src="${esc(p.image||"./assets/fnfy-logo.png")}" onerror="this.src='./assets/fnfy-logo.png'">
+ <div class="card"><img class="pic" src="${esc(p.image||"./fnfy-logo.png")}" onerror="this.src='./fnfy-logo.png'">
  <div class="pad"><b>${esc(p.name)}</b>${priceHtml(p)}<div class="small">${esc(p.category||"")}</div>
  <button class="btn" data-view="${esc(id)}" style="margin-top:9px">View / Buy</button></div></div>`).join(""):'<div class="empty">কোনো product নেই।</div>';
  document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>openProduct(b.dataset.view));
@@ -131,7 +131,7 @@ function openProduct(id){
  const p=products[id];if(!p)return;
  const imgs=p.images?.length?p.images:[p.image].filter(Boolean);
  $("productDetail").innerHTML=`
- <img class="pic" id="mainImg" src="${esc(imgs[0]||"./assets/fnfy-logo.png")}">
+ <img class="pic" id="mainImg" src="${esc(imgs[0]||"./fnfy-logo.png")}">
  <div class="thumbs">${imgs.map(x=>`<img src="${esc(x)}" data-img="${esc(x)}">`).join("")}</div>
  <h2>${esc(p.name)}</h2>${priceHtml(p)}<p>${esc(p.description||"")}</p>
  <label>Size</label><select id="selSize">${(p.sizes||["28","30","32","34"]).map(x=>`<option>${esc(x)}</option>`).join("")}</select>
