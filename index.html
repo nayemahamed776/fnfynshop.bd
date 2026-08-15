@@ -144,14 +144,13 @@ function openProduct(id){
  const item={id,name:p.name,price:finalPrice(p),originalPrice:Number(p.price||0),discountPercent:discountPercent(p),image:p.image||imgs[0],size:$("selSize").value,color:$("selColor").value,qty:Number($("selQty").value)||1};
  if(!item.size||!item.color)return alert("Color ও Size নির্বাচন করুন।");
  cart.push(item);saveCart();$("productModal").classList.remove("show");alert("Product Cart-এ save হয়েছে।");
-};
-}
+};}
 $("buyNow").onclick=()=>{
  const item={id,name:p.name,price:finalPrice(p),originalPrice:Number(p.price||0),discountPercent:discountPercent(p),image:p.image||imgs[0],size:$("selSize").value,color:$("selColor").value,qty:Number($("selQty").value)||1};
  if(!item.size||!item.color)return alert("Color ও Size নির্বাচন করুন।");
  checkoutItems=[item];checkoutMode="buy";$("productModal").classList.remove("show");$("cartModal").classList.add("show");renderCart();
 };
-  }
+  
 function activeCheckoutItems(){return checkoutMode==="buy"?checkoutItems:cart;}
 function renderCart(){
  const items=activeCheckoutItems();
@@ -188,7 +187,7 @@ $("orderForm").onsubmit=async e=>{
   $("trackId").value=orderId;checkTracking(orderId);
  }catch(err){$("orderMsg").textContent="Order save হয়নি: "+err.message}
 };
-  }
+  
 $("waOrder").onclick=()=>{const items=activeCheckoutItems();if(!items.length)return alert("Cart খালি।");const o=orderData();if(!o.name||!o.phone||!o.address||!o.paymentMethod){alert("নাম, ফোন, ঠিকানা ও Payment নির্বাচন করুন।");return}window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText(o))}`,"_blank")};
 
 $("cartBtn").onclick=()=>{checkoutMode="cart";checkoutItems=[];$("cartModal").classList.add("show");renderCart()};
