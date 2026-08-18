@@ -1,4 +1,7 @@
-<!doctype html>
+
+const BKASH_NUMBER="01965460567";
+const NAGAD_NUMBER="01965460567";
+const ROCKET_NUMBER="019654605676";<!doctype html>
 <html lang="bn">
 <head>
 <meta charset="utf-8">
@@ -231,10 +234,22 @@ updateCount();
 </script>
 <script>
 (function(){
- const sel=document.getElementById("paymentMethod"), info=document.getElementById("paymentInfo");
- if(!sel||!info)return;
- const numbers={bKash:"Contact seller for bKash number",Nagad:"Contact seller for Nagad number",Rocket:"019654605676"};
- function show(){const v=sel.value;info.innerHTML=v==="COD"?"Cash on Delivery":`Send Money via <b>${v}</b> to <b>${numbers[v]}</b>`;}
- sel.addEventListener("change",show); show();
+  const sel=document.getElementById("paymentMethod");
+  const info=document.getElementById("paymentInfo");
+  const tx=document.getElementById("transactionId");
+  if(!sel||!info)return;
+  const nums={bKash:"01965460567",Nagad:"01965460567",Rocket:"019654605676"};
+  function updatePaymentUI(){
+    const m=sel.value;
+    if(m==="COD"){
+      info.innerHTML="<b>Cash on Delivery</b><div style='margin-top:4px'>Payment will be collected on delivery.</div>";
+      if(tx){tx.required=false;tx.value="";}
+    }else{
+      info.innerHTML="<b>"+m+"</b><div style='margin-top:4px'>Send Money to: <strong>"+nums[m]+"</strong></div><div style='margin-top:4px;font-size:13px'>Payment করার পর Transaction ID দিন।</div>";
+      if(tx)tx.required=true;
+    }
+  }
+  sel.addEventListener("change",updatePaymentUI);
+  updatePaymentUI();
 })();
 </script></body></html>
