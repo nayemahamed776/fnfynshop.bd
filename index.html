@@ -23,6 +23,14 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 @media(max-width:520px){.top{padding:8px 10px}.brand img{width:52px;height:42px}.brand b{font-size:21px}.sub{font-size:9px}.actions .waTop{display:none}.hero{margin:10px;padding:42px 18px}.hero h1{font-size:28px}.grid{gap:9px}.row{grid-template-columns:1fr}}
 
 .discount-badge{display:inline-block;background:#111;color:#fff;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:800;margin-top:5px}.old-price{text-decoration:line-through;color:#888;font-size:14px;margin-right:6px}.new-price{font-size:20px;font-weight:800}.hero-product-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.84}.hero-product-content{position:relative;z-index:2;max-width:720px}.hero-product-content h1{margin:8px 0;font-size:40px}.hero-product-content p{font-size:18px;line-height:1.5}.hero-product-slide:after{background:linear-gradient(90deg,rgba(0,0,0,.38),rgba(0,0,0,.06))}.hero-product-slide{background:#111}.hero-product-price{font-size:22px;font-weight:800;margin-top:10px}
+
+/* Active Navbar animation — added only; existing site styles/functions unchanged */
+.active-nav{position:sticky;top:68px;z-index:19;background:#080808;border-top:1px solid #222;border-bottom:1px solid #222;overflow:hidden}
+.active-nav-inner{max-width:1150px;margin:auto;position:relative;display:flex;justify-content:center;gap:8px;padding:7px 12px}
+.active-nav a{position:relative;z-index:2;color:#bbb;text-decoration:none;padding:10px 16px;border-radius:12px;font-weight:700;transition:color .25s ease,transform .25s ease}
+.active-nav a:hover,.active-nav a.active{color:#fff;transform:translateY(-1px)}
+.active-indicator{position:absolute;z-index:1;left:0;bottom:4px;height:3px;width:0;border-radius:999px;background:#fff;box-shadow:0 0 10px rgba(255,255,255,.85),0 0 24px rgba(255,255,255,.45);transition:left .38s cubic-bezier(.22,1,.36,1),width .38s cubic-bezier(.22,1,.36,1)}
+@media(max-width:520px){.active-nav{top:58px}.active-nav-inner{gap:2px;justify-content:flex-start;overflow-x:auto;scrollbar-width:none}.active-nav-inner::-webkit-scrollbar{display:none}.active-nav a{padding:9px 12px;font-size:13px;white-space:nowrap}}
 </style>
 </head>
 <body>
@@ -35,8 +43,16 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
     </div>
   </div>
 </header>
+<nav class="active-nav" aria-label="FNFY navigation">
+  <div class="active-nav-inner" id="activeNav">
+    <a href="#home" class="active">Home</a>
+    <a href="#productsSection">Products</a>
+    <a href="#reviewsSection">Reviews</a>
+    <span class="active-indicator" id="activeIndicator"></span>
+  </div>
+</nav>
 
-<section class="hero" aria-label="FNFY New Collection slideshow"><div class="hero-track" id="heroTrack">
+<section class="hero" id="home" aria-label="FNFY New Collection slideshow"><div class="hero-track" id="heroTrack">
   <article class="hero-slide"><div class="hero-content"><span class="hero-badge">NEW COLLECTION 2026</span><h1>Style that speaks for itself.</h1><p>Shirt, pant, denim, cargo and jersey — product দেখুন, size/color বাছুন এবং সরাসরি order করুন।</p></div></article>
   <article class="hero-slide"><div class="hero-content"><span class="hero-badge">NEW ARRIVALS</span><h1>Fresh styles. Premium look.</h1><p>নতুন product, ৪টি gallery image, discount এবং available color/size একসাথে দেখুন।</p></div></article>
   <article class="hero-slide"><div class="hero-content"><span class="hero-badge">ORDER YOUR WAY</span><h1>Website + WhatsApp Order</h1><p>Website থেকে order করুন অথবা WhatsApp icon-এ tap করে সরাসরি order পাঠান।</p></div></article>
@@ -47,11 +63,11 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 <h2>Track Your Order</h2>
 <div class="track-card"><form id="trackForm"><input id="trackId" placeholder="Order ID দিন" required><button class="btn" type="submit">Check Status</button></form><div id="trackResult"></div></div>
 
-<h2>Our Products <span class="small" id="count"></span></h2>
+<h2 id="productsSection">Our Products <span class="small" id="count"></span></h2>
 <div class="filters" id="filters"></div>
 <div class="grid" id="products">Loading...</div>
 
-<h2>Customer Reviews</h2>
+<h2 id="reviewsSection">Customer Reviews</h2>
 <div class="card"><div class="pad" id="reviewList">Loading...</div>
 <div class="pad"><form id="reviewForm"><div class="row"><input id="rname" placeholder="আপনার নাম" required><select id="rstar"><option value="5">★★★★★</option><option value="4">★★★★☆</option><option value="3">★★★☆☆</option><option value="2">★★☆☆☆</option><option value="1">★☆☆☆☆</option></select></div><textarea id="rtext" rows="3" placeholder="Review লিখুন" required></textarea><button class="btn">Review Submit</button></form></div></div>
 </main>
@@ -252,4 +268,32 @@ updateCount();
   sel.addEventListener("change",updatePaymentUI);
   updatePaymentUI();
 })();
-</script></body></html>
+</script>
+<script>
+(function(){
+  const nav=document.getElementById('activeNav');
+  const indicator=document.getElementById('activeIndicator');
+  if(!nav||!indicator)return;
+  const links=[...nav.querySelectorAll('a')];
+  function moveIndicator(link){
+    const navRect=nav.getBoundingClientRect(),r=link.getBoundingClientRect();
+    indicator.style.left=(r.left-navRect.left+nav.scrollLeft)+'px';
+    indicator.style.width=r.width+'px';
+  }
+  function setActive(link){
+    links.forEach(a=>a.classList.toggle('active',a===link));
+    moveIndicator(link);
+  }
+  links.forEach(link=>link.addEventListener('click',function(){setActive(link);}));
+  function updateOnScroll(){
+    const y=window.scrollY+120;
+    let current=links[0];
+    links.forEach(link=>{const target=document.querySelector(link.getAttribute('href'));if(target&&target.offsetTop<=y)current=link;});
+    setActive(current);
+  }
+  window.addEventListener('scroll',updateOnScroll,{passive:true});
+  window.addEventListener('resize',()=>{const a=nav.querySelector('a.active')||links[0];moveIndicator(a);});
+  requestAnimationFrame(()=>moveIndicator(links[0]));
+})();
+</script>
+</body></html>
