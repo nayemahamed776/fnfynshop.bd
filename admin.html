@@ -63,10 +63,22 @@ function loadProducts(){
 }
 
 function loadOrders(){
- onValue(ref(db,"orders"),s=>{
+ onValue(ref(db,"orders"),async s=>{
   const d=s.val()||{};
   const arr=Object.entries(d).sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0));
-  arr.forEach(async ([id,o])=>{const t=await get(ref(db,"tracking/"+id));if(!t.exists())await set(ref(db,"tracking/"+id),{orderId:o.orderId||id,status:o.status||"Pending",updatedAt:o.updatedAt||o.createdAt||Date.now()});});
+  // Load all tracking data in one go
+  let trackingData={};
+  try{
+    const tSnap=await get(ref(db,"tracking"));
+    trackingData=tSnap.val()||{};
+  }catch(e){}
+  // Create missing tracking entries
+  for(const [id,o] of arr){
+    if(!trackingData[id]){
+      trackingData[id]={orderId:o.orderId||id,status:o.status||"Pending",updatedAt:o.updatedAt||o.createdAt||Date.now()};
+      await set(ref(db,"tracking/"+id),trackingData[id]).catch(()=>{});
+    }
+  }
   $("orders").innerHTML=arr.map(([id,o])=>{
    const items=(o.items||[]).map(x=>`${esc(x.name)} × ${x.qty}<br><small>Size: ${esc(x.size)} | Color: ${esc(x.color)}</small>`).join("<hr>");
    const status=o.status||"Pending";
@@ -91,7 +103,7 @@ function resizeImage(file){
  return new Promise((resolve,reject)=>{
   const r=new FileReader();r.onload=()=>{
    const img=new Image();img.onload=()=>{
-    const max=500,scale=Math.min(1,max/Math.max(img.width,img.height)),c=document.createElement("canvas");
+    const maxWidth=800,scale=Math.min(1,maxWidth/img.width),c=document.createElement("canvas");
     c.width=Math.max(1,Math.round(img.width*scale));c.height=Math.max(1,Math.round(img.height*scale));
     c.getContext("2d").drawImage(img,0,0,c.width,c.height);resolve(c.toDataURL("image/jpeg",.58));
    };img.onerror=reject;img.src=r.result;
