@@ -8,6 +8,7 @@
 <meta name="theme-color" content="#080808">
 <link rel="apple-touch-icon" href="./assets/fnfy-logo.png">
 <style>
+/* ====== Existing Styles ====== */
 *{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f5f5;color:#111}
 header{background:#080808;color:#fff;position:sticky;top:0;z-index:20}.top{max-width:1150px;margin:auto;padding:10px 15px;display:flex;align-items:center;justify-content:space-between;gap:10px}
 .brand{display:flex;align-items:center;gap:10px}.brand img{width:62px;height:48px;object-fit:contain}.brand b{font-size:25px;letter-spacing:4px}.sub{font-size:11px;letter-spacing:3px;color:#ccc}
@@ -31,6 +32,35 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 .active-nav a:hover,.active-nav a.active{color:#fff;transform:translateY(-1px)}
 .active-indicator{position:absolute;z-index:1;left:0;bottom:4px;height:3px;width:0;border-radius:999px;background:#fff;box-shadow:0 0 10px rgba(255,255,255,.85),0 0 24px rgba(255,255,255,.45);transition:left .38s cubic-bezier(.22,1,.36,1),width .38s cubic-bezier(.22,1,.36,1)}
 @media(max-width:520px){.active-nav{top:58px}.active-nav-inner{gap:2px;justify-content:flex-start;overflow-x:auto;scrollbar-width:none}.active-nav-inner::-webkit-scrollbar{display:none}.active-nav a{padding:9px 12px;font-size:13px;white-space:nowrap}}
+
+/* ====== NEW: Impossible Light Bulb Animation ====== */
+.bulb-wrapper{background:#111;padding:15px;border-radius:15px;margin:15px auto;max-width:1150px;display:flex;justify-content:center;align-items:center;overflow:hidden;cursor:pointer}
+.bulb-scene{--cap:#dedede;--shine:#fff;--stroke:#444;--cord:#111;--filament:#ffb703;--flash:#f5e0a3;--door:#2b2b2b;width:180px;height:150px;position:relative}
+.toggle-scene-dummy-cord{stroke:var(--cord);stroke-width:6}
+.bulb-cap{fill:var(--cap)}
+.bulb-cap-shine{fill:var(--shine)}
+.bulb-cap-outline{stroke:var(--stroke);display:none}
+.bulb-filament{stroke:var(--filament)}
+.bulb-shine{stroke:var(--shine)}
+.bulb-flash{stroke:#f5e0a3;display:none}
+.bear-fun{fill:#784421}
+.bear-pad{fill:#dea87f}
+.bulb-wrapper.on .bulb-flash{display:block}
+.bulb-wrapper.on .bulb-shine{display:block}
+.bulb-wrapper.on .bulb-filament{stroke:var(--flash)}
+.bulb-wrapper.on .toggle-scene-dummy-cord{animation:swing 0.5s ease}
+@keyframes swing{0%{transform:rotate(0)}50%{transform:rotate(15deg)}100%{transform:rotate(0)}}
+@media(max-width:520px){.bulb-wrapper{max-width:100%;margin:10px}}
+
+/* ====== NEW: Animated Order Confirmation ====== */
+.order-confirm-container{display:none;text-align:center;padding:30px}
+.order-confirm-container.show{display:block}
+.order{position:relative;display:inline-block;width:220px;height:50px;border-radius:30px;background:#2d2d2d;overflow:hidden;margin-bottom:15px;box-shadow:0 4px 10px rgba(0,0,0,.2)}
+.order span{position:absolute;left:0;right:0;top:0;bottom:0;text-align:center;line-height:50px;font-weight:700;color:#fff;font-size:14px}
+.order .success{background:#28a745;color:#fff;width:0;overflow:hidden;transition:width .5s ease}
+.order.show-success .success{width:100%}
+.order.show-success .success svg{opacity:1}
+.order .success svg{width:20px;height:20px;vertical-align:middle;opacity:0;transition:opacity .3s .3s}
 </style>
 </head>
 <body>
@@ -57,6 +87,22 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
   <article class="hero-slide"><div class="hero-content"><span class="hero-badge">NEW ARRIVALS</span><h1>Fresh styles. Premium look.</h1><p>নতুন product, ৪টি gallery image, discount এবং available color/size একসাথে দেখুন।</p></div></article>
   <article class="hero-slide"><div class="hero-content"><span class="hero-badge">ORDER YOUR WAY</span><h1>Website + WhatsApp Order</h1><p>Website থেকে order করুন অথবা WhatsApp icon-এ tap করে সরাসরি order পাঠান।</p></div></article>
 </div><div class="hero-dots" id="heroDots"></div></section>
+
+<!-- NEW: Light Bulb Animation placed after Hero -->
+<div class="bulb-wrapper" onclick="toggleBulb(this)">
+  <svg class="bulb-scene" viewBox="0 0 200 160">
+    <rect x="150" y="20" width="20" height="120" fill="var(--door)"></rect>
+    <line class="toggle-scene-dummy-cord" x1="160" y1="20" x2="160" y2="70"></line>
+    <path class="bulb-cap" d="M80,40 L120,40 L115,70 L85,70 Z"></path>
+    <path class="bulb-cap-shine" d="M80,40 L100,40 L95,70 L85,70 Z"></path>
+    <path class="bulb-cap-outline" d="M80,40 L120,40 L115,70 L85,70 Z" stroke="var(--stroke)" fill="none"></path>
+    <path class="bulb-filament" d="M100,70 L100,100 M95,100 L105,100 M90,100 L110,100" stroke-width="2" fill="none"></path>
+    <path class="bulb-flash" d="M70,80 Q100,110 130,80 Q100,130 70,80 Z" fill="rgba(255,255,255,0.2)"></path>
+    <circle class="bulb-shine" cx="80" cy="90" r="30" fill="none" stroke-width="2"></circle>
+    <circle class="bear-fun" cx="50" cy="130" r="15"></circle>
+    <circle class="bear-pad" cx="50" cy="130" r="8"></circle>
+  </svg>
+</div>
 
 <main class="wrap">
 <h2>Track Your Order</h2>
@@ -110,6 +156,12 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 </form>
 <button class="btn wa" id="waOrder" style="margin-top:7px">WhatsApp-এ Order পাঠান</button>
 <p id="orderMsg"></p>
+<div class="order-confirm-container" id="orderConfirmAnimation">
+  <div class="order" id="orderBar">
+    <span class="default">Processing Order...</span>
+    <span class="success"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Success</span>
+  </div>
+</div>
 </div></div>
 
 <script type="module">
@@ -192,6 +244,16 @@ function orderData(){
 }
 function waText(o){return `FNFY Order\nName: ${o.name}\nPhone: ${o.phone}\nAddress: ${o.address}\nPayment: ${o.paymentMethod||"Not selected"}\nDelivery: ৳${o.deliveryCharge}\nTotal: ৳${o.total}\n\nItems:\n`+o.items.map(x=>`${x.name} × ${x.qty} | Size: ${x.size} | Color: ${x.color}`).join("\n")}
 
+function showOrderConfirmation(){
+  const container=$("orderConfirmAnimation");
+  const bar=$("orderBar");
+  container.classList.add("show");
+  bar.classList.remove("show-success");
+  bar.querySelector('.default').textContent="Processing Order...";
+  setTimeout(()=>{bar.classList.add("show-success");bar.querySelector('.default').textContent="";},500);
+  setTimeout(()=>{container.classList.remove("show");},3000);
+}
+
 $("orderForm").onsubmit=async e=>{
  e.preventDefault();
  const items=activeCheckoutItems();if(!items.length)return alert("Cart খালি।");
@@ -205,6 +267,7 @@ $("orderForm").onsubmit=async e=>{
   checkoutItems=[];checkoutMode="cart";e.target.reset();renderCart();
   $("orderMsg").innerHTML=`<b>Order সফল হয়েছে!</b><br>Order ID: <strong>${esc(orderId)}</strong><br>Status: Pending<br>Order Time: ${new Date(now).toLocaleString()}<br><a class="btn wa" href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText(order))}" target="_blank">WhatsApp-এ পাঠান</a>`;
   $("trackId").value=orderId;checkTracking(orderId);
+  showOrderConfirmation(); // Show Order Confirmation Animation
  }catch(err){$("orderMsg").textContent="Order save হয়নি: "+err.message}
 };
 
@@ -247,25 +310,10 @@ setInterval(()=>showHero(heroIndex+1),5000);
 updateCount();
 </script>
 <script>
-(function(){
-  const sel=document.getElementById("paymentMethod");
-  const info=document.getElementById("paymentInfo");
-  const tx=document.getElementById("transactionId");
-  if(!sel||!info)return;
-  const nums={bKash:"01965460567",Nagad:"01965460567",Rocket:"019654605676"};
-  function updatePaymentUI(){
-    const m=sel.value;
-    if(m==="COD"){
-      info.innerHTML="<b>Cash on Delivery</b><div style='margin-top:4px'>Payment will be collected on delivery.</div>";
-      if(tx){tx.required=false;tx.value="";}
-    }else{
-      info.innerHTML="<b>"+m+"</b><div style='margin-top:4px'>Send Money to: <strong>"+nums[m]+"</strong></div><div style='margin-top:4px;font-size:13px'>Payment করার পর Transaction ID দিন।</div>";
-      if(tx)tx.required=true;
-    }
-  }
-  sel.addEventListener("change",updatePaymentUI);
-  updatePaymentUI();
-})();
+// Light Bulb Toggle Function
+function toggleBulb(element) {
+  element.classList.toggle('on');
+}
 </script>
 <script>
 (function(){
