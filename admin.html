@@ -15,112 +15,25 @@ input,select,textarea{width:100%;padding:12px;margin:5px 0 10px;border:1px solid
 .table{overflow:auto}table{border-collapse:collapse;width:100%;min-width:900px}th,td{padding:9px;border-bottom:1px solid #eee;text-align:left;font-size:13px;vertical-align:top}
 .preview{display:flex;gap:7px;flex-wrap:wrap}.preview img{width:70px;height:70px;object-fit:cover;border-radius:8px}
 @media(max-width:600px){.row{grid-template-columns:1fr}}
-
-/* ============ ANIMATION 1: Animated Login Form ============ */
-.login-card{background:#fff;border-radius:15px;padding:30px;max-width:430px;margin:40px auto;box-shadow:0 4px 20px rgba(0,0,0,0.1);position:relative;overflow:hidden}
-.login-card:before{content:"";position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(45deg,transparent,rgba(0,0,0,0.03),transparent);transform:rotate(45deg);animation:shine 3s infinite}
-@keyframes shine{0%{transform:translateX(-100%) rotate(45deg)}100%{transform:translateX(100%) rotate(45deg)}}
-.login-card h2{margin-bottom:20px;text-align:center}
-.login-card input{width:100%;padding:14px;margin:8px 0;border:2px solid #ddd;border-radius:10px;font-size:16px;transition:border-color .3s}
-.login-card input:focus{border-color:#111;outline:none}
-.login-card button{width:100%;padding:14px;background:#111;color:#fff;border:0;border-radius:10px;font-size:16px;font-weight:bold;cursor:pointer;transition:transform .2s,background .3s}
-.login-card button:hover{background:#333;transform:scale(0.98)}
-.login-card .msg{margin-top:10px;text-align:center}
-
-/* ============ ANIMATION 2: Impossible Light Bulb ============ */
-.bulb-wrapper{background:#111;padding:15px;border-radius:15px;margin:15px auto;max-width:1100px;display:flex;justify-content:center;align-items:center;overflow:hidden}
-.bulb-scene{--cap:#dedede;--shine:#fff;--stroke:#444;--cord:#111;--filament:#ffb703;--flash:#f5e0a3;--door:#2b2b2b;width:180px;height:150px;position:relative}
-.toggle-scene-dummy-cord{stroke:var(--cord);stroke-width:6}
-.bulb-cap{fill:var(--cap)}
-.bulb-cap-shine{fill:var(--shine)}
-.bulb-cap-outline{stroke:var(--stroke);display:none}
-.bulb-filament{stroke:var(--filament)}
-.bulb-shine{stroke:var(--shine)}
-.bulb-flash{stroke:#f5e0a3;display:none}
-.bear-fun{fill:#784421}
-.bear-pad{fill:#dea87f}
-.bulb-wrapper.on .bulb-flash{display:block}
-.bulb-wrapper.on .bulb-shine{display:block}
-.bulb-wrapper.on .bulb-filament{stroke:var(--flash)}
-.bulb-wrapper.on .toggle-scene-dummy-cord{animation:swing 0.5s ease}
-@keyframes swing{0%{transform:rotate(0)}50%{transform:rotate(15deg)}100%{transform:rotate(0)}}
-
-/* ============ ANIMATION 3: Animated Order Confirmation ============ */
-.order-btn{position:relative;overflow:hidden;transition:background .3s}
-.order-btn.confirmed{background:#12833b}
-.order-btn.delivered{background:#12833b}
-.order-btn.cancelled{background:#a00000}
-.confirm-anim{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:15px;padding:30px;box-shadow:0 10px 40px rgba(0,0,0,0.3);z-index:9999;text-align:center;display:none}
-.confirm-anim.show{display:block}
-.confirm-anim .circle{width:80px;height:80px;border-radius:50%;border:4px solid #ddd;border-top:4px solid #12833b;margin:0 auto 15px;animation:spin 1s linear infinite}
-.confirm-anim .checkmark{width:60px;height:60px;border-radius:50%;background:#12833b;display:flex;align-items:center;justify-content:center;font-size:30px;color:#fff;margin:0 auto 15px;transform:scale(0);animation:pop 0.4s ease forwards 0.5s}
-@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
-@keyframes pop{0%{transform:scale(0)}100%{transform:scale(1)}}
-.confirm-anim p{font-size:18px;font-weight:bold;margin:0}
-.confirm-anim small{color:#666;display:block;margin-top:5px}
 </style>
 </head>
 <body>
-<div class="head">
-  <div class="brand"><img src="./assets/fnfy-logo.png" onerror="this.onerror=null;this.src='./fnfy-logo.png'"><div><b>FNFY</b><br><small>ADMIN PANEL</small></div></div>
-  <button id="logout" class="logout hidden">Logout</button>
-</div>
-
-<!-- Animation 2: Impossible Light Bulb (Header er niche) -->
-<div class="bulb-wrapper" onclick="toggleBulb(this)">
-  <svg class="bulb-scene" viewBox="0 0 200 160">
-    <rect x="150" y="20" width="20" height="120" fill="var(--door)"></rect>
-    <line class="toggle-scene-dummy-cord" x1="160" y1="20" x2="160" y2="70"></line>
-    <path class="bulb-cap" d="M80,40 L120,40 L115,70 L85,70 Z"></path>
-    <path class="bulb-cap-shine" d="M80,40 L100,40 L95,70 L85,70 Z"></path>
-    <path class="bulb-cap-outline" d="M80,40 L120,40 L115,70 L85,70 Z" stroke="var(--stroke)" fill="none"></path>
-    <path class="bulb-filament" d="M100,70 L100,100 M95,100 L105,100 M90,100 L110,100" stroke-width="2" fill="none"></path>
-    <path class="bulb-flash" d="M70,80 Q100,110 130,80 Q100,130 70,80 Z" fill="rgba(255,255,255,0.2)"></path>
-    <circle class="bulb-shine" cx="80" cy="90" r="30" fill="none" stroke-width="2"></circle>
-    <circle class="bear-fun" cx="50" cy="130" r="15"></circle>
-    <circle class="bear-pad" cx="50" cy="130" r="8"></circle>
-  </svg>
-</div>
-
-<!-- Animation 1: Animated Login Form -->
-<div id="login" class="login-card">
-  <h2>Admin Login</h2>
-  <input id="email" type="email" placeholder="Admin Gmail">
-  <input id="pass" type="password" placeholder="Password">
-  <button id="loginBtn">Login</button>
-  <p id="msg" class="msg"></p>
-</div>
-
+<div class="head"><div class="brand"><img src="./assets/fnfy-logo.png" onerror="this.onerror=null;this.src='./fnfy-logo.png'"><div><b>FNFY</b><br><small>ADMIN PANEL</small></div></div><button id="logout" class="logout hidden">Logout</button></div>
+<div class="wrap">
+<div id="login" class="card" style="max-width:430px;margin:40px auto"><h2>Admin Login</h2><input id="email" type="email" placeholder="Admin Gmail"><input id="pass" type="password" placeholder="Password"><button id="loginBtn">Login</button><p id="msg" class="msg"></p></div>
 <div id="panel" class="hidden">
-  <div class="card"><h2>➕ Add Product</h2><form id="pf">
-    <div class="row"><input id="pn" placeholder="Product name" required><input id="pc" placeholder="Category" required></div>
-    <div class="row"><input id="pp" type="number" min="0" placeholder="Price" required><input id="pdiscount" type="number" min="0" max="100" placeholder="Discount % (optional)"></div>
-    <div class="row"><input id="pcol" placeholder="Colors: Black, Blue"><input id="psz" placeholder="Sizes: 28, 30, 32, 34"></div>
-    <textarea id="pd" placeholder="Description"></textarea>
-    <input id="imgs" type="file" accept="image/*" multiple required><div class="preview" id="preview"></div>
-    <p id="up" class="msg">Storage লাগবে না — image compressed হয়ে Realtime Database-এ save হবে.</p>
-    <button id="add" type="submit">Add Product</button>
-  </form></div>
+<div class="card"><h2>➕ Add Product</h2><form id="pf">
+<div class="row"><input id="pn" placeholder="Product name" required><input id="pc" placeholder="Category" required></div>
+<div class="row"><input id="pp" type="number" min="0" placeholder="Price" required><input id="pdiscount" type="number" min="0" max="100" placeholder="Discount % (optional)"></div>
+<div class="row"><input id="pcol" placeholder="Colors: Black, Blue"><input id="psz" placeholder="Sizes: 28, 30, 32, 34"></div>
+<textarea id="pd" placeholder="Description"></textarea>
+<input id="imgs" type="file" accept="image/*" multiple required><div class="preview" id="preview"></div>
+<p id="up" class="msg">Storage লাগবে না — image compressed হয়ে Realtime Database-এ save হবে.</p>
+<button id="add" type="submit">Add Product</button></form></div>
 
-  <div class="card"><h2>📦 Orders</h2><div id="orderMsg" class="msg"></div>
-    <div class="table">
-      <table>
-        <thead><tr><th>Order ID</th><th>Customer</th><th>Items</th><th>Total</th><th>Payment</th><th>Time</th><th>Status</th><th>Action</th></tr></thead>
-        <tbody id="orders"><tr><td colspan="8">Loading...</td></tr></tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="card"><h2>🛍 Products</h2><div id="products">Loading...</div></div>
-</div>
-
-<!-- Animation 3: Order Confirmation Popup -->
-<div id="confirmModal" class="confirm-anim">
-  <div class="circle" id="confirmCircle"></div>
-  <div class="checkmark" id="confirmCheck">✓</div>
-  <p id="confirmText">Order Confirmed!</p>
-  <small id="confirmSub">Status updated successfully</small>
-</div>
+<div class="card"><h2>📦 Orders</h2><div id="orderMsg" class="msg"></div><div class="table"><table><thead><tr><th>Order ID</th><th>Customer</th><th>Items</th><th>Total</th><th>Payment</th><th>Time</th><th>Status</th><th>Action</th></tr></thead><tbody id="orders"><tr><td colspan="8">Loading...</td></tr></tbody></table></div></div>
+<div class="card"><h2>🛍 Products</h2><div id="products">Loading...</div></div>
+</div></div>
 
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
@@ -150,79 +63,35 @@ function loadProducts(){
 }
 
 function loadOrders(){
- onValue(ref(db,"orders"),async s=>{
+ onValue(ref(db,"orders"),s=>{
   const d=s.val()||{};
   const arr=Object.entries(d).sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0));
-  let trackingData={};
-  try{
-    const tSnap=await get(ref(db,"tracking"));
-    trackingData=tSnap.val()||{};
-  }catch(e){}
-  for(const [id,o] of arr){
-    if(!trackingData[id]){
-      trackingData[id]={orderId:o.orderId||id,status:o.status||"Pending",updatedAt:o.updatedAt||o.createdAt||Date.now()};
-      await set(ref(db,"tracking/"+id),trackingData[id]).catch(()=>{});
-    }
-  }
+  arr.forEach(async ([id,o])=>{const t=await get(ref(db,"tracking/"+id));if(!t.exists())await set(ref(db,"tracking/"+id),{orderId:o.orderId||id,status:o.status||"Pending",updatedAt:o.updatedAt||o.createdAt||Date.now()});});
   $("orders").innerHTML=arr.map(([id,o])=>{
    const items=(o.items||[]).map(x=>`${esc(x.name)} × ${x.qty}<br><small>Size: ${esc(x.size)} | Color: ${esc(x.color)}</small>`).join("<hr>");
    const status=o.status||"Pending";
-   return `<tr><td><b>${esc(o.orderId||id)}</b><br><small>Tracking: ${esc(o.orderId||id)}</small></td><td><b>${esc(o.name)}</b><br>${esc(o.phone)}<br>${esc(o.address)}</td><td>${items}</td><td>Subtotal ৳${Number(o.subtotal||0).toLocaleString()}<br>Delivery ৳${Number(o.deliveryCharge||0).toLocaleString()}<br><b>Total ৳${Number(o.total||0).toLocaleString()}</b></td><td><b>${esc(o.paymentMethod||"—")}</b></td><td><small>Created: ${o.createdAt?new Date(o.createdAt).toLocaleString():"—"}<br>Updated: ${o.updatedAt?new Date(o.updatedAt).toLocaleString():"—"}</small></td><td><select data-status="${esc(id)}">${["Pending","Confirmed","Delivered","Cancelled"].map(x=>`<option ${x===status?"selected":""}>${x}</option>`).join("")}</select></td><td><button class="green order-btn" data-action="${esc(id)}" data-next="Confirmed">Confirm</button><br><button class="green order-btn" data-action="${esc(id)}" data-next="Delivered">Delivered</button><br><button class="danger order-btn" data-action="${esc(id)}" data-next="Cancelled">Cancel</button><br><button class="danger" data-order-del="${esc(id)}">Delete</button></td></tr>`;
+   return `<tr><td><b>${esc(o.orderId||id)}</b><br><small>Tracking: ${esc(o.orderId||id)}</small></td><td><b>${esc(o.name)}</b><br>${esc(o.phone)}<br>${esc(o.address)}</td><td>${items}</td><td>Subtotal ৳${Number(o.subtotal||0).toLocaleString()}<br>Delivery ৳${Number(o.deliveryCharge||0).toLocaleString()}<br><b>Total ৳${Number(o.total||0).toLocaleString()}</b></td><td><b>${esc(o.paymentMethod||"—")}</b></td><td><small>Created: ${o.createdAt?new Date(o.createdAt).toLocaleString():"—"}<br>Updated: ${o.updatedAt?new Date(o.updatedAt).toLocaleString():"—"}</small></td><td><select data-status="${esc(id)}">${["Pending","Confirmed","Delivered","Cancelled"].map(x=>`<option ${x===status?"selected":""}>${x}</option>`).join("")}</select></td><td><button class="green" data-action="${esc(id)}" data-next="Confirmed">Confirm</button><br><button class="green" data-action="${esc(id)}" data-next="Delivered">Delivered</button><br><button class="danger" data-action="${esc(id)}" data-next="Cancelled">Cancel</button><br><button class="danger" data-order-del="${esc(id)}">Delete</button></td></tr>`;
   }).join("")||'<tr><td colspan="8">No orders yet</td></tr>';
-  document.querySelectorAll("[data-status]").forEach(x=>x.onchange=()=>syncOrderStatus(x.dataset.status,x.value,false));
-  document.querySelectorAll("[data-action]").forEach(b=>b.onclick=()=>syncOrderStatus(b.dataset.action,b.dataset.next,true));
+  document.querySelectorAll("[data-status]").forEach(x=>x.onchange=()=>syncOrderStatus(x.dataset.status,x.value));
+  document.querySelectorAll("[data-action]").forEach(b=>b.onclick=()=>syncOrderStatus(b.dataset.action,b.dataset.next));
   document.querySelectorAll("[data-order-del]").forEach(b=>b.onclick=async()=>{if(confirm("Delete order?")){await remove(ref(db,"orders/"+b.dataset.orderDel));await remove(ref(db,"tracking/"+b.dataset.orderDel));}});
  },e=>$('orders').innerHTML=`<tr><td colspan="8">Firebase order error: ${esc(e.message)}</td></tr>`);
 }
 
-async function syncOrderStatus(orderId,status,showAnim){
+async function syncOrderStatus(orderId,status){
  try{
   const now=Date.now();
   await update(ref(db,"orders/"+orderId),{status,updatedAt:now,orderId});
   await update(ref(db,"tracking/"+orderId),{orderId,status,updatedAt:now,updatedBy:ADMIN_EMAIL});
   $("orderMsg").textContent=`Order ${orderId} → ${status} saved in orders + tracking.`;
-  if(showAnim) showConfirmAnimation(status);
  }catch(e){$("orderMsg").textContent="Status update failed: "+e.message}
-}
-
-function showConfirmAnimation(status){
-  const modal=$("confirmModal");
-  const circle=$("confirmCircle");
-  const check=$("confirmCheck");
-  const text=$("confirmText");
-  const sub=$("confirmSub");
-  
-  modal.classList.add("show");
-  circle.style.display="block";
-  check.style.animation="none";
-  void check.offsetWidth; // reflow
-  
-  if(status==="Confirmed"){
-    text.textContent="Order Confirmed!";
-    sub.textContent="Order successfully confirmed";
-  }else if(status==="Delivered"){
-    text.textContent="Order Delivered!";
-    sub.textContent="Order delivered successfully";
-  }else if(status==="Cancelled"){
-    text.textContent="Order Cancelled";
-    sub.textContent="Order has been cancelled";
-  }
-  
-  setTimeout(()=>{
-    circle.style.display="none";
-    check.style.animation="pop 0.4s ease forwards";
-  },1500);
-  
-  setTimeout(()=>{
-    modal.classList.remove("show");
-  },2500);
 }
 
 function resizeImage(file){
  return new Promise((resolve,reject)=>{
   const r=new FileReader();r.onload=()=>{
    const img=new Image();img.onload=()=>{
-    const maxWidth=800,scale=Math.min(1,maxWidth/img.width),c=document.createElement("canvas");
+    const max=500,scale=Math.min(1,max/Math.max(img.width,img.height)),c=document.createElement("canvas");
     c.width=Math.max(1,Math.round(img.width*scale));c.height=Math.max(1,Math.round(img.height*scale));
     c.getContext("2d").drawImage(img,0,0,c.width,c.height);resolve(c.toDataURL("image/jpeg",.58));
    };img.onerror=reject;img.src=r.result;
@@ -243,11 +112,5 @@ $("pf").onsubmit=async e=>{
  }catch(e){$("up").textContent="Product save হয়নি: "+e.message}
  finally{$("add").disabled=false}
 };
-
-// Bulb toggle function
-window.toggleBulb = function(element) {
-  element.classList.toggle('on');
-};
 </script>
-</body>
-</html>
+</body></html>

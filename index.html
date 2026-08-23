@@ -1,14 +1,13 @@
-<!doctype html>
+
+const BKASH_NUMBER="01965460567";
+const NAGAD_NUMBER="01965460567";
+const ROCKET_NUMBER="019654605676";<!doctype html>
 <html lang="bn">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>FNFY — Men's Clothing</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#080808">
-<link rel="apple-touch-icon" href="./assets/fnfy-logo.png">
 <style>
-/* ====== Existing Styles ====== */
 *{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f5f5;color:#111}
 header{background:#080808;color:#fff;position:sticky;top:0;z-index:20}.top{max-width:1150px;margin:auto;padding:10px 15px;display:flex;align-items:center;justify-content:space-between;gap:10px}
 .brand{display:flex;align-items:center;gap:10px}.brand img{width:62px;height:48px;object-fit:contain}.brand b{font-size:25px;letter-spacing:4px}.sub{font-size:11px;letter-spacing:3px;color:#ccc}
@@ -21,11 +20,11 @@ header{background:#080808;color:#fff;position:sticky;top:0;z-index:20}.top{max-w
 input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:9px;margin:5px 0 10px;font:inherit}.empty{text-align:center;padding:30px;background:#fff;border-radius:15px}
 .review{padding:12px;border-bottom:1px solid #eee}.floatwa{position:fixed;right:16px;bottom:18px;z-index:30;border-radius:30px;padding:13px 18px;text-decoration:none;font-weight:bold}.site-footer{background:#080808;color:#fff;margin-top:35px;padding:38px 16px 90px}.footer-inner{max-width:1150px;margin:auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px}.footer-brand{display:flex;align-items:center;gap:12px}.footer-brand img{width:68px;height:55px;object-fit:contain}.footer-title{font-size:24px;font-weight:900;letter-spacing:3px}.footer-text{color:#bbb;line-height:1.7;margin:12px 0}.socials{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.socials a{width:44px;height:44px;border-radius:12px;background:#fff;display:grid;place-items:center;overflow:hidden}.socials img{width:30px;height:30px;object-fit:contain}.socials img.waicon{width:27px;height:27px}.footer-link{color:#fff;text-decoration:none}.footer-copy{max-width:1150px;margin:28px auto 0;padding-top:18px;border-top:1px solid #333;color:#888;font-size:13px}@media(max-width:700px){.footer-inner{grid-template-columns:1fr}.hero-slide{min-height:300px;padding:40px 22px}.hero h1{font-size:30px}.hero p{font-size:16px}.hero-dots{left:22px}}
 @media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:31px}}
-@media(max-width:520px){.top{padding:8px 10px}.brand img{width:52px;height:42px}.brand b{font-size:21px}.sub{font-size:9px}.actions .waTop{display:none}.hero{margin:10px;padding:0}.hero h1{font-size:28px}.grid{gap:9px}.row{grid-template-columns:1fr}}
+@media(max-width:520px){.top{padding:8px 10px}.brand img{width:52px;height:42px}.brand b{font-size:21px}.sub{font-size:9px}.actions .waTop{display:none}.hero{margin:10px;padding:42px 18px}.hero h1{font-size:28px}.grid{gap:9px}.row{grid-template-columns:1fr}}
 
 .discount-badge{display:inline-block;background:#111;color:#fff;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:800;margin-top:5px}.old-price{text-decoration:line-through;color:#888;font-size:14px;margin-right:6px}.new-price{font-size:20px;font-weight:800}.hero-product-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.84}.hero-product-content{position:relative;z-index:2;max-width:720px}.hero-product-content h1{margin:8px 0;font-size:40px}.hero-product-content p{font-size:18px;line-height:1.5}.hero-product-slide:after{background:linear-gradient(90deg,rgba(0,0,0,.38),rgba(0,0,0,.06))}.hero-product-slide{background:#111}.hero-product-price{font-size:22px;font-weight:800;margin-top:10px}
 
-/* Active Navbar animation */
+/* Active Navbar animation — added only; existing site styles/functions unchanged */
 .active-nav{position:sticky;top:68px;z-index:19;background:#080808;border-top:1px solid #222;border-bottom:1px solid #222;overflow:hidden}
 .active-nav-inner{max-width:1150px;margin:auto;position:relative;display:flex;justify-content:center;gap:8px;padding:7px 12px}
 .active-nav a{position:relative;z-index:2;color:#bbb;text-decoration:none;padding:10px 16px;border-radius:12px;font-weight:700;transition:color .25s ease,transform .25s ease}
@@ -33,35 +32,40 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 .active-indicator{position:absolute;z-index:1;left:0;bottom:4px;height:3px;width:0;border-radius:999px;background:#fff;box-shadow:0 0 10px rgba(255,255,255,.85),0 0 24px rgba(255,255,255,.45);transition:left .38s cubic-bezier(.22,1,.36,1),width .38s cubic-bezier(.22,1,.36,1)}
 @media(max-width:520px){.active-nav{top:58px}.active-nav-inner{gap:2px;justify-content:flex-start;overflow-x:auto;scrollbar-width:none}.active-nav-inner::-webkit-scrollbar{display:none}.active-nav a{padding:9px 12px;font-size:13px;white-space:nowrap}}
 
-/* ====== NEW: Impossible Light Bulb Animation ====== */
-.bulb-wrapper{background:#111;padding:15px;border-radius:15px;margin:15px auto;max-width:1150px;display:flex;justify-content:center;align-items:center;overflow:hidden;cursor:pointer}
-.bulb-scene{--cap:#dedede;--shine:#fff;--stroke:#444;--cord:#111;--filament:#ffb703;--flash:#f5e0a3;--door:#2b2b2b;width:180px;height:150px;position:relative}
-.toggle-scene-dummy-cord{stroke:var(--cord);stroke-width:6}
-.bulb-cap{fill:var(--cap)}
-.bulb-cap-shine{fill:var(--shine)}
-.bulb-cap-outline{stroke:var(--stroke);display:none}
-.bulb-filament{stroke:var(--filament)}
-.bulb-shine{stroke:var(--shine)}
-.bulb-flash{stroke:#f5e0a3;display:none}
-.bear-fun{fill:#784421}
-.bear-pad{fill:#dea87f}
-.bulb-wrapper.on .bulb-flash{display:block}
-.bulb-wrapper.on .bulb-shine{display:block}
-.bulb-wrapper.on .bulb-filament{stroke:var(--flash)}
-.bulb-wrapper.on .toggle-scene-dummy-cord{animation:swing 0.5s ease}
-@keyframes swing{0%{transform:rotate(0)}50%{transform:rotate(15deg)}100%{transform:rotate(0)}}
-@media(max-width:520px){.bulb-wrapper{max-width:100%;margin:10px}}
+/* Order confirmation animation — added only */
+.order-success-overlay{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.55);backdrop-filter:blur(3px)}
+.order-success-overlay.show{display:flex}
+.order-success-box{width:min(330px,88vw);background:#fff;color:#111;border-radius:24px;padding:28px 22px;text-align:center;box-shadow:0 18px 60px rgba(0,0,0,.35);animation:orderPop .42s cubic-bezier(.2,.9,.25,1.25)}
+.order-success-check{width:76px;height:76px;margin:0 auto 14px;border-radius:50%;background:#25D366;display:grid;place-items:center;animation:orderPulse .7s ease-out}
+.order-success-check:after{content:"✓";font-size:48px;font-weight:900;color:#fff;line-height:1;animation:orderCheck .45s .15s both}
+.order-success-box h3{margin:4px 0 7px;font-size:24px}
+.order-success-box p{margin:0;color:#666;font-size:14px}
+@keyframes orderPop{0%{opacity:0;transform:scale(.72) translateY(12px)}100%{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes orderPulse{0%{transform:scale(.55);box-shadow:0 0 0 0 rgba(37,211,102,.45)}70%{transform:scale(1.05);box-shadow:0 0 0 18px rgba(37,211,102,0)}100%{transform:scale(1);box-shadow:0 0 0 0 rgba(37,211,102,0)}}
+@keyframes orderCheck{0%{opacity:0;transform:scale(.4) rotate(-18deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
 
-/* ====== NEW: Animated Order Confirmation ====== */
-.order-confirm-container{display:none;text-align:center;padding:30px}
-.order-confirm-container.show{display:block}
-.order{position:relative;display:inline-block;width:220px;height:50px;border-radius:30px;background:#2d2d2d;overflow:hidden;margin-bottom:15px;box-shadow:0 4px 10px rgba(0,0,0,.2)}
-.order span{position:absolute;left:0;right:0;top:0;bottom:0;text-align:center;line-height:50px;font-weight:700;color:#fff;font-size:14px}
-.order .success{background:#28a745;color:#fff;width:0;overflow:hidden;transition:width .5s ease}
-.order.show-success .success{width:100%}
-.order.show-success .success svg{opacity:1}
-.order .success svg{width:20px;height:20px;vertical-align:middle;opacity:0;transition:opacity .3s .3s}
 </style>
+
+<style id="fnfy-bulb-login-style">
+/* FNFY animated bulb */
+.fnfy-bulb-btn{position:fixed;left:18px;bottom:24px;z-index:9998;width:54px;height:54px;border:0;border-radius:50%;background:#111;color:#ffd84d;display:grid;place-items:center;box-shadow:0 6px 20px rgba(0,0,0,.22);cursor:pointer;transition:.25s}
+.fnfy-bulb-btn:hover{transform:translateY(-3px) scale(1.04)}
+.fnfy-bulb{font-size:27px;filter:drop-shadow(0 0 0 rgba(255,216,77,0));transition:.3s}
+.fnfy-bulb-btn.on{background:#fff3b0;box-shadow:0 0 24px rgba(255,216,77,.8),0 6px 20px rgba(0,0,0,.18)}
+.fnfy-bulb-btn.on .fnfy-bulb{filter:drop-shadow(0 0 12px #ffd84d);animation:fnfyBulbPulse 1s ease-in-out infinite alternate}
+@keyframes fnfyBulbPulse{from{transform:scale(1)}to{transform:scale(1.14)}}
+.fnfy-login-open{margin-left:8px;border:1px solid #ddd;background:#fff;color:#111;border-radius:999px;padding:10px 15px;font-weight:700;cursor:pointer}
+.fnfy-login-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.58);backdrop-filter:blur(5px);z-index:10000;display:none;align-items:center;justify-content:center;padding:20px}
+.fnfy-login-backdrop.show{display:flex;animation:fnfyFade .2s ease}
+.fnfy-login-card{width:min(390px,100%);background:#fff;border-radius:24px;padding:28px;box-shadow:0 25px 80px rgba(0,0,0,.35);position:relative;overflow:hidden;animation:fnfyLoginIn .45s cubic-bezier(.2,.8,.2,1)}
+.fnfy-login-card:before{content:"";position:absolute;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,rgba(100,210,255,.35),transparent 68%);top:-80px;right:-55px;animation:fnfyGlow 2.5s ease-in-out infinite alternate}
+.fnfy-login-card h2{margin:0 0 7px;font-size:27px;position:relative}.fnfy-login-card p{margin:0 0 20px;color:#666;position:relative}
+.fnfy-login-card input{width:100%;box-sizing:border-box;margin:7px 0;padding:14px 15px;border:1px solid #ddd;border-radius:12px;font-size:16px;outline:none}.fnfy-login-card input:focus{border-color:#111;box-shadow:0 0 0 3px rgba(0,0,0,.06)}
+.fnfy-login-actions{display:flex;gap:9px;margin-top:10px}.fnfy-login-actions button{border:0;border-radius:12px;padding:13px 16px;font-weight:700;cursor:pointer}.fnfy-login-submit{background:#111;color:#fff;flex:1}.fnfy-login-close{background:#eee;color:#111}.fnfy-login-msg{min-height:20px;margin-top:10px;color:#c62828;font-size:14px}.fnfy-login-spinner{display:inline-block;width:15px;height:15px;border:2px solid #777;border-top-color:transparent;border-radius:50%;animation:fnfySpin .7s linear infinite;vertical-align:-3px;margin-right:6px}
+@keyframes fnfyFade{from{opacity:0}to{opacity:1}}@keyframes fnfyLoginIn{from{opacity:0;transform:translateY(28px) scale(.94)}to{opacity:1;transform:none}}@keyframes fnfyGlow{from{transform:scale(.85);opacity:.55}to{transform:scale(1.2);opacity:1}}@keyframes fnfySpin{to{transform:rotate(360deg)}}
+@media(max-width:520px){.fnfy-bulb-btn{left:14px;bottom:18px;width:50px;height:50px}.fnfy-login-open{padding:9px 12px;font-size:13px}}
+</style>
+
 </head>
 <body>
 <header>
@@ -88,21 +92,6 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
   <article class="hero-slide"><div class="hero-content"><span class="hero-badge">ORDER YOUR WAY</span><h1>Website + WhatsApp Order</h1><p>Website থেকে order করুন অথবা WhatsApp icon-এ tap করে সরাসরি order পাঠান।</p></div></article>
 </div><div class="hero-dots" id="heroDots"></div></section>
 
-<!-- NEW: Light Bulb Animation placed after Hero -->
-<div class="bulb-wrapper" onclick="toggleBulb(this)">
-  <svg class="bulb-scene" viewBox="0 0 200 160">
-    <rect x="150" y="20" width="20" height="120" fill="var(--door)"></rect>
-    <line class="toggle-scene-dummy-cord" x1="160" y1="20" x2="160" y2="70"></line>
-    <path class="bulb-cap" d="M80,40 L120,40 L115,70 L85,70 Z"></path>
-    <path class="bulb-cap-shine" d="M80,40 L100,40 L95,70 L85,70 Z"></path>
-    <path class="bulb-cap-outline" d="M80,40 L120,40 L115,70 L85,70 Z" stroke="var(--stroke)" fill="none"></path>
-    <path class="bulb-filament" d="M100,70 L100,100 M95,100 L105,100 M90,100 L110,100" stroke-width="2" fill="none"></path>
-    <path class="bulb-flash" d="M70,80 Q100,110 130,80 Q100,130 70,80 Z" fill="rgba(255,255,255,0.2)"></path>
-    <circle class="bulb-shine" cx="80" cy="90" r="30" fill="none" stroke-width="2"></circle>
-    <circle class="bear-fun" cx="50" cy="130" r="15"></circle>
-    <circle class="bear-pad" cx="50" cy="130" r="8"></circle>
-  </svg>
-</div>
 
 <main class="wrap">
 <h2>Track Your Order</h2>
@@ -156,18 +145,13 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 </form>
 <button class="btn wa" id="waOrder" style="margin-top:7px">WhatsApp-এ Order পাঠান</button>
 <p id="orderMsg"></p>
-<div class="order-confirm-container" id="orderConfirmAnimation">
-  <div class="order" id="orderBar">
-    <span class="default">Processing Order...</span>
-    <span class="success"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Success</span>
-  </div>
-</div>
 </div></div>
 
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import{getDatabase,ref,onValue,push,set,get,update}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
-import{firebaseConfig,WHATSAPP_NUMBER}from"./firebase-config.js";
+const firebaseConfig={apiKey:"AIzaSyCJCRm19whUUqEmTR3Mf1o5P8jAK2UhBxE",authDomain:"fnfynshop.firebaseapp.com",databaseURL:"https://fnfynshop-default-rtdb.asia-southeast1.firebasedatabase.app",projectId:"fnfynshop",storageBucket:"fnfynshop.firebasestorage.app",messagingSenderId:"146671106800",appId:"1:146671106800:web:9a389ba7c418e8289fe035",measurementId:"G-RDZLGVKZDL"};
+const WHATSAPP_NUMBER="8801965460567";
 const app=initializeApp(firebaseConfig),db=getDatabase(app);
 const DB_URL=String(firebaseConfig.databaseURL||"").replace(/\/$/,"");
 async function restGet(path){const r=await fetch(`${DB_URL}/${path}.json`);if(!r.ok)throw Error(`HTTP ${r.status}`);return await r.json()}
@@ -244,16 +228,6 @@ function orderData(){
 }
 function waText(o){return `FNFY Order\nName: ${o.name}\nPhone: ${o.phone}\nAddress: ${o.address}\nPayment: ${o.paymentMethod||"Not selected"}\nDelivery: ৳${o.deliveryCharge}\nTotal: ৳${o.total}\n\nItems:\n`+o.items.map(x=>`${x.name} × ${x.qty} | Size: ${x.size} | Color: ${x.color}`).join("\n")}
 
-function showOrderConfirmation(){
-  const container=$("orderConfirmAnimation");
-  const bar=$("orderBar");
-  container.classList.add("show");
-  bar.classList.remove("show-success");
-  bar.querySelector('.default').textContent="Processing Order...";
-  setTimeout(()=>{bar.classList.add("show-success");bar.querySelector('.default').textContent="";},500);
-  setTimeout(()=>{container.classList.remove("show");},3000);
-}
-
 $("orderForm").onsubmit=async e=>{
  e.preventDefault();
  const items=activeCheckoutItems();if(!items.length)return alert("Cart খালি।");
@@ -267,7 +241,6 @@ $("orderForm").onsubmit=async e=>{
   checkoutItems=[];checkoutMode="cart";e.target.reset();renderCart();
   $("orderMsg").innerHTML=`<b>Order সফল হয়েছে!</b><br>Order ID: <strong>${esc(orderId)}</strong><br>Status: Pending<br>Order Time: ${new Date(now).toLocaleString()}<br><a class="btn wa" href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText(order))}" target="_blank">WhatsApp-এ পাঠান</a>`;
   $("trackId").value=orderId;checkTracking(orderId);
-  showOrderConfirmation(); // Show Order Confirmation Animation
  }catch(err){$("orderMsg").textContent="Order save হয়নি: "+err.message}
 };
 
@@ -310,10 +283,25 @@ setInterval(()=>showHero(heroIndex+1),5000);
 updateCount();
 </script>
 <script>
-// Light Bulb Toggle Function
-function toggleBulb(element) {
-  element.classList.toggle('on');
-}
+(function(){
+  const sel=document.getElementById("paymentMethod");
+  const info=document.getElementById("paymentInfo");
+  const tx=document.getElementById("transactionId");
+  if(!sel||!info)return;
+  const nums={bKash:"01965460567",Nagad:"01965460567",Rocket:"019654605676"};
+  function updatePaymentUI(){
+    const m=sel.value;
+    if(m==="COD"){
+      info.innerHTML="<b>Cash on Delivery</b><div style='margin-top:4px'>Payment will be collected on delivery.</div>";
+      if(tx){tx.required=false;tx.value="";}
+    }else{
+      info.innerHTML="<b>"+m+"</b><div style='margin-top:4px'>Send Money to: <strong>"+nums[m]+"</strong></div><div style='margin-top:4px;font-size:13px'>Payment করার পর Transaction ID দিন।</div>";
+      if(tx)tx.required=true;
+    }
+  }
+  sel.addEventListener("change",updatePaymentUI);
+  updatePaymentUI();
+})();
 </script>
 <script>
 (function(){
@@ -342,15 +330,92 @@ function toggleBulb(element) {
   requestAnimationFrame(()=>moveIndicator(links[0]));
 })();
 </script>
+
+<div class="order-success-overlay" id="orderSuccessOverlay" aria-hidden="true">
+  <div class="order-success-box">
+    <div class="order-success-check"></div>
+    <h3>Order Confirmed!</h3>
+    <p>আপনার order সফলভাবে save হয়েছে</p>
+  </div>
+</div>
+
+
 <script>
-  // PWA Service Worker Registration
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js')
-        .then((registration) => console.log('SW registered:', registration))
-        .catch((error) => console.log('SW registration failed:', error));
-    });
-  }
+/* Order confirmation animation — added only; existing order logic unchanged */
+(function(){
+  const msg=document.getElementById("orderMsg");
+  const overlay=document.getElementById("orderSuccessOverlay");
+  if(!msg||!overlay)return;
+  let timer;
+  const observer=new MutationObserver(function(){
+    const text=(msg.textContent||"").trim();
+    if(text.includes("Order সফল হয়েছে!")){
+      clearTimeout(timer);
+      overlay.classList.add("show");
+      overlay.setAttribute("aria-hidden","false");
+      timer=setTimeout(function(){
+        overlay.classList.remove("show");
+        overlay.setAttribute("aria-hidden","true");
+      },2200);
+    }
+  });
+  observer.observe(msg,{childList:true,subtree:true,characterData:true});
+  overlay.addEventListener("click",function(e){
+    if(e.target===overlay)overlay.classList.remove("show");
+  });
+})();
 </script>
-</body>
-</html>
+
+
+<!-- FNFY Animated Bulb -->
+<button class="fnfy-bulb-btn" id="fnfyBulbBtn" aria-label="Toggle bulb animation"><span class="fnfy-bulb">💡</span></button>
+
+<!-- FNFY Animated Admin Login -->
+<div class="fnfy-login-backdrop" id="fnfyLoginBackdrop" aria-hidden="true">
+  <div class="fnfy-login-card" role="dialog" aria-modal="true" aria-labelledby="fnfyLoginTitle">
+    <h2 id="fnfyLoginTitle">Welcome Back</h2>
+    <p>Admin panel-এ যেতে sign in করুন</p>
+    <input id="fnfyAdminEmail" type="email" autocomplete="username" placeholder="Admin email">
+    <input id="fnfyAdminPass" type="password" autocomplete="current-password" placeholder="Password">
+    <div class="fnfy-login-actions">
+      <button class="fnfy-login-submit" id="fnfyLoginSubmit">Sign In</button>
+      <button class="fnfy-login-close" id="fnfyLoginClose">Close</button>
+    </div>
+    <div class="fnfy-login-msg" id="fnfyLoginMsg"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const b=document.getElementById('fnfyBulbBtn');
+  if(!b)return;
+  b.addEventListener('click',()=>b.classList.toggle('on'));
+})();
+</script>
+
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import{getAuth,signInWithEmailAndPassword}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import{firebaseConfig,ADMIN_EMAIL}from"./firebase-config.js";
+const app=initializeApp(firebaseConfig),auth=getAuth(app);
+const backdrop=document.getElementById('fnfyLoginBackdrop'),email=document.getElementById('fnfyAdminEmail'),pass=document.getElementById('fnfyAdminPass'),msg=document.getElementById('fnfyLoginMsg'),submit=document.getElementById('fnfyLoginSubmit');
+function openLogin(){backdrop.classList.add('show');backdrop.setAttribute('aria-hidden','false');setTimeout(()=>email.focus(),150)}
+function closeLogin(){backdrop.classList.remove('show');backdrop.setAttribute('aria-hidden','true');msg.textContent='';}
+const loginBtn=document.createElement('button');loginBtn.className='fnfy-login-open';loginBtn.textContent='Admin Login';loginBtn.type='button';
+const headerActions=document.querySelector('.actions');
+if(headerActions)headerActions.appendChild(loginBtn); else document.body.appendChild(loginBtn);
+loginBtn.addEventListener('click',openLogin);
+document.getElementById('fnfyLoginClose').addEventListener('click',closeLogin);
+backdrop.addEventListener('click',e=>{if(e.target===backdrop)closeLogin()});
+pass.addEventListener('keydown',e=>{if(e.key==='Enter')submit.click()});
+submit.addEventListener('click',async()=>{
+  const em=email.value.trim(),pw=pass.value;
+  if(!em||!pw){msg.textContent='Email ও password দিন।';return}
+  if(ADMIN_EMAIL&&em.toLowerCase()!==ADMIN_EMAIL.toLowerCase()){msg.textContent='এই email admin email নয়।';return}
+  submit.disabled=true;submit.innerHTML='<span class="fnfy-login-spinner"></span>Signing in...';msg.textContent='';
+  try{await signInWithEmailAndPassword(auth,em,pw);location.href='./admin.html';}
+  catch(e){msg.textContent='Login failed: '+(e.code||e.message);submit.disabled=false;submit.textContent='Sign In';}
+});
+</script>
+
+</body></html>
