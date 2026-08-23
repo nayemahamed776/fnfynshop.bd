@@ -1,0 +1,26 @@
+{
+  "name": "FNFY — Men's Clothing",
+  "short_name": "FNFY",
+  "description": "Quality men's fashion at an affordable price. Order online via website or WhatsApp.",
+  "start_url": "./index.html",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f5f5f5",
+  "theme_color": "#080808",
+  "lang": "bn",
+  "icons": [
+    {
+      "src": "./assets/fnfy-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./assets/fnfy-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

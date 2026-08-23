@@ -4,6 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>FNFY — Men's Clothing</title>
+
+<!-- PWA Added Lines Start -->
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#080808">
+<link rel="apple-touch-icon" href="./assets/fnfy-logo.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="FNFY">
+<!-- PWA Added Lines End -->
+
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f5f5;color:#111}
 header{background:#080808;color:#fff;position:sticky;top:0;z-index:20}.top{max-width:1150px;margin:auto;padding:10px 15px;display:flex;align-items:center;justify-content:space-between;gap:10px}
@@ -244,6 +254,19 @@ function showHero(i){heroIndex=((i%heroCount)+heroCount)%heroCount;if(heroTrack)
 setInterval(()=>showHero(heroIndex+1),5000);
 updateCount();
 </script>
+
+<!-- Service Worker Registration Added -->
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("./sw.js")
+      .then((reg) => console.log("Service Worker registered:", reg.scope))
+      .catch((err) => console.log("Service Worker registration failed:", err));
+  });
+}
+</script>
+
 <script>
 (function(){
   const sel=document.getElementById("paymentMethod");
