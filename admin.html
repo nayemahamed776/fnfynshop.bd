@@ -2,124 +2,453 @@
 <html lang="bn">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FNFY Admin</title>
+<title>FNFY Premium Admin</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f3f3f3;font-family:Arial;color:#111}
-.head{background:#080808;color:#fff;padding:10px 15px;display:flex;justify-content:space-between;align-items:center}
-.brand{display:flex;align-items:center;gap:9px}.brand img{width:55px;height:42px;object-fit:contain}.brand b{font-size:21px;letter-spacing:3px}
-.wrap{max-width:1100px;margin:auto;padding:15px}.card{background:#fff;border-radius:15px;padding:18px;margin:15px 0}
-input,select,textarea{width:100%;padding:12px;margin:5px 0 10px;border:1px solid #ccc;border-radius:9px;font-size:16px}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}button{background:#111;color:#fff;border:0;padding:12px 16px;border-radius:9px;font-weight:bold;cursor:pointer}
-.logout{width:auto;margin:0}.danger{background:#a00000}.green{background:#12833b}.hidden{display:none!important}.msg{padding:10px;background:#eee;border-radius:8px;white-space:pre-wrap}
-.product{display:flex;gap:12px;align-items:center;border-bottom:1px solid #eee;padding:10px 0}.product img{width:65px;height:65px;object-fit:cover;border-radius:8px;background:#eee}
-.table{overflow:auto}table{border-collapse:collapse;width:100%;min-width:900px}th,td{padding:9px;border-bottom:1px solid #eee;text-align:left;font-size:13px;vertical-align:top}
-.preview{display:flex;gap:7px;flex-wrap:wrap}.preview img{width:70px;height:70px;object-fit:cover;border-radius:8px}
-@media(max-width:600px){.row{grid-template-columns:1fr}}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
-/* ============ ANIMATION 1: Animated Login Form ============ */
-.login-card{background:#fff;border-radius:15px;padding:30px;max-width:430px;margin:40px auto;box-shadow:0 4px 20px rgba(0,0,0,0.1);position:relative;overflow:hidden}
-.login-card:before{content:"";position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(45deg,transparent,rgba(0,0,0,0.03),transparent);transform:rotate(45deg);animation:shine 3s infinite}
-@keyframes shine{0%{transform:translateX(-100%) rotate(45deg)}100%{transform:translateX(100%) rotate(45deg)}}
-.login-card h2{margin-bottom:20px;text-align:center}
-.login-card input{width:100%;padding:14px;margin:8px 0;border:2px solid #ddd;border-radius:10px;font-size:16px;transition:border-color .3s}
-.login-card input:focus{border-color:#111;outline:none}
-.login-card button{width:100%;padding:14px;background:#111;color:#fff;border:0;border-radius:10px;font-size:16px;font-weight:bold;cursor:pointer;transition:transform .2s,background .3s}
-.login-card button:hover{background:#333;transform:scale(0.98)}
-.login-card .msg{margin-top:10px;text-align:center}
+:root {
+  --bg-dark: #0f172a;
+  --bg-card: rgba(30, 41, 59, 0.7);
+  --border: rgba(255, 255, 255, 0.1);
+  --text-dark: #e2e8f0;
+  --accent: #6366f1;
+  --success: #10b981;
+  --danger: #ef4444;
+  --electric-border-color: #dd8448;
+  --electric-light-color: oklch(from var(--electric-border-color) l c h);
+  --gradient-color: oklch(from var(--electric-border-color) 0.3 calc(c / 2) h / 0.4);
+  --color-neutral-900: oklch(0.185 0 0);
+}
 
-/* ============ ANIMATION 2: Impossible Light Bulb ============ */
-.bulb-wrapper{background:#111;padding:15px;border-radius:15px;margin:15px auto;max-width:1100px;display:flex;justify-content:center;align-items:center;overflow:hidden}
-.bulb-scene{--cap:#dedede;--shine:#fff;--stroke:#444;--cord:#111;--filament:#ffb703;--flash:#f5e0a3;--door:#2b2b2b;width:180px;height:150px;position:relative}
-.toggle-scene-dummy-cord{stroke:var(--cord);stroke-width:6}
-.bulb-cap{fill:var(--cap)}
-.bulb-cap-shine{fill:var(--shine)}
-.bulb-cap-outline{stroke:var(--stroke);display:none}
-.bulb-filament{stroke:var(--filament)}
-.bulb-shine{stroke:var(--shine)}
-.bulb-flash{stroke:#f5e0a3;display:none}
-.bear-fun{fill:#784421}
-.bear-pad{fill:#dea87f}
-.bulb-wrapper.on .bulb-flash{display:block}
-.bulb-wrapper.on .bulb-shine{display:block}
-.bulb-wrapper.on .bulb-filament{stroke:var(--flash)}
-.bulb-wrapper.on .toggle-scene-dummy-cord{animation:swing 0.5s ease}
-@keyframes swing{0%{transform:rotate(0)}50%{transform:rotate(15deg)}100%{transform:rotate(0)}}
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
 
-/* ============ ANIMATION 3: Animated Order Confirmation ============ */
-.order-btn{position:relative;overflow:hidden;transition:background .3s}
-.order-btn.confirmed{background:#12833b}
-.order-btn.delivered{background:#12833b}
-.order-btn.cancelled{background:#a00000}
-.confirm-anim{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:15px;padding:30px;box-shadow:0 10px 40px rgba(0,0,0,0.3);z-index:9999;text-align:center;display:none}
-.confirm-anim.show{display:block}
-.confirm-anim .circle{width:80px;height:80px;border-radius:50%;border:4px solid #ddd;border-top:4px solid #12833b;margin:0 auto 15px;animation:spin 1s linear infinite}
-.confirm-anim .checkmark{width:60px;height:60px;border-radius:50%;background:#12833b;display:flex;align-items:center;justify-content:center;font-size:30px;color:#fff;margin:0 auto 15px;transform:scale(0);animation:pop 0.4s ease forwards 0.5s}
-@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
-@keyframes pop{0%{transform:scale(0)}100%{transform:scale(1)}}
-.confirm-anim p{font-size:18px;font-weight:bold;margin:0}
-.confirm-anim small{color:#666;display:block;margin-top:5px}
+/* Header */
+.head {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(12px);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand img { width: 55px; height: 45px; object-fit: contain; border-radius: 10px; }
+.brand b { font-size: 24px; letter-spacing: 2px; font-weight: 700; }
+.logout { background: var(--danger); border-radius: 12px; padding: 10px 18px; font-weight: 600; }
+
+/* Cards & Form */
+.wrap { max-width: 1200px; margin: auto; padding: 20px; }
+.card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 25px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s ease;
+}
+h2, h3 { margin-top: 0; font-weight: 600; }
+
+input, select, textarea {
+  width: 100%;
+  padding: 14px 16px;
+  margin: 8px 0 15px;
+  border: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  border-radius: 12px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+}
+
+button {
+  background: var(--accent);
+  border: 0;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); }
+.danger { background: var(--danger); }
+.green { background: var(--success); }
+.hidden { display: none !important; }
+.msg { padding: 10px; border-radius: 10px; background: rgba(255,255,255,0.1); }
+
+/* ===================== Electric Border Animation (Fixed) ===================== */
+.electric-main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+.electric-svg-container { position: absolute; width: 0; height: 0; }
+
+.electric-card-container {
+  padding: 2px;
+  border-radius: 20px;
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  overflow: hidden; /* বর্ডার বাইরে বের হওয়া বন্ধ */
+  background: linear-gradient(-30deg, var(--gradient-color), transparent, var(--gradient-color)),
+              linear-gradient(to bottom, var(--color-neutral-900), var(--color-neutral-900));
+}
+
+.electric-inner-container { position: relative; }
+
+.electric-border-outer {
+  border: 2px solid rgba(221, 132, 72, 0.5);
+  border-radius: 20px;
+  padding-right: 4px;
+  padding-bottom: 4px;
+}
+
+.electric-main-card {
+  width: 100%;
+  height: 400px;
+  border-radius: 20px;
+  border: 2px solid var(--electric-border-color);
+  margin-top: -4px;
+  margin-left: -4px;
+  filter: url(#turbulent-displace);
+}
+
+/* গ্লো লেয়ারগুলো কার্ডের ভেতরে আটকে রাখা */
+.electric-glow-layer-1 {
+  border: 2px solid rgba(221, 132, 72, 0.6);
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  filter: blur(1px);
+}
+
+.electric-glow-layer-2 {
+  border: 2px solid var(--electric-light-color);
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  filter: blur(4px);
+}
+
+.electric-overlay-1 {
+  position: absolute;
+  width: 100%; height: 100%;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 20px;
+  opacity: 1;
+  mix-blend-mode: overlay;
+  transform: scale(1.0); /* বাইরে বের হওয়া ঠেকাতে */
+  filter: blur(16px);
+  background: linear-gradient(-30deg, white, transparent 30%, transparent 70%, white);
+}
+
+.electric-overlay-2 {
+  position: absolute;
+  width: 100%; height: 100%;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 20px;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  transform: scale(1.0);
+  filter: blur(16px);
+  background: linear-gradient(-30deg, white, transparent 30%, transparent 70%, white);
+}
+
+.electric-background-glow {
+  position: absolute;
+  width: 100%; height: 100%;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 20px;
+  filter: blur(32px);
+  transform: scale(1.0);
+  opacity: 0.3;
+  z-index: -1;
+  background: linear-gradient(-30deg, var(--electric-light-color), transparent, var(--electric-border-color));
+}
+
+/* ফর্মের কনটেইনার */
+.electric-content-container {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100%; height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+}
+
+.electric-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 25px;
+  text-shadow: 0 0 10px var(--electric-border-color);
+  letter-spacing: 2px;
+}
+
+.electric-divider {
+  width: 60%;
+  border: none;
+  height: 1px;
+  background-color: #fff;
+  opacity: 0.2;
+  margin-bottom: 25px;
+}
+
+/* Login form সঠিকভাবে সাজানো */
+.electric-login-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 260px;
+  gap: 12px;
+}
+
+.electric-login-form input {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  padding: 13px 15px;
+  border-radius: 10px;
+  font-size: 15px;
+  text-align: center;
+  margin: 0 !important; /* বাড়তি margin বাদ */
+}
+
+.electric-login-form input::placeholder { color: rgba(255, 255, 255, 0.7); }
+
+.electric-login-form button {
+  background: var(--electric-border-color);
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 1px;
+  box-shadow: 0 0 15px rgba(221, 132, 72, 0.5);
+}
+
+.electric-login-form button:hover {
+  background: #ff9a5c;
+}
+
+/* ===================== End Electric Border ===================== */
+
+/* Shipping Car */
+.shipping-card { margin-top: 20px; }
+.shipping-road {
+  width: 100%;
+  height: 80px;
+  background: linear-gradient(to bottom, #1e293b, #0f172a);
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 15px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.shipping-road::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, #facc15 0px, #facc15 20px, transparent 20px, transparent 40px);
+  animation: roadmove 1s linear infinite;
+}
+@keyframes roadmove { from { background-position-x: 0; } to { background-position-x: -40px; } }
+.car-anim {
+  position: absolute;
+  bottom: 15px;
+  width: 100px;
+  animation: drive 6s linear infinite;
+}
+@keyframes drive { from { left: 100%; } to { left: -120px; } }
+.car-body { fill: #ef4444; }
+.car-window { fill: #fff; opacity: 0.8; }
+.car-wheel { fill: #111; }
+
+/* Premium Order Button */
+.order-btn-premium {
+  position: relative;
+  width: 100%;
+  padding: 12px;
+  border-radius: 50px;
+  background: var(--accent);
+  color: #fff;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+.order-btn-premium span {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+.order-btn-premium span.default { transform: translateY(0); }
+.order-btn-premium span.success { transform: translateY(100%); opacity: 0; }
+.order-btn-premium.active { background: var(--success); }
+.order-btn-premium.active span.default { transform: translateY(-100%); opacity: 0; }
+.order-btn-premium.active span.success { transform: translateY(0); opacity: 1; transition-delay: 0.2s; }
+
+/* Table */
+.table { overflow-x: auto; }
+th, td { padding: 12px; border-bottom: 1px solid var(--border); text-align: left; font-size: 14px; }
 </style>
 </head>
 <body>
+
 <div class="head">
-  <div class="brand"><img src="./assets/fnfy-logo.png" onerror="this.onerror=null;this.src='./fnfy-logo.png'"><div><b>FNFY</b><br><small>ADMIN PANEL</small></div></div>
+  <div class="brand"><img src="./assets/fnfy-logo.png" onerror="this.onerror=null;this.src='./fnfy-logo.png'"><div><b>FNFY</b><br><small>PREMIUM ADMIN</small></div></div>
   <button id="logout" class="logout hidden">Logout</button>
 </div>
 
-<!-- Animation 2: Impossible Light Bulb (Header er niche) -->
-<div class="bulb-wrapper" onclick="toggleBulb(this)">
-  <svg class="bulb-scene" viewBox="0 0 200 160">
-    <rect x="150" y="20" width="20" height="120" fill="var(--door)"></rect>
-    <line class="toggle-scene-dummy-cord" x1="160" y1="20" x2="160" y2="70"></line>
-    <path class="bulb-cap" d="M80,40 L120,40 L115,70 L85,70 Z"></path>
-    <path class="bulb-cap-shine" d="M80,40 L100,40 L95,70 L85,70 Z"></path>
-    <path class="bulb-cap-outline" d="M80,40 L120,40 L115,70 L85,70 Z" stroke="var(--stroke)" fill="none"></path>
-    <path class="bulb-filament" d="M100,70 L100,100 M95,100 L105,100 M90,100 L110,100" stroke-width="2" fill="none"></path>
-    <path class="bulb-flash" d="M70,80 Q100,110 130,80 Q100,130 70,80 Z" fill="rgba(255,255,255,0.2)"></path>
-    <circle class="bulb-shine" cx="80" cy="90" r="30" fill="none" stroke-width="2"></circle>
-    <circle class="bear-fun" cx="50" cy="130" r="15"></circle>
-    <circle class="bear-pad" cx="50" cy="130" r="8"></circle>
-  </svg>
-</div>
+<div class="wrap">
 
-<!-- Animation 1: Animated Login Form -->
-<div id="login" class="login-card">
-  <h2>Admin Login</h2>
-  <input id="email" type="email" placeholder="Admin Gmail">
-  <input id="pass" type="password" placeholder="Password">
-  <button id="loginBtn">Login</button>
-  <p id="msg" class="msg"></p>
-</div>
+  <!-- Electric Border Login Form -->
+  <div class="electric-main-container" id="login">
+    <!-- SVG Filters for Electric Border -->
+    <svg class="electric-svg-container">
+      <defs>
+        <filter id="turbulent-displace" colorInterpolationFilters="sRGB" x="-20%" y="-20%" width="140%" height="140%">
+          <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise1" seed="1" />
+          <feOffset in="noise1" dx="0" dy="0" result="offsetNoise1">
+            <animate attributeName="dy" values="700; 0" dur="6s" repeatCount="indefinite" calcMode="linear" />
+          </feOffset>
+          <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise2" seed="1" />
+          <feOffset in="noise2" dx="0" dy="0" result="offsetNoise2">
+            <animate attributeName="dy" values="0; -700" dur="6s" repeatCount="indefinite" calcMode="linear" />
+          </feOffset>
+          <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise1" seed="2" />
+          <feOffset in="noise1" dx="0" dy="0" result="offsetNoise3">
+            <animate attributeName="dx" values="490; 0" dur="6s" repeatCount="indefinite" calcMode="linear" />
+          </feOffset>
+          <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise2" seed="2" />
+          <feOffset in="noise2" dx="0" dy="0" result="offsetNoise4">
+            <animate attributeName="dx" values="0; -490" dur="6s" repeatCount="indefinite" calcMode="linear" />
+          </feOffset>
+          <feComposite in="offsetNoise1" in2="offsetNoise2" result="part1" />
+          <feComposite in="offsetNoise3" in2="offsetNoise4" result="part2" />
+          <feBlend in="part1" in2="part2" mode="color-dodge" result="combinedNoise" />
+          <feDisplacementMap in="SourceGraphic" in2="combinedNoise" scale="30" xChannelSelector="R" yChannelSelector="B" />
+        </filter>
+      </defs>
+    </svg>
 
-<div id="panel" class="hidden">
-  <div class="card"><h2>➕ Add Product</h2><form id="pf">
-    <div class="row"><input id="pn" placeholder="Product name" required><input id="pc" placeholder="Category" required></div>
-    <div class="row"><input id="pp" type="number" min="0" placeholder="Price" required><input id="pdiscount" type="number" min="0" max="100" placeholder="Discount % (optional)"></div>
-    <div class="row"><input id="pcol" placeholder="Colors: Black, Blue"><input id="psz" placeholder="Sizes: 28, 30, 32, 34"></div>
-    <textarea id="pd" placeholder="Description"></textarea>
-    <input id="imgs" type="file" accept="image/*" multiple required><div class="preview" id="preview"></div>
-    <p id="up" class="msg">Storage লাগবে না — image compressed হয়ে Realtime Database-এ save হবে.</p>
-    <button id="add" type="submit">Add Product</button>
-  </form></div>
+    <!-- Electric Border Card -->
+    <div class="electric-card-container">
+      <div class="electric-inner-container">
+        <div class="electric-border-outer">
+          <div class="electric-main-card"></div>
+        </div>
+        <div class="electric-glow-layer-1"></div>
+        <div class="electric-glow-layer-2"></div>
+      </div>
+      <div class="electric-overlay-1"></div>
+      <div class="electric-overlay-2"></div>
+      <div class="electric-background-glow"></div>
 
-  <div class="card"><h2>📦 Orders</h2><div id="orderMsg" class="msg"></div>
-    <div class="table">
-      <table>
-        <thead><tr><th>Order ID</th><th>Customer</th><th>Items</th><th>Total</th><th>Payment</th><th>Time</th><th>Status</th><th>Action</th></tr></thead>
-        <tbody id="orders"><tr><td colspan="8">Loading...</td></tr></tbody>
-      </table>
+      <!-- Form Content inside the electric border -->
+      <div class="electric-content-container">
+        <h2 class="electric-title">Admin Login</h2>
+        <div class="electric-login-form">
+          <input id="email" type="email" placeholder="Admin Gmail">
+          <input id="pass" type="password" placeholder="Password">
+          <button id="loginBtn">Login</button>
+        </div>
+        <p id="msg" style="color:#ffcccc;font-size:14px;margin-top:10px"></p>
+      </div>
     </div>
   </div>
 
-  <div class="card"><h2>🛍 Products</h2><div id="products">Loading...</div></div>
-</div>
+  <!-- Admin Panel (Hidden initially) -->
+  <div id="panel" class="hidden">
+    
+    <div class="card">
+      <h2>➕ Add Premium Product</h2>
+      <form id="pf">
+        <div class="row" style="display:grid;grid-template-columns:1fr 1fr;gap:15px">
+          <input id="pn" placeholder="Product name" required>
+          <input id="pc" placeholder="Category" required>
+        </div>
+        <div class="row" style="display:grid;grid-template-columns:1fr 1fr;gap:15px">
+          <input id="pp" type="number" min="0" placeholder="Price" required>
+          <input id="pdiscount" type="number" min="0" max="100" placeholder="Discount % (optional)">
+        </div>
+        <div class="row" style="display:grid;grid-template-columns:1fr 1fr;gap:15px">
+          <input id="pcol" placeholder="Colors: Black, Blue">
+          <input id="psz" placeholder="Sizes: 28, 30, 32, 34">
+        </div>
+        <textarea id="pd" placeholder="Description"></textarea>
+        <input id="imgs" type="file" accept="image/*" multiple required>
+        <div class="preview" id="preview"></div>
+        <p id="up" class="msg">Storage লাগবে না — image compressed হয়ে Realtime Database-এ save হবে.</p>
+        <button id="add" type="submit" style="width:100%">Add Product</button>
+      </form>
+    </div>
 
-<!-- Animation 3: Order Confirmation Popup -->
-<div id="confirmModal" class="confirm-anim">
-  <div class="circle" id="confirmCircle"></div>
-  <div class="checkmark" id="confirmCheck">✓</div>
-  <p id="confirmText">Order Confirmed!</p>
-  <small id="confirmSub">Status updated successfully</small>
+    <div class="card shipping-card">
+      <h2>📦 Orders</h2>
+      <div class="shipping-road">
+        <div class="car-anim">
+          <svg viewBox="0 0 100 40">
+            <path class="car-body" d="M5,20 L15,15 L25,10 L65,10 L80,15 L95,20 L95,30 L5,30 Z"></path>
+            <rect class="car-window" x="25" y="12" width="35" height="8" rx="2"></rect>
+            <circle class="car-wheel" cx="20" cy="30" r="5"></circle>
+            <circle class="car-wheel" cx="80" cy="30" r="5"></circle>
+            <rect x="5" y="20" width="5" height="3" fill="#fef08a"></rect>
+            <rect x="90" y="20" width="5" height="3" fill="#ef4444"></rect>
+          </svg>
+        </div>
+      </div>
+      <div id="orderMsg" class="msg"></div>
+      <div class="table">
+        <table>
+          <thead><tr><th>Order ID</th><th>Customer</th><th>Items</th><th>Total</th><th>Payment</th><th>Time</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody id="orders"><tr><td colspan="8">Loading...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🛍 Products</h2>
+      <div id="products">Loading...</div>
+    </div>
+
+  </div>
 </div>
 
 <script type="module">
@@ -129,11 +458,11 @@ import{getDatabase,ref,push,set,onValue,remove,update,get}from"https://www.gstat
 import{firebaseConfig,ADMIN_EMAIL}from"./firebase-config.js";
 
 const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getDatabase(app),$=id=>document.getElementById(id);
-const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+
 onAuthStateChanged(auth,u=>{
  if(u&&u.email?.toLowerCase()===ADMIN_EMAIL.toLowerCase()){
   $("login").classList.add("hidden");$("panel").classList.remove("hidden");$("logout").classList.remove("hidden");loadProducts();loadOrders();
- }else if(u){$("msg").textContent="এই Gmail admin নয়: "+u.email;signOut(auth)}
+ }else if(u){$("msg").textContent="এই Gmail admin নয়";signOut(auth)}
 });
 $("loginBtn").onclick=async()=>{
  try{await signInWithEmailAndPassword(auth,$("email").value.trim(),$("pass").value)}
@@ -146,7 +475,13 @@ function loadProducts(){
   const d=s.val()||{};
   $("products").innerHTML=Object.entries(d).map(([id,p])=>`<div class="product"><img src="${esc(p.image||"./assets/fnfy-logo.png")}"><div style="flex:1"><b>${esc(p.name)}</b><br>${esc(p.category||"")} · ৳${Number(p.price||0).toLocaleString()}</div><button class="danger" data-del="${esc(id)}">Delete</button></div>`).join("")||"No products";
   document.querySelectorAll("[data-del]").forEach(b=>b.onclick=async()=>{if(confirm("Delete product?"))await remove(ref(db,"products/"+b.dataset.del))});
- },e=>$("products").textContent="Firebase error: "+e.message);
+ },e=>$("products").textContent="Error: "+e.message);
+}
+
+/* প্রিমিয়াম অর্ডার কনফার্ম বাটন */
+function animateOrderButton(btn) {
+  btn.classList.add('active');
+  setTimeout(() => { btn.classList.remove('active'); }, 1500);
 }
 
 function loadOrders(){
@@ -154,68 +489,33 @@ function loadOrders(){
   const d=s.val()||{};
   const arr=Object.entries(d).sort((a,b)=>(b[1].createdAt||0)-(a[1].createdAt||0));
   let trackingData={};
-  try{
-    const tSnap=await get(ref(db,"tracking"));
-    trackingData=tSnap.val()||{};
-  }catch(e){}
-  for(const [id,o] of arr){
-    if(!trackingData[id]){
-      trackingData[id]={orderId:o.orderId||id,status:o.status||"Pending",updatedAt:o.updatedAt||o.createdAt||Date.now()};
-      await set(ref(db,"tracking/"+id),trackingData[id]).catch(()=>{});
-    }
-  }
+  try{const tSnap=await get(ref(db,"tracking"));trackingData=tSnap.val()||{};}catch(e){}
+  for(const [id,o] of arr){ if(!trackingData[id]){ trackingData[id]={orderId:o.orderId||id,status:o.status||"Pending",updatedAt:o.updatedAt||o.createdAt||Date.now()}; await set(ref(db,"tracking/"+id),trackingData[id]).catch(()=>{});} }
+  
   $("orders").innerHTML=arr.map(([id,o])=>{
    const items=(o.items||[]).map(x=>`${esc(x.name)} × ${x.qty}<br><small>Size: ${esc(x.size)} | Color: ${esc(x.color)}</small>`).join("<hr>");
    const status=o.status||"Pending";
-   return `<tr><td><b>${esc(o.orderId||id)}</b><br><small>Tracking: ${esc(o.orderId||id)}</small></td><td><b>${esc(o.name)}</b><br>${esc(o.phone)}<br>${esc(o.address)}</td><td>${items}</td><td>Subtotal ৳${Number(o.subtotal||0).toLocaleString()}<br>Delivery ৳${Number(o.deliveryCharge||0).toLocaleString()}<br><b>Total ৳${Number(o.total||0).toLocaleString()}</b></td><td><b>${esc(o.paymentMethod||"—")}</b></td><td><small>Created: ${o.createdAt?new Date(o.createdAt).toLocaleString():"—"}<br>Updated: ${o.updatedAt?new Date(o.updatedAt).toLocaleString():"—"}</small></td><td><select data-status="${esc(id)}">${["Pending","Confirmed","Delivered","Cancelled"].map(x=>`<option ${x===status?"selected":""}>${x}</option>`).join("")}</select></td><td><button class="green order-btn" data-action="${esc(id)}" data-next="Confirmed">Confirm</button><br><button class="green order-btn" data-action="${esc(id)}" data-next="Delivered">Delivered</button><br><button class="danger order-btn" data-action="${esc(id)}" data-next="Cancelled">Cancel</button><br><button class="danger" data-order-del="${esc(id)}">Delete</button></td></tr>`;
+   return `<tr><td><b>${esc(o.orderId||id)}</b></td><td><b>${esc(o.name)}</b><br>${esc(o.phone)}<br>${esc(o.address)}</td><td>${items}</td><td><b>৳${Number(o.total||0).toLocaleString()}</b></td><td><b>${esc(o.paymentMethod||"—")}</b></td><td>${o.createdAt?new Date(o.createdAt).toLocaleString():"—"}</td><td><select data-status="${esc(id)}">${["Pending","Confirmed","Delivered","Cancelled"].map(x=>`<option ${x===status?"selected":""}>${x}</option>`).join("")}</select></td>
+   <td><button class="order-btn-premium" data-action="${esc(id)}" data-next="Confirmed"><span class="default">Confirm</span><span class="success">✓ Done</span></button><br><button class="green" data-action="${esc(id)}" data-next="Delivered">Delivered</button><br><button class="danger" data-action="${esc(id)}" data-next="Cancelled">Cancel</button><br><button class="danger" data-order-del="${esc(id)}">Delete</button></td></tr>`;
   }).join("")||'<tr><td colspan="8">No orders yet</td></tr>';
-  document.querySelectorAll("[data-status]").forEach(x=>x.onchange=()=>syncOrderStatus(x.dataset.status,x.value,false));
-  document.querySelectorAll("[data-action]").forEach(b=>b.onclick=()=>syncOrderStatus(b.dataset.action,b.dataset.next,true));
+
+  document.querySelectorAll("[data-status]").forEach(x=>x.onchange=()=>syncOrderStatus(x.dataset.status,x.value));
+  document.querySelectorAll(".order-btn-premium[data-action]").forEach(b=>b.onclick=()=>{
+    animateOrderButton(b);
+    syncOrderStatus(b.dataset.action, b.dataset.next);
+  });
+  document.querySelectorAll("[data-action]").forEach(b=>b.onclick=()=>syncOrderStatus(b.dataset.action,b.dataset.next));
   document.querySelectorAll("[data-order-del]").forEach(b=>b.onclick=async()=>{if(confirm("Delete order?")){await remove(ref(db,"orders/"+b.dataset.orderDel));await remove(ref(db,"tracking/"+b.dataset.orderDel));}});
- },e=>$('orders').innerHTML=`<tr><td colspan="8">Firebase order error: ${esc(e.message)}</td></tr>`);
+ },e=>$('orders').innerHTML=`<tr><td colspan="8">Error: ${esc(e.message)}</td></tr>`);
 }
 
-async function syncOrderStatus(orderId,status,showAnim){
+async function syncOrderStatus(orderId,status){
  try{
   const now=Date.now();
   await update(ref(db,"orders/"+orderId),{status,updatedAt:now,orderId});
   await update(ref(db,"tracking/"+orderId),{orderId,status,updatedAt:now,updatedBy:ADMIN_EMAIL});
-  $("orderMsg").textContent=`Order ${orderId} → ${status} saved in orders + tracking.`;
-  if(showAnim) showConfirmAnimation(status);
+  $("orderMsg").textContent=`Order ${orderId} → ${status} saved successfully.`;
  }catch(e){$("orderMsg").textContent="Status update failed: "+e.message}
-}
-
-function showConfirmAnimation(status){
-  const modal=$("confirmModal");
-  const circle=$("confirmCircle");
-  const check=$("confirmCheck");
-  const text=$("confirmText");
-  const sub=$("confirmSub");
-  
-  modal.classList.add("show");
-  circle.style.display="block";
-  check.style.animation="none";
-  void check.offsetWidth; // reflow
-  
-  if(status==="Confirmed"){
-    text.textContent="Order Confirmed!";
-    sub.textContent="Order successfully confirmed";
-  }else if(status==="Delivered"){
-    text.textContent="Order Delivered!";
-    sub.textContent="Order delivered successfully";
-  }else if(status==="Cancelled"){
-    text.textContent="Order Cancelled";
-    sub.textContent="Order has been cancelled";
-  }
-  
-  setTimeout(()=>{
-    circle.style.display="none";
-    check.style.animation="pop 0.4s ease forwards";
-  },1500);
-  
-  setTimeout(()=>{
-    modal.classList.remove("show");
-  },2500);
 }
 
 function resizeImage(file){
@@ -239,15 +539,11 @@ $("pf").onsubmit=async e=>{
   const fs=[...$("imgs").files].slice(0,4);if(!fs.length)throw Error("Image নির্বাচন করুন");
   const images=[];for(let i=0;i<fs.length;i++){$("up").textContent=`Image ${i+1}/${fs.length} prepare হচ্ছে...`;images.push(await resizeImage(fs[i]))}
   await set(push(ref(db,"products")),{name:$("pn").value.trim(),category:$("pc").value.trim(),price:Number($("pp").value),discountPercent:Math.max(0,Math.min(100,Number($("pdiscount").value||0))),colors:$("pcol").value.split(",").map(x=>x.trim()).filter(Boolean),sizes:$("psz").value.split(",").map(x=>x.trim()).filter(Boolean),description:$("pd").value.trim(),image:images[0],images,createdAt:Date.now()});
-  e.target.reset();$("preview").innerHTML="";$("up").textContent="Product Firebase-এ save হয়েছে!";
- }catch(e){$("up").textContent="Product save হয়নি: "+e.message}
+  e.target.reset();$("preview").innerHTML="";$("up").textContent="Product Firebase-এ save হয়েছে!";
+ }catch(e){$("up").textContent="Product save হয়নি: "+e.message}
  finally{$("add").disabled=false}
 };
-
-// Bulb toggle function
-window.toggleBulb = function(element) {
-  element.classList.toggle('on');
-};
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
 </script>
 </body>
 </html>
