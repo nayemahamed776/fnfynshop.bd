@@ -83,8 +83,10 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 <h2>Track Your Order</h2>
 <div class="track-card"><form id="trackForm"><input id="trackId" placeholder="Order ID দিন" required><button class="btn" type="submit">Check Status</button></form><div id="trackResult"></div></div>
 
-<h2 id="productsSection">Our Products <span class="small" id="count"></span></h2>
-<div class="filters" id="filters"></div>
+<h2 id="productsSection" style="margin-bottom:15px;">Our Products <span class="small" id="count"></span></h2>
+<div class="filters" id="filters" style="margin-bottom:20px;">
+    <button class="active" data-cat="All">All</button> <!-- Fallback button -->
+</div>
 <div class="grid" id="products">Loading...</div>
 
 <!-- Our Store Section -->
