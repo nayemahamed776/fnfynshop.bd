@@ -8,6 +8,30 @@
 <meta name="theme-color" content="#080808">
 <link rel="apple-touch-icon" href="./assets/fnfy-logo.png">
 <style>
+  /* ====== Background Image (FNFY Shop) ====== */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('./assets/shop-bg.jpg'); /* আপনি assets ফোল্ডারে রাখা ছবির নাম */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* সাদা ওভারলে - যাতে টেক্সট ও বাটন স্পষ্ট দেখা যায় */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.90); /* 90% সাদা - ছবি কিছুটা দেখা যাবে, টেক্সট পরিষ্কার থাকবে */
+    z-index: -1;
+    pointer-events: none;
+}
+  
 /* ====== Existing Styles ====== */
 *{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f5f5;color:#111}
 header{background:#080808;color:#fff;position:sticky;top:0;z-index:20}.top{max-width:1150px;margin:auto;padding:10px 15px;display:flex;align-items:center;justify-content:space-between;gap:10px}
