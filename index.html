@@ -10,7 +10,7 @@
 <style>
 /* ================= MOBILE-FIRST CSS (ছোট স্ক্রিন আগে) ================= */
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background-image:url(https://i.postimg.cc/pTRgPNtm/image.png);background-size:cover;background-position:center;background-repeat:no-repeat;color:#111}
+body{margin:0;font-family:Arial,sans-serif;background-image:url();background-size:cover;background-position:center;background-repeat:no-repeat;color:#111}
 body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(light mint);z-index:-1;pointer-events:none}
 
 /* Header (মোবাইল ফ্রেন্ডলি) */
@@ -277,103 +277,3 @@ updateCount();
   requestAnimationFrame(()=>moveIndicator(links[0]));
 })();
 </script>
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js').then((registration) => console.log('SW registered:', registration)).catch((error) => console.log('SW registration failed:', error));
-    });
-  }
-</script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animated Navigation Menu</title>
-
-    <link rel="stylesheet" href="code-with-nazia.css">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <div class="background-blur blur1"></div>
-<div class="background-blur blur2"></div>
-
-<nav>
-    <ul>
-        <div class="border-effect"></div>
-
-        <!-- HOME -->
-        <li id="home" class="active">
-
-            <svg class="active-fill" id="home-icon" viewBox="0 0 24 24">
-
-                <path
-                    d="M9.02 2.84L3.63 7.04C2.73 7.74 2 9.23 2 10.36V17.77C2 20.09 3.89 22 6.21 22H17.79C20.11 22 22 20.09 22 17.78V10.5C22 9.29 21.19 7.74 20.2 7.05L14.02 2.72C12.62 1.74 10.37 1.79 9.02 2.84Z" />
-
-                <path id="home-no-touch"
-                    d="M12 18V15" />
-
-            </svg>
-
-            <p>Home</p>
-
-        </li>
-
-        <!-- EXPLORE -->
-        <li id="explore">
-
-            <svg id="explore-icon" viewBox="0 0 24 24">
-
-                <path d="M17 10H19C21 10 22 9 22 7V5C22 3 21 2 19 2H17C15 2 14 3 14 5V7C14 9 15 10 17 10Z"/>
-
-                <path d="M5 22H7C9 22 10 21 10 19V17C10 15 9 14 7 14H5C3 14 2 15 2 17V19C2 21 3 22 5 22Z"/>
-
-                <path d="M6 10A4 4 0 106 2A4 4 0 006 10Z"/>
-
-                <path d="M18 22A4 4 0 1018 14A4 4 0 0018 22Z"/>
-
-            </svg>
-
-            <p>Explore</p>
-
-        </li>
-
-        <!-- MESSAGES -->
-        <li id="messages">
-
-            <svg id="messages-icon" viewBox="0 0 24 24">
-
-                <path d="M22 6.25V11.35C22 12.62 21.58 13.69 20.83 14.43C20.09 15.18 19.02 15.6 17.75 15.6V17.41C17.75 18.09 16.99 18.5 16.43 18.12L15.46 17.48C15.55 17.17 15.59 16.83 15.59 16.47V12.4C15.59 10.36 14.23 9 12.19 9H5.4C5.26 9 5.13 9.01 5 9.02V6.25C5 3.7 6.7 2 9.25 2H17.75C20.3 2 22 3.7 22 6.25Z"/>
-
-                <path d="M15.59 12.4V16.47C15.59 18.5 14.23 19.87 12.19 19.87H9.47L6.45 21.88C6 22.19 5.4 21.86 5.4 21.32V19.87C3.39 19.87 2 18.48 2 16.47V12.4C2 10.36 3.36 9 5.4 9H12.19C14.23 9 15.59 10.36 15.59 12.4Z"/>
-
-            </svg>
-
-            <p>Messages</p>
-
-        </li>
-
-        <!-- PROFILE -->
-        <li id="profile">
-
-            <svg id="profile-icon" viewBox="0 0 24 24">
-
-                <path d="M12.16 10.87C12.06 10.86 11.94 10.86 11.83 10.87C9.45 10.79 7.56 8.84 7.56 6.44C7.56 3.99 9.54 2 12 2C14.45 2 16.44 3.99 16.44 6.44C16.43 8.84 14.54 10.79 12.16 10.87Z"/>
-
-                <path d="M7.16 14.56C4.74 16.18 4.74 18.82 7.16 20.43C9.91 22.27 14.42 22.27 17.17 20.43C19.59 18.81 19.59 16.17 17.17 14.56C14.43 12.73 9.92 12.73 7.16 14.56Z"/>
-
-            </svg>
-
-            <p>Profile</p>
-
-        </li>
-
-    </ul>
-</nav>
-
-<script src="script.js"></script>
-
-</body>
-</html>
