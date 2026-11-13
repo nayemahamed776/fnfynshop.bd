@@ -1,279 +1,434 @@
-<!doctype html>
+
+const BKASH_NUMBER="01965460567";
+const NAGAD_NUMBER="01965460567";
+const ROCKET_NUMBER="019654605676";<!doctype html>
 <html lang="bn">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>FNFY — Men's Clothing</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#080808">
-<link rel="apple-touch-icon" href="./assets/fnfy-logo.png">
 <style>
-/* ================= MOBILE-FIRST CSS (ছোট স্ক্রিন আগে) ================= */
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background-image:url();background-size:cover;background-position:center;background-repeat:no-repeat;color:#111}
-body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(light mint);z-index:-1;pointer-events:none}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f5f5;color:#111}
+header{background:#080808;color:#fff;position:sticky;top:0;z-index:20}.top{max-width:1150px;margin:auto;padding:10px 15px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{display:flex;align-items:center;gap:10px}.brand img{width:62px;height:48px;object-fit:contain}.brand b{font-size:25px;letter-spacing:4px}.sub{font-size:11px;letter-spacing:3px;color:#ccc}
+.actions{display:flex;gap:7px;align-items:center}.btn{background:#111;color:#fff;border:0;border-radius:9px;padding:11px 14px;font-weight:bold;cursor:pointer}.white{background:#fff;color:#111}.wa{background:#25D366;color:#fff}.cart{border-radius:22px;padding:10px 15px}
+.hero{max-width:1150px;margin:15px auto;padding:0;background:#111;color:#fff;border-radius:20px;overflow:hidden;position:relative;min-height:330px}.hero-track{display:flex;transition:transform .6s ease;width:100%}.hero-slide{min-width:100%;min-height:330px;padding:52px 34px;display:flex;align-items:center;position:relative;overflow:hidden}.hero-slide:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.45),rgba(0,0,0,.06));pointer-events:none}.hero-content{position:relative;z-index:1;max-width:760px}.hero h1{font-size:42px;margin:8px 0}.hero p{font-size:18px;line-height:1.6;max-width:700px}.hero-badge{display:inline-block;padding:8px 13px;border-radius:999px;background:#fff;color:#111;font-weight:800;font-size:12px;letter-spacing:2px}.hero-slide:nth-child(1){background:linear-gradient(120deg,#242424,#555)}.hero-slide:nth-child(2){background:linear-gradient(120deg,#2d2d2d,#666)}.hero-slide:nth-child(3){background:linear-gradient(120deg,#252525,#505050)}.hero-dots{position:absolute;left:34px;bottom:18px;z-index:3;display:flex;gap:7px}.hero-dot{width:8px;height:8px;border-radius:50%;background:#777;cursor:pointer}.hero-dot.active{background:#fff;transform:scale(1.25)}
+.wrap{max-width:1150px;margin:auto;padding:0 15px 45px}h2{margin-top:28px}.filters{display:flex;gap:8px;flex-wrap:wrap}.filters button{border:1px solid #ddd;background:#fff;border-radius:20px;padding:9px 14px}.filters .active{background:#111;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 2px 12px #00000012}.pic{width:100%;aspect-ratio:1/1;object-fit:cover;background:#eee}.pad{padding:13px}.price{font-size:20px;font-weight:bold;margin:7px 0}.small{font-size:13px;color:#666}
+.modal{position:fixed;inset:0;background:#0008;display:none;z-index:50;align-items:flex-end;justify-content:center}.modal.show{display:flex}.sheet{background:#fff;width:100%;max-width:650px;max-height:93vh;overflow:auto;border-radius:20px 20px 0 0;padding:20px}.close{float:right;border:0;background:#eee;border-radius:50%;width:36px;height:36px;font-size:20px}
+.thumbs{display:flex;gap:7px;overflow:auto;margin:8px 0}.thumbs img{width:65px;height:65px;object-fit:cover;border-radius:7px;cursor:pointer}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:9px;margin:5px 0 10px;font:inherit}.empty{text-align:center;padding:30px;background:#fff;border-radius:15px}
+.review{padding:12px;border-bottom:1px solid #eee}.floatwa{position:fixed;right:16px;bottom:18px;z-index:30;border-radius:30px;padding:13px 18px;text-decoration:none;font-weight:bold}.site-footer{background:#080808;color:#fff;margin-top:35px;padding:38px 16px 90px}.footer-inner{max-width:1150px;margin:auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px}.footer-brand{display:flex;align-items:center;gap:12px}.footer-brand img{width:68px;height:55px;object-fit:contain}.footer-title{font-size:24px;font-weight:900;letter-spacing:3px}.footer-text{color:#bbb;line-height:1.7;margin:12px 0}.socials{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.socials a{width:44px;height:44px;border-radius:12px;background:#fff;display:grid;place-items:center;overflow:hidden}.socials img{width:30px;height:30px;object-fit:contain}.socials img.waicon{width:27px;height:27px}.footer-link{color:#fff;text-decoration:none}.footer-copy{max-width:1150px;margin:28px auto 0;padding-top:18px;border-top:1px solid #333;color:#888;font-size:13px}@media(max-width:700px){.footer-inner{grid-template-columns:1fr}.hero-slide{min-height:300px;padding:40px 22px}.hero h1{font-size:30px}.hero p{font-size:16px}.hero-dots{left:22px}}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:31px}}
+@media(max-width:520px){.top{padding:8px 10px}.brand img{width:52px;height:42px}.brand b{font-size:21px}.sub{font-size:9px}.actions .waTop{display:none}.hero{margin:10px;padding:42px 18px}.hero h1{font-size:28px}.grid{gap:9px}.row{grid-template-columns:1fr}}
 
-/* Header (মোবাইল ফ্রেন্ডলি) */
-header{background:#080808;color:#fff;position:sticky;top:0;z-index:20}
-.top{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px}
-.brand{display:flex;align-items:center;gap:8px}
-.brand img{width:45px;height:38px;object-fit:contain}
-.brand b{font-size:20px;letter-spacing:2px}
-.sub{font-size:9px;letter-spacing:2px;color:#ccc}
-.actions{display:flex;gap:5px;align-items:center}
-.btn{background:#111;color:#fff;border:0;border-radius:8px;padding:10px 12px;font-weight:bold;cursor:pointer;font-size:14px}
-.btn.white{background:#fff;color:#111}
-.btn.wa{background:#25D366;color:#fff}
-.cart{border-radius:20px;padding:8px 12px}
+.discount-badge{display:inline-block;background:#111;color:#fff;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:800;margin-top:5px}.old-price{text-decoration:line-through;color:#888;font-size:14px;margin-right:6px}.new-price{font-size:20px;font-weight:800}.hero-product-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.84}.hero-product-content{position:relative;z-index:2;max-width:720px}.hero-product-content h1{margin:8px 0;font-size:40px}.hero-product-content p{font-size:18px;line-height:1.5}.hero-product-slide:after{background:linear-gradient(90deg,rgba(0,0,0,.38),rgba(0,0,0,.06))}.hero-product-slide{background:#111}.hero-product-price{font-size:22px;font-weight:800;margin-top:10px}
 
-/* Mobile Navbar (স্ক্রল করা যাবে) */
-.active-nav{background:#080808;border-top:1px solid #222;border-bottom:1px solid #222;overflow-x:auto;white-space:nowrap;z-index:19}
-.active-nav-inner{display:flex;gap:4px;padding:8px}
-.active-nav a{color:#bbb;text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:700;font-size:14px;display:inline-block}
-.active-nav a.active,.active-nav a:hover{color:#fff;background:#333}
-.active-indicator{display:none}
+/* Active Navbar animation — added only; existing site styles/functions unchanged */
+.active-nav{position:sticky;top:68px;z-index:19;background:#080808;border-top:1px solid #222;border-bottom:1px solid #222;overflow:hidden}
+.active-nav-inner{max-width:1150px;margin:auto;position:relative;display:flex;justify-content:center;gap:8px;padding:7px 12px}
+.active-nav a{position:relative;z-index:2;color:#bbb;text-decoration:none;padding:10px 16px;border-radius:12px;font-weight:700;transition:color .25s ease,transform .25s ease}
+.active-nav a:hover,.active-nav a.active{color:#fff;transform:translateY(-1px)}
+.active-indicator{position:absolute;z-index:1;left:0;bottom:4px;height:3px;width:0;border-radius:999px;background:#fff;box-shadow:0 0 10px rgba(255,255,255,.85),0 0 24px rgba(255,255,255,.45);transition:left .38s cubic-bezier(.22,1,.36,1),width .38s cubic-bezier(.22,1,.36,1)}
+@media(max-width:520px){.active-nav{top:58px}.active-nav-inner{gap:2px;justify-content:flex-start;overflow-x:auto;scrollbar-width:none}.active-nav-inner::-webkit-scrollbar{display:none}.active-nav a{padding:9px 12px;font-size:13px;white-space:nowrap}}
 
-/* Hero (মোবাইলে ছোট) */
-.hero{max-width:100%;margin:10px;background:#111;color:#fff;border-radius:15px;overflow:hidden;position:relative;min-height:250px}
-.hero-track{display:flex;transition:transform .6s ease;width:100%}
-.hero-slide{min-width:100%;min-height:250px;padding:30px 20px;display:flex;align-items:center;position:relative}
-.hero h1{font-size:26px;margin:8px 0}
-.hero p{font-size:15px;line-height:1.6}
-.hero-badge{display:inline-block;padding:6px 10px;border-radius:20px;background:#fff;color:#111;font-weight:800;font-size:11px;letter-spacing:1px}
-.hero-dots{position:absolute;left:20px;bottom:12px;display:flex;gap:6px}
-.hero-dot{width:7px;height:7px;border-radius:50%;background:#777;cursor:pointer}
-.hero-dot.active{background:#fff;transform:scale(1.2)}
+/* Order confirmation animation — added only */
+.order-success-overlay{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.55);backdrop-filter:blur(3px)}
+.order-success-overlay.show{display:flex}
+.order-success-box{width:min(330px,88vw);background:#fff;color:#111;border-radius:24px;padding:28px 22px;text-align:center;box-shadow:0 18px 60px rgba(0,0,0,.35);animation:orderPop .42s cubic-bezier(.2,.9,.25,1.25)}
+.order-success-check{width:76px;height:76px;margin:0 auto 14px;border-radius:50%;background:#25D366;display:grid;place-items:center;animation:orderPulse .7s ease-out}
+.order-success-check:after{content:"✓";font-size:48px;font-weight:900;color:#fff;line-height:1;animation:orderCheck .45s .15s both}
+.order-success-box h3{margin:4px 0 7px;font-size:24px}
+.order-success-box p{margin:0;color:#666;font-size:14px}
+@keyframes orderPop{0%{opacity:0;transform:scale(.72) translateY(12px)}100%{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes orderPulse{0%{transform:scale(.55);box-shadow:0 0 0 0 rgba(37,211,102,.45)}70%{transform:scale(1.05);box-shadow:0 0 0 18px rgba(37,211,102,0)}100%{transform:scale(1);box-shadow:0 0 0 0 rgba(37,211,102,0)}}
+@keyframes orderCheck{0%{opacity:0;transform:scale(.4) rotate(-18deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
 
-/* Main Content */
-.wrap{max-width:100%;margin:auto;padding:0 12px 40px}
-h2{font-size:20px;margin-top:20px;margin-bottom:10px}
-.track-card{margin-bottom:15px}
-input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;margin:5px 0 10px;font-size:16px;font-family:inherit;background:#fff}
-
-/* Filters (মোবাইলে বাটন র্যাপ হবে) */
-.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:15px}
-.filters button{border:1px solid #ddd;background:#fff;border-radius:20px;padding:8px 12px;font-weight:bold;font-size:13px;cursor:pointer}
-.filters .active{background:#111;color:#fff}
-
-/* Products Grid (মোবাইলে ২ কলাম) */
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-.card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.1)}
-.pic{width:100%;aspect-ratio:1/1;object-fit:cover;background:#eee}
-.pad{padding:10px}
-.price{font-size:17px;font-weight:bold;margin:5px 0}
-.small{font-size:11px;color:#666}
-.card .btn{width:100%;margin-top:5px;padding:8px;font-size:13px}
-
-/* Our Store (মোবাইলে ২ কলাম) */
-.store-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
-.store-item{border-radius:12px;overflow:hidden;position:relative;background:#eee;aspect-ratio:1/1}
-.store-item img{width:100%;height:100%;object-fit:cover}
-
-/* Footer (মোবাইলে উলম্বভাবে সাজানো) */
-.site-footer{background:#080808;color:#fff;margin-top:30px;padding:30px 15px 120px}
-.footer-inner{display:flex;flex-direction:column;gap:25px}
-.footer-brand{display:flex;align-items:center;gap:10px}
-.footer-brand img{width:50px;height:40px;object-fit:contain}
-.footer-title{font-size:22px;font-weight:900;letter-spacing:2px}
-.footer-text{color:#bbb;line-height:1.7;margin:8px 0;font-size:14px}
-.socials{display:flex;gap:10px;margin-top:10px}
-.socials a{width:40px;height:40px;border-radius:10px;background:#fff;display:grid;place-items:center}
-.socials img{width:24px;height:24px;object-fit:contain}
-.footer-copy{text-align:center;color:#888;font-size:12px;margin-top:20px}
-
-/* Floating WhatsApp (মোবাইলে সঠিক জায়গায়) */
-.floatwa{position:fixed;right:15px;bottom:15px;z-index:30;border-radius:25px;padding:12px 16px;text-decoration:none;font-weight:bold;background:#25D366;color:#fff;font-size:14px;box-shadow:0 4px 10px rgba(0,0,0,0.3)}
-
-/* Modals (মোবাইলে ফুল স্ক্রিনের কাছাকাছি) */
-.modal{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;z-index:50;align-items:flex-end}
-.modal.show{display:flex}
-.sheet{background:#fff;width:100%;max-height:90vh;overflow-y:auto;border-radius:20px 20px 0 0;padding:20px}
-.close{float:right;border:0;background:#eee;border-radius:50%;width:35px;height:35px;font-size:18px;cursor:pointer}
-.thumbs{display:flex;gap:8px;overflow-x:auto;margin:10px 0}
-.thumbs img{width:60px;height:60px;object-fit:cover;border-radius:8px;cursor:pointer}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-
-/* ================= DESKTOP/LARGE SCREEN (মিন-উইডথ ৯০০পিএক্স) ================= */
-@media(min-width:900px){
-    .top{max-width:1150px;margin:auto;padding:10px 15px}
-    .brand img{width:62px;height:48px}
-    .brand b{font-size:25px}
-    .top .waTop{display:block}
-    .active-nav-inner{max-width:1150px;margin:auto;justify-content:center;gap:8px;padding:7px 12px}
-    .active-nav a{padding:10px 16px;font-size:15px}
-    .active-indicator{display:block;position:absolute;bottom:0;height:3px;background:#fff;transition:all .3s}
-    .hero{max-width:1150px;margin:15px auto;min-height:330px}
-    .hero-slide{min-height:330px;padding:52px 34px}
-    .hero h1{font-size:42px}
-    .hero p{font-size:18px}
-    .wrap{max-width:1150px;padding:0 15px 45px}
-    .grid{grid-template-columns:repeat(4,1fr);gap:14px}
-    .store-gallery{grid-template-columns:repeat(3,1fr);gap:15px}
-    .footer-inner{flex-direction:row;justify-content:space-between;gap:30px;max-width:1150px;margin:auto}
-    .site-footer{padding:38px 16px 90px}
-    .footer-copy{max-width:1150px;margin:28px auto 0;text-align:left;border-top:1px solid #333;padding-top:18px}
-}
 </style>
+
+<style id="fnfy-bulb-login-style">
+/* FNFY animated bulb */
+.fnfy-bulb-btn{position:fixed;left:18px;bottom:24px;z-index:9998;width:54px;height:54px;border:0;border-radius:50%;background:#111;color:#ffd84d;display:grid;place-items:center;box-shadow:0 6px 20px rgba(0,0,0,.22);cursor:pointer;transition:.25s}
+.fnfy-bulb-btn:hover{transform:translateY(-3px) scale(1.04)}
+.fnfy-bulb{font-size:27px;filter:drop-shadow(0 0 0 rgba(255,216,77,0));transition:.3s}
+.fnfy-bulb-btn.on{background:#fff3b0;box-shadow:0 0 24px rgba(255,216,77,.8),0 6px 20px rgba(0,0,0,.18)}
+.fnfy-bulb-btn.on .fnfy-bulb{filter:drop-shadow(0 0 12px #ffd84d);animation:fnfyBulbPulse 1s ease-in-out infinite alternate}
+@keyframes fnfyBulbPulse{from{transform:scale(1)}to{transform:scale(1.14)}}
+.fnfy-login-open{margin-left:8px;border:1px solid #ddd;background:#fff;color:#111;border-radius:999px;padding:10px 15px;font-weight:700;cursor:pointer}
+.fnfy-login-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.58);backdrop-filter:blur(5px);z-index:10000;display:none;align-items:center;justify-content:center;padding:20px}
+.fnfy-login-backdrop.show{display:flex;animation:fnfyFade .2s ease}
+.fnfy-login-card{width:min(390px,100%);background:#fff;border-radius:24px;padding:28px;box-shadow:0 25px 80px rgba(0,0,0,.35);position:relative;overflow:hidden;animation:fnfyLoginIn .45s cubic-bezier(.2,.8,.2,1)}
+.fnfy-login-card:before{content:"";position:absolute;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,rgba(100,210,255,.35),transparent 68%);top:-80px;right:-55px;animation:fnfyGlow 2.5s ease-in-out infinite alternate}
+.fnfy-login-card h2{margin:0 0 7px;font-size:27px;position:relative}.fnfy-login-card p{margin:0 0 20px;color:#666;position:relative}
+.fnfy-login-card input{width:100%;box-sizing:border-box;margin:7px 0;padding:14px 15px;border:1px solid #ddd;border-radius:12px;font-size:16px;outline:none}.fnfy-login-card input:focus{border-color:#111;box-shadow:0 0 0 3px rgba(0,0,0,.06)}
+.fnfy-login-actions{display:flex;gap:9px;margin-top:10px}.fnfy-login-actions button{border:0;border-radius:12px;padding:13px 16px;font-weight:700;cursor:pointer}.fnfy-login-submit{background:#111;color:#fff;flex:1}.fnfy-login-close{background:#eee;color:#111}.fnfy-login-msg{min-height:20px;margin-top:10px;color:#c62828;font-size:14px}.fnfy-login-spinner{display:inline-block;width:15px;height:15px;border:2px solid #777;border-top-color:transparent;border-radius:50%;animation:fnfySpin .7s linear infinite;vertical-align:-3px;margin-right:6px}
+@keyframes fnfyFade{from{opacity:0}to{opacity:1}}@keyframes fnfyLoginIn{from{opacity:0;transform:translateY(28px) scale(.94)}to{opacity:1;transform:none}}@keyframes fnfyGlow{from{transform:scale(.85);opacity:.55}to{transform:scale(1.2);opacity:1}}@keyframes fnfySpin{to{transform:rotate(360deg)}}
+@media(max-width:520px){.fnfy-bulb-btn{left:14px;bottom:18px;width:50px;height:50px}.fnfy-login-open{padding:9px 12px;font-size:13px}}
+</style>
+
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<style>.fnfy-3d-wrap{background:linear-gradient(145deg,#f8f8f8,#e9e9e9);border-radius:16px;overflow:hidden;margin:12px 0}.fnfy-view-tabs{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}.fnfy-view-tabs button{border:1px solid #ddd;background:#fff;color:#111;border-radius:20px;padding:9px 13px;font-weight:700}.fnfy-view-tabs button.active{background:#111;color:#fff}.fnfy-360-stage{height:340px;display:flex;align-items:center;justify-content:center;touch-action:pan-y;cursor:ew-resize;user-select:none}.fnfy-360-stage img{width:100%;height:100%;object-fit:contain;pointer-events:none}.fnfy-360-hint{text-align:center;color:#666;font-size:12px;padding:0 10px 12px}.fnfy-model{display:block;width:100%;height:390px;background:transparent}.fnfy-viewer-note{font-size:12px;color:#666;margin:4px 0 10px}@media(max-width:520px){.fnfy-360-stage{height:290px}.fnfy-model{height:330px}}</style>
 </head>
 <body>
-
 <header>
   <div class="top">
-    <div class="brand"><img src="./assets/fnfy-logo.png" onerror="this.onerror=null;this.src='./fnfy-logo.png'"><div><b>FNFY</b><div class="sub">MEN'S CLOTHING</div></div></div>
+    <div class="brand"><img src="./assets/fnfy-logo.png" onerror="this.onerror=null;this.src='./fnfy-logo.png'" alt="FNFY Logo"><div><b>FNFY</b><div class="sub">MEN'S CLOTHING</div></div></div>
     <div class="actions">
-      <a class="btn wa waTop" href="https://wa.me/8801965460567" target="_blank" style="display:none">WhatsApp</a>
+      <a class="btn wa waTop" href="https://wa.me/8801965460567" target="_blank">WhatsApp</a>
       <button class="btn white cart" id="cartBtn">Cart (<span id="cartCount">0</span>)</button>
     </div>
   </div>
 </header>
-
 <nav class="active-nav" aria-label="FNFY navigation">
   <div class="active-nav-inner" id="activeNav">
     <a href="#home" class="active">Home</a>
     <a href="#productsSection">Products</a>
-    <a href="#storeSection">Our Store</a>
     <a href="#reviewsSection">Reviews</a>
     <span class="active-indicator" id="activeIndicator"></span>
   </div>
 </nav>
 
-<section class="hero" id="home"><div class="hero-track" id="heroTrack">
-  <article class="hero-slide"><div class="hero-content"><span class="hero-badge">NEW COLLECTION 2026</span><h1>Style that speaks for itself.</h1><p>Shirt, pant, denim, cargo and jersey.</p></div></article>
-  <article class="hero-slide"><div class="hero-content"><span class="hero-badge">NEW ARRIVALS</span><h1>Fresh styles.</h1><p>নতুন product, discount এবং available color/size.</p></div></article>
-  <article class="hero-slide"><div class="hero-content"><span class="hero-badge">ORDER YOUR WAY</span><h1>Website + WhatsApp</h1><p>Website থেকে order করুন অথবা WhatsApp-এ পাঠান।</p></div></article>
+<section class="hero" id="home" aria-label="FNFY New Collection slideshow"><div class="hero-track" id="heroTrack">
+  <article class="hero-slide"><div class="hero-content"><span class="hero-badge">NEW COLLECTION 2026</span><h1>Style that speaks for itself.</h1><p>Shirt, pant, denim, cargo and jersey — product দেখুন, size/color বাছুন এবং সরাসরি order করুন।</p></div></article>
+  <article class="hero-slide"><div class="hero-content"><span class="hero-badge">NEW ARRIVALS</span><h1>Fresh styles. Premium look.</h1><p>নতুন product, ৪টি gallery image, discount এবং available color/size একসাথে দেখুন।</p></div></article>
+  <article class="hero-slide"><div class="hero-content"><span class="hero-badge">ORDER YOUR WAY</span><h1>Website + WhatsApp Order</h1><p>Website থেকে order করুন অথবা WhatsApp icon-এ tap করে সরাসরি order পাঠান।</p></div></article>
 </div><div class="hero-dots" id="heroDots"></div></section>
+
 
 <main class="wrap">
 <h2>Track Your Order</h2>
-<div class="track-card"><form id="trackForm"><input id="trackId" placeholder="Order ID দিন" required><button class="btn" type="submit" style="width:100%">Check Status</button></form><div id="trackResult"></div></div>
+<div class="track-card"><form id="trackForm"><input id="trackId" placeholder="Order ID দিন" required><button class="btn" type="submit">Check Status</button></form><div id="trackResult"></div></div>
 
 <h2 id="productsSection">Our Products <span class="small" id="count"></span></h2>
-<div class="filters" id="filters"><button class="active" data-cat="All">All</button></div>
+<div class="filters" id="filters"></div>
 <div class="grid" id="products">Loading...</div>
 
-<h2 id="storeSection">Our Store</h2>
-<div class="store-gallery">
-  <div class="store-item"><img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=400&auto=format&fit=crop" alt="Store"></div>
-  <div class="store-item"><img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=400&auto=format&fit=crop" alt="Store"></div>
-  <div class="store-item"><img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=400&auto=format&fit=crop" alt="Store"></div>
-  <div class="store-item"><img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=400&auto=format&fit=crop" alt="Store"></div>
-  <div class="store-item"><img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=400&auto=format&fit=crop" alt="Store"></div>
-  <div class="store-item"><img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=400&auto=format&fit=crop" alt="Store"></div>
-</div>
-
 <h2 id="reviewsSection">Customer Reviews</h2>
-<div class="card" style="padding:15px"><div id="reviewList">Loading...</div>
-<div><form id="reviewForm"><div class="row"><input id="rname" placeholder="আপনার নাম" required><select id="rstar"><option value="5">★★★★★</option><option value="4">★★★★☆</option></select></div><textarea id="rtext" rows="3" placeholder="Review লিখুন" required></textarea><button class="btn" type="submit" style="width:100%">Review Submit</button></form></div></div>
+<div class="card"><div class="pad" id="reviewList">Loading...</div>
+<div class="pad"><form id="reviewForm"><div class="row"><input id="rname" placeholder="আপনার নাম" required><select id="rstar"><option value="5">★★★★★</option><option value="4">★★★★☆</option><option value="3">★★★☆☆</option><option value="2">★★☆☆☆</option><option value="1">★☆☆☆☆</option></select></div><textarea id="rtext" rows="3" placeholder="Review লিখুন" required></textarea><button class="btn">Review Submit</button></form></div></div>
 </main>
 
 <footer class="site-footer">
   <div class="footer-inner">
     <div>
-      <div class="footer-brand"><img src="./assets/fnfy-logo.png" onerror="this.onerror=null;this.src='./fnfy-logo.png'"><div class="footer-title">FNFY</div></div>
+      <div class="footer-brand"><img src="./assets/fnfy-logo.png" onerror="this.onerror=null;this.src='./fnfy-logo.png'" alt="FNFY Logo"><div><div class="footer-title">FNFY</div><div class="sub">MEN'S CLOTHING</div></div></div>
       <p class="footer-text">Quality men's fashion at an affordable price.</p>
     </div>
     <div>
       <h3>Contact</h3>
-      <p class="footer-text">WhatsApp: 01965460567<br>Website Order + WhatsApp Order</p>
+      <p class="footer-text">WhatsApp: <a class="footer-link" href="https://wa.me/8801965460567" target="_blank">01965460567</a><br>Website Order + WhatsApp Order</p>
     </div>
     <div>
       <h3>Follow FNFY</h3>
       <div class="socials">
-        <a href="https://www.facebook.com/share/19RWoj5v3K/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="FB"></a>
-        <a href="https://wa.me/8801965460567" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WA"></a>
-        <a href="https://www.instagram.com/fnfy2026/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="IG"></a>
+        <a href="https://www.facebook.com/share/19RWoj5v3K/" target="_blank" aria-label="FNFY Facebook"><img src="./assets/facebook.png" onerror="this.onerror=null;this.src='./facebook.png'" alt="Facebook"></a>
+        <a href="https://wa.me/8801965460567" target="_blank" aria-label="FNFY WhatsApp"><img class="waicon" src="./assets/whatsapp.svg" onerror="this.onerror=null;this.src='./whatsapp.svg'" alt="WhatsApp"></a>
+        <a href="https://www.instagram.com/fnfy2026/" target="_blank" aria-label="FNFY Instagram"><img src="./assets/instagram.png" onerror="this.onerror=null;this.src='./instagram.png'" alt="Instagram"></a>
       </div>
     </div>
   </div>
   <div class="footer-copy">© 2026 FNFY Men's Clothing. All rights reserved.</div>
 </footer>
 
-<a class="floatwa" href="https://wa.me/8801965460567" target="_blank">WhatsApp Order</a>
+<a class="floatwa wa" href="https://wa.me/8801965460567" target="_blank">WhatsApp Order</a>
 
 <div class="modal" id="productModal"><div class="sheet"><button class="close" data-close>×</button><div id="productDetail"></div></div></div>
+
 <div class="modal" id="cartModal"><div class="sheet">
 <button class="close" data-close>×</button><h2>Your Cart</h2><div id="cartItems"></div><hr><h3>Subtotal: ৳<span id="cartTotal">0</span></h3>
+<div id="checkoutModeMsg" class="small" style="margin-bottom:8px"></div>
 <form id="orderForm">
 <input id="cname" placeholder="নাম" required><input id="cphone" placeholder="মোবাইল নম্বর" required>
 <textarea id="caddress" placeholder="সম্পূর্ণ ঠিকানা" required></textarea>
 <select id="delivery"><option value="60">ঢাকার ভিতরে — ৳60</option><option value="120">ঢাকার বাইরে — ৳120</option></select>
-<select id="payment" required><option value="">Payment নির্বাচন</option><option>Cash on Delivery</option><option>bKash</option><option>Nagad</option></select>
-<button class="btn" type="submit" style="width:100%">Confirm Order</button>
+<select id="payment" required><option value="">Payment নির্বাচন করুন</option><option>Cash on Delivery</option><option>bKash</option><option>Nagad</option><option value="Rocket">Rocket</option></select>
+<div class="small" style="margin:-2px 0 8px">Cash on Delivery / bKash / Nagad থেকে একটি নির্বাচন করুন।</div>
+<button class="btn" type="submit">Confirm Order</button>
 </form>
-<button class="btn wa" id="waOrder" style="width:100%;margin-top:8px">WhatsApp-এ পাঠান</button>
+<button class="btn wa" id="waOrder" style="margin-top:7px">WhatsApp-এ Order পাঠান</button>
 <p id="orderMsg"></p>
 </div></div>
 
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import{getDatabase,ref,onValue,push,set,get,update}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
-import{firebaseConfig,WHATSAPP_NUMBER}from"./firebase-config.js";
+const firebaseConfig={apiKey:"AIzaSyCJCRm19whUUqEmTR3Mf1o5P8jAK2UhBxE",authDomain:"fnfynshop.firebaseapp.com",databaseURL:"https://fnfynshop-default-rtdb.asia-southeast1.firebasedatabase.app",projectId:"fnfynshop",storageBucket:"fnfynshop.firebasestorage.app",messagingSenderId:"146671106800",appId:"1:146671106800:web:9a389ba7c418e8289fe035",measurementId:"G-RDZLGVKZDL"};
+const WHATSAPP_NUMBER="8801965460567";
 const app=initializeApp(firebaseConfig),db=getDatabase(app);
 const DB_URL=String(firebaseConfig.databaseURL||"").replace(/\/$/,"");
 async function restGet(path){const r=await fetch(`${DB_URL}/${path}.json`);if(!r.ok)throw Error(`HTTP ${r.status}`);return await r.json()}
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
 let products={},cart=JSON.parse(localStorage.getItem("fnfy_cart")||"[]"),filter="All",checkoutItems=[],checkoutMode="cart";
-function discountPercent(p){return Math.max(0,Math.min(100,Number(p.discountPercent||p.discount||0)))}
-function finalPrice(p){const price=Number(p.price||0),d=discountPercent(p);return Math.round(price*(1-d/100))}
-function priceHtml(p){const d=discountPercent(p),price=Number(p.price||0),final=finalPrice(p);return d>0?`<div class="price"><span class="old-price" style="color:#888;text-decoration:line-through;font-size:12px;margin-right:4px">৳${price}</span><span>৳${final}</span></div>`:`<div class="price">৳${price}</div>`}
-function productImage(p){return p?.images?.[0]?.image||p?.images?.[0]||p?.image||"./fnfy-logo.png"}
-function renderFiltersAndProducts(){
-    const cats=["All",...new Set(Object.values(products).map(p=>p.category).filter(Boolean))];
-    $("filters").innerHTML=cats.map(c=>`<button class="${filter===c?"active":""}" data-cat="${esc(c)}">${esc(c)}</button>`).join("");
-    document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{filter=b.dataset.cat;renderFiltersAndProducts()});
-    const arr=Object.entries(products).filter(([id,p])=>filter==="All"||String(p.category||"")===filter);
-    $("count").textContent=`(${arr.length})`;
-    if(arr.length===0){$("products").innerHTML='<div class="empty" style="grid-column:1/-1;text-align:center;padding:30px;background:#fff;border-radius:10px">এখনো প্রোডাক্ট নেই</div>';}
-    else{$("products").innerHTML=arr.map(([id,p])=>`<div class="card"><img class="pic" src="${esc(productImage(p))}" onerror="this.src='./assets/fnfy-logo.png'"><div class="pad"><b>${esc(p.name)}</b>${priceHtml(p)}<div class="small">${esc(p.category||"")}</div><button class="btn" data-view="${esc(id)}">View / Buy</button></div></div>`).join("");}
-    document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>openProduct(b.dataset.view));
-}
-let productsRealtime=false;
-onValue(ref(db,"products"),s=>{productsRealtime=true;products=s.val()||{};renderFiltersAndProducts();renderHeroProducts()},e=>{renderFiltersAndProducts();$("products").innerHTML=`<div class="empty">Data load হয়নি</div>`});
-setTimeout(async()=>{if(productsRealtime)return;try{products=await restGet("products")||{};renderFiltersAndProducts();renderHeroProducts()}catch(e){renderFiltersAndProducts();$("products").innerHTML=`<div class="empty">Data load হয়নি</div>`}},3500);
-
-function openProduct(id){const p=products[id];if(!p)return;const imgs=p.images?.length?p.images:[p.image].filter(Boolean);$("productDetail").innerHTML=`<img class="pic" id="mainImg" src="${esc(imgs[0]||"./assets/fnfy-logo.png")}"><div class="thumbs">${imgs.map(x=>`<img src="${esc(x)}" data-img="${esc(x)}">`).join("")}</div><h2>${esc(p.name)}</h2>${priceHtml(p)}<p>${esc(p.description||"")}</p><label>Size</label><select id="selSize">${(p.sizes||["28","30","32","34"]).map(x=>`<option>${esc(x)}</option>`).join("")}</select><label>Color</label><select id="selColor">${(p.colors||["Default"]).map(x=>`<option>${esc(x)}</option>`).join("")}</select><label>Quantity</label><input id="selQty" type="number" min="1" value="1"><div class="row" style="margin-top:10px"><button class="btn" id="addCart">Add to Cart</button><button class="btn wa" id="buyNow">Buy Now</button></div>`;$("productModal").classList.add("show");document.querySelectorAll("[data-img]").forEach(x=>x.onclick=()=>{$("mainImg").src=x.dataset.img});$("addCart").onclick=()=>{const item={id,name:p.name,price:finalPrice(p),originalPrice:Number(p.price||0),discountPercent:discountPercent(p),image:productImage(p),size:$("selSize").value,color:$("selColor").value,qty:Number($("selQty").value)||1};if(!item.size||!item.color)return alert("Color ও Size নির্বাচন করুন।");cart.push(item);saveCart();$("productModal").classList.remove("show");alert("Product Cart-এ save হয়েছে।");};$("buyNow").onclick=()=>{const item={id,name:p.name,price:finalPrice(p),originalPrice:Number(p.price||0),discountPercent:discountPercent(p),image:productImage(p),size:$("selSize").value,color:$("selColor").value,qty:Number($("selQty").value)||1};if(!item.size||!item.color)return alert("Color ও Size নির্বাচন করুন।");checkoutItems=[item];checkoutMode="buy";$("productModal").classList.remove("show");$("cartModal").classList.add("show");renderCart();};}
+function discountPercent(p){return Math.max(0,Math.min(100,Number(p.discountPercent||p.discount||0)));}
+function finalPrice(p){const price=Number(p.price||0),d=discountPercent(p);return Math.round(price*(1-d/100));}
+function priceHtml(p){const d=discountPercent(p),price=Number(p.price||0),final=finalPrice(p);return d>0?`<div class="price"><span class="old-price">৳${price.toLocaleString()}</span><span class="new-price">৳${final.toLocaleString()}</span><br><span class="discount-badge">${d}% OFF</span></div>`:`<div class="price">৳${price.toLocaleString()}</div>`;}
 
 function saveCart(){localStorage.setItem("fnfy_cart",JSON.stringify(cart));updateCount()}
 function updateCount(){$("cartCount").textContent=cart.reduce((a,x)=>a+x.qty,0)}
-function activeCheckoutItems(){return checkoutMode==="buy"?checkoutItems:cart;}
-function renderCart(){const items=activeCheckoutItems();$("checkoutModeMsg").textContent=checkoutMode==="buy"?"Buy Now":"Cart";if(!items.length){$("cartItems").innerHTML="<div class='empty'>Cart খালি</div>";$("cartTotal").textContent="0";return}$("cartItems").innerHTML=items.map((x,i)=>`<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #eee"><img src="${esc(x.image||"./assets/fnfy-logo.png")}" style="width:50px;height:50px;object-fit:cover;border-radius:5px"><div style="flex:1"><b>${esc(x.name)}</b><br>৳${x.price} × ${x.qty}<br>Size: ${esc(x.size)} | Color: ${esc(x.color)}${checkoutMode==="cart"?`<br><button class="btn" data-minus="${i}">−</button> <button class="btn" data-plus="${i}">+</button> <button class="btn" data-remove="${i}">Remove</button>`:""}</div></div>`).join("");const subtotal=items.reduce((a,x)=>a+x.price*x.qty,0);$("cartTotal").textContent=subtotal.toLocaleString();if(checkoutMode==="cart"){document.querySelectorAll("[data-minus]").forEach(b=>b.onclick=()=>{cart[b.dataset.minus].qty=Math.max(1,cart[b.dataset.minus].qty-1);saveCart();renderCart()});document.querySelectorAll("[data-plus]").forEach(b=>b.onclick=()=>{cart[b.dataset.plus].qty++;saveCart();renderCart()});document.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>{cart.splice(b.dataset.remove,1);saveCart();renderCart()});}}
 
-function orderData(){const items=activeCheckoutItems();const delivery=Number($("delivery").value),subtotal=items.reduce((a,x)=>a+x.price*x.qty,0),now=Date.now();return {name:$('cname').value.trim(),phone:$('cphone').value.trim(),address:$('caddress').value.trim(),deliveryCharge:delivery,subtotal,total:subtotal+delivery,items,paymentMethod:$('payment').value,status:"Pending",createdAt:now,updatedAt:now};}
+function productImage(p){return p?.images?.[0]?.image||p?.images?.[0]||p?.image||"./fnfy-logo.png";}
+function renderProducts(){
+ const arr=Object.entries(products).filter(([id,p])=>filter==="All"||String(p.category||"")===filter);
+ $("count").textContent=`(${arr.length})`;
+ $("products").innerHTML=arr.length?arr.map(([id,p])=>`
+ <div class="card"><img class="pic" src="${esc(productImage(p))}" onerror="this.src='./assets/fnfy-logo.png'">
+ <div class="pad"><b>${esc(p.name)}</b>${priceHtml(p)}<div class="small">${esc(p.category||"")}</div>
+ <button class="btn" data-view="${esc(id)}" style="margin-top:9px">View / Buy</button></div></div>`).join(""):'<div class="empty">কোনো product নেই।</div>';
+ document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>openProduct(b.dataset.view));
+ const cats=["All",...new Set(Object.values(products).map(p=>p.category).filter(Boolean))];
+ $("filters").innerHTML=cats.map(c=>`<button class="${filter===c?"active":""}" data-cat="${esc(c)}">${esc(c)}</button>`).join("");
+ document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{filter=b.dataset.cat;renderProducts()});
+}
+let productsRealtime=false;
+onValue(ref(db,"products"),s=>{productsRealtime=true;products=s.val()||{};renderProducts();renderHeroProducts()},e=>{$("products").innerHTML=`<div class="empty">Products load হয়নি: ${esc(e.message)}</div>`});
+setTimeout(async()=>{if(productsRealtime)return;try{products=await restGet("products")||{};renderProducts();renderHeroProducts()}catch(e){$("products").innerHTML=`<div class="empty">Products load হয়নি: ${esc(e.message)}</div>`}},3500);
+
+function openProduct(id){
+ const p=products[id];if(!p)return;
+ const imgs=p.images?.length?p.images:[p.image].filter(Boolean);
+ $("productDetail").innerHTML=`
+ <div class="fnfy-view-tabs"><button type="button" class="active" id="view360Tab">360° Product</button><button type="button" id="view3dTab">3D Model</button></div>
+ <div class="fnfy-3d-wrap" id="fnfy360Panel"><div class="fnfy-360-stage" id="fnfy360Stage"><img id="mainImg" src="${esc(imgs[0]||"./assets/fnfy-logo.png")}" alt="${esc(p.name)}"></div><div class="fnfy-360-hint">ছবির উপর আঙুল/মাউস দিয়ে ডানে-বামে টানুন — ${imgs.length}টি angle image থাকলে ঘুরিয়ে দেখা যাবে</div></div>
+ <div class="fnfy-3d-wrap" id="fnfy3dPanel" style="display:none">${p.model3dUrl?`<model-viewer class="fnfy-model" src="${esc(p.model3dUrl)}" camera-controls auto-rotate rotation-per-second="18deg" shadow-intensity="1" exposure="1" environment-image="neutral" alt="${esc(p.name)} 3D model"></model-viewer>`:`<div style="padding:24px;text-align:center"><b>3D Model এখনো যোগ করা হয়নি</b><p class="small">Admin Panel থেকে এই product-এর GLB/GLTF model URL যোগ করুন।</p></div>`}</div>
+ <div class="thumbs">${imgs.map((x,i)=>`<img src="${esc(x)}" data-img-index="${i}" alt="Product angle ${i+1}">`).join("")}</div>
+ <div class="fnfy-viewer-note">৩৬০° ছবির ভিউয়ের জন্য বিভিন্ন দিক থেকে তোলা ছবি ব্যবহার করুন। পূর্ণ 3D rotation-এর জন্য GLB/GLTF ফাইল প্রয়োজন।</div>
+ <h2>${esc(p.name)}</h2>${priceHtml(p)}<p>${esc(p.description||"")}</p>
+ <label>Size</label><select id="selSize">${(p.sizes||["28","30","32","34"]).map(x=>`<option>${esc(x)}</option>`).join("")}</select>
+ <label>Color</label><select id="selColor">${(p.colors||["Default"]).map(x=>`<option>${esc(x)}</option>`).join("")}</select>
+ <label>Quantity</label><input id="selQty" type="number" min="1" value="1">
+ <div class="row" style="margin-top:10px"><button class="btn" id="addCart" type="button">Add to Cart</button><button class="btn wa" id="buyNow" type="button">Buy Now</button></div>`;
+ $("productModal").classList.add("show");
+ const stage=$("fnfy360Stage"),mainImg=$("mainImg");let angle=0,startX=null,lastX=null;
+ const showAngle=i=>{if(imgs.length)mainImg.src=imgs[(i+imgs.length)%imgs.length]};
+ document.querySelectorAll("[data-img-index]").forEach(x=>x.onclick=()=>{angle=Number(x.dataset.imgIndex);showAngle(angle)});
+ const rotateStart=e=>{startX=e.touches?e.touches[0].clientX:e.clientX;lastX=startX};
+ const rotateMove=e=>{if(startX===null)return;const x=e.touches?e.touches[0].clientX:e.clientX;if(Math.abs(x-lastX)>12){angle=(angle+(x<lastX?1:-1)+imgs.length)%imgs.length;showAngle(angle);lastX=x}if(e.cancelable)e.preventDefault()};
+ const rotateEnd=()=>{startX=null;lastX=null};
+ stage.addEventListener("mousedown",rotateStart);window.addEventListener("mousemove",rotateMove);window.addEventListener("mouseup",rotateEnd);stage.addEventListener("touchstart",rotateStart,{passive:true});stage.addEventListener("touchmove",rotateMove,{passive:false});stage.addEventListener("touchend",rotateEnd);
+ $("view360Tab").onclick=()=>{$("fnfy360Panel").style.display="block";$("fnfy3dPanel").style.display="none";$("view360Tab").classList.add("active");$("view3dTab").classList.remove("active")};
+ $("view3dTab").onclick=()=>{$("fnfy360Panel").style.display="none";$("fnfy3dPanel").style.display="block";$("view3dTab").classList.add("active");$("view360Tab").classList.remove("active")};
+ $("addCart").onclick=()=>{
+ const item={id,name:p.name,price:finalPrice(p),originalPrice:Number(p.price||0),discountPercent:discountPercent(p),image:productImage(p),size:$("selSize").value,color:$("selColor").value,qty:Number($("selQty").value)||1};
+ if(!item.size||!item.color)return alert("Color ও Size নির্বাচন করুন।");
+ cart.push(item);saveCart();$("productModal").classList.remove("show");alert("Product Cart-এ save হয়েছে।");
+};
+$("buyNow").onclick=()=>{
+ const item={id,name:p.name,price:finalPrice(p),originalPrice:Number(p.price||0),discountPercent:discountPercent(p),image:productImage(p),size:$("selSize").value,color:$("selColor").value,qty:Number($("selQty").value)||1};
+ if(!item.size||!item.color)return alert("Color ও Size নির্বাচন করুন।");
+ checkoutItems=[item];checkoutMode="buy";$("productModal").classList.remove("show");$("cartModal").classList.add("show");renderCart();
+};
+}
+
+function activeCheckoutItems(){return checkoutMode==="buy"?checkoutItems:cart;}
+function renderCart(){
+ const items=activeCheckoutItems();
+ $("checkoutModeMsg").textContent=checkoutMode==="buy"?"Buy Now checkout — এই item Cart-এ save হবে না।":"Cart checkout — Cart-এ save করা itemগুলো এখন order করতে পারবেন।";
+ if(!items.length){$("cartItems").innerHTML="<div class='empty'>Cart খালি।</div>";$("cartTotal").textContent="0";return}
+ $("cartItems").innerHTML=items.map((x,i)=>`<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #eee"><img src="${esc(x.image||"./assets/fnfy-logo.png")}" style="width:65px;height:65px;object-fit:cover;border-radius:8px"><div style="flex:1"><b>${esc(x.name)}</b><br>৳${Number(x.price).toLocaleString()} × ${x.qty}<br>Size: ${esc(x.size)} | Color: ${esc(x.color)}${checkoutMode==="cart"?`<br><button class="btn" data-minus="${i}">−</button> <button class="btn" data-plus="${i}">+</button> <button class="btn" data-remove="${i}">Remove</button>`:""}</div></div>`).join("");
+ const subtotal=items.reduce((a,x)=>a+x.price*x.qty,0);$("cartTotal").textContent=subtotal.toLocaleString();
+ if(checkoutMode==="cart"){
+  document.querySelectorAll("[data-minus]").forEach(b=>b.onclick=()=>{cart[b.dataset.minus].qty=Math.max(1,cart[b.dataset.minus].qty-1);saveCart();renderCart()});
+  document.querySelectorAll("[data-plus]").forEach(b=>b.onclick=()=>{cart[b.dataset.plus].qty++;saveCart();renderCart()});
+  document.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>{cart.splice(b.dataset.remove,1);saveCart();renderCart()});
+ }
+}
+
+function orderData(){
+ const items=activeCheckoutItems();
+ const delivery=Number($("delivery").value),subtotal=items.reduce((a,x)=>a+x.price*x.qty,0),now=Date.now();
+ return {name:$('cname').value.trim(),phone:$('cphone').value.trim(),address:$('caddress').value.trim(),deliveryCharge:delivery,subtotal,total:subtotal+delivery,items,paymentMethod:$('payment').value,status:"Pending",createdAt:now,updatedAt:now};
+}
 function waText(o){return `FNFY Order\nName: ${o.name}\nPhone: ${o.phone}\nAddress: ${o.address}\nPayment: ${o.paymentMethod||"Not selected"}\nDelivery: ৳${o.deliveryCharge}\nTotal: ৳${o.total}\n\nItems:\n`+o.items.map(x=>`${x.name} × ${x.qty} | Size: ${x.size} | Color: ${x.color}`).join("\n")}
 
-$("orderForm").onsubmit=async e=>{e.preventDefault();const items=activeCheckoutItems();if(!items.length)return alert("Cart খালি।");const o=orderData();if(!o.name||!o.phone||!o.address||!o.paymentMethod)return alert("নাম, ফোন, ঠিকানা ও Payment নির্বাচন করুন।");try{const orderRef=push(ref(db,"orders"));const orderId=orderRef.key;const now=Date.now();const order={...o,orderId,status:"Pending",createdAt:now,updatedAt:now};const tracking={orderId,status:"Pending",createdAt:now,updatedAt:now};await update(ref(db),{[`orders/${orderId}`]:order,[`tracking/${orderId}`]:tracking});if(checkoutMode==="cart"){cart=[];saveCart();}checkoutItems=[];checkoutMode="cart";e.target.reset();renderCart();$("orderMsg").innerHTML=`<b>Order সফল!</b><br>Order ID: <strong>${esc(orderId)}</strong><br><a class="btn wa" href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText(order))}" target="_blank" style="width:100%;margin-top:10px">WhatsApp-এ পাঠান</a>`;$("trackId").value=orderId;checkTracking(orderId);}catch(err){$("orderMsg").textContent="Order save হয়নি: "+err.message}};
+$("orderForm").onsubmit=async e=>{
+ e.preventDefault();
+ const items=activeCheckoutItems();if(!items.length)return alert("Cart খালি।");
+ const o=orderData();if(!o.name||!o.phone||!o.address||!o.paymentMethod)return alert("নাম, ফোন, ঠিকানা ও Payment নির্বাচন করুন।");
+ try{
+  const orderRef=push(ref(db,"orders"));const orderId=orderRef.key;const now=Date.now();
+  const order={...o,orderId,status:"Pending",createdAt:now,updatedAt:now};
+  const tracking={orderId,status:"Pending",createdAt:now,updatedAt:now};
+  await update(ref(db),{[`orders/${orderId}`]:order,[`tracking/${orderId}`]:tracking});
+  if(checkoutMode==="cart"){cart=[];saveCart();}
+  checkoutItems=[];checkoutMode="cart";e.target.reset();renderCart();
+  $("orderMsg").innerHTML=`<b>Order সফল হয়েছে!</b><br>Order ID: <strong>${esc(orderId)}</strong><br>Status: Pending<br>Order Time: ${new Date(now).toLocaleString()}<br><a class="btn wa" href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText(order))}" target="_blank">WhatsApp-এ পাঠান</a>`;
+  $("trackId").value=orderId;checkTracking(orderId);
+ }catch(err){$("orderMsg").textContent="Order save হয়নি: "+err.message}
+};
+
 $("waOrder").onclick=()=>{const items=activeCheckoutItems();if(!items.length)return alert("Cart খালি।");const o=orderData();if(!o.name||!o.phone||!o.address||!o.paymentMethod){alert("নাম, ফোন, ঠিকানা ও Payment নির্বাচন করুন।");return}window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText(o))}`,"_blank")};
+
 $("cartBtn").onclick=()=>{checkoutMode="cart";checkoutItems=[];$("cartModal").classList.add("show");renderCart()};
+
 document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>b.closest(".modal").classList.remove("show"));
 
 let reviewsRealtime=false;
-onValue(ref(db,"reviews"),s=>{reviewsRealtime=true;const d=s.val()||{};$("reviewList").innerHTML=Object.values(d).reverse().map(r=>`<div class="review"><b>${esc(r.name)}</b> ${"★".repeat(Number(r.star??r.rating??5))}<br>${esc(r.text)}</div>`).join("")||"এখনো কোনো review নেই।"},e=>{$("reviewList").innerHTML="Review load হয়নি"});
-setTimeout(async()=>{if(reviewsRealtime)return;try{const d=await restGet("reviews")||{};$("reviewList").innerHTML=Object.values(d).reverse().map(r=>`<div class="review"><b>${esc(r.name)}</b> ${"★".repeat(Number(r.star??r.rating??5))}<br>${esc(r.text)}</div>`).join("")||"এখনো কোনো review নেই।"}catch(e){$("reviewList").innerHTML="Review load হয়নি"}},3500);
+onValue(ref(db,"reviews"),s=>{reviewsRealtime=true;const d=s.val()||{};$("reviewList").innerHTML=Object.values(d).reverse().map(r=>`<div class="review"><b>${esc(r.name)}</b> ${"★".repeat(Number(r.star??r.rating??5))}<br>${esc(r.text)}</div>`).join("")||"এখনো কোনো review নেই।"},e=>{$("reviewList").innerHTML=`<div class="review">Review load হয়নি: ${esc(e.message)}</div>`});
+setTimeout(async()=>{if(reviewsRealtime)return;try{const d=await restGet("reviews")||{};$("reviewList").innerHTML=Object.values(d).reverse().map(r=>`<div class="review"><b>${esc(r.name)}</b> ${"★".repeat(Number(r.star??r.rating??5))}<br>${esc(r.text)}</div>`).join("")||"এখনো কোনো review নেই।"}catch(e){$("reviewList").innerHTML=`<div class="review">Review load হয়নি: ${esc(e.message)}</div>`}},3500);
 $("reviewForm").onsubmit=async e=>{e.preventDefault();try{await set(push(ref(db,"reviews")),{name:$("rname").value.trim(),star:Number($("rstar").value),text:$("rtext").value.trim(),createdAt:Date.now()});e.target.reset();alert("Review submitted")}catch(err){alert(err.message)}};
-async function checkTracking(orderId){const id=String(orderId||$("trackId").value||"").trim();if(!id){$("trackResult").innerHTML="";return}$("trackResult").innerHTML="Checking...";try{const snap=await get(ref(db,"tracking/"+id));if(!snap.exists()){$("trackResult").innerHTML='<div class="track-result">Order ID পাওয়া যায়নি</div>';return}const t=snap.val()||{};$("trackResult").innerHTML=`<b>Status:</b> <span class="status-pill" style="background:#eee;padding:4px 8px;border-radius:10px">${esc(t.status||"Pending")}</span>`}catch(e){$("trackResult").innerHTML="Tracking error"}}
+async function checkTracking(orderId){
+ const id=String(orderId||$("trackId").value||"").trim();if(!id){$("trackResult").innerHTML="";return}
+ $("trackResult").innerHTML="Checking...";
+ try{const snap=await get(ref(db,"tracking/"+id));if(!snap.exists()){$("trackResult").innerHTML='<div class="track-result">Order ID পাওয়া যায়নি।</div>';return}const t=snap.val()||{};$("trackResult").innerHTML=`<div class="track-result"><b>Order ID:</b> ${esc(t.orderId||id)}<br><b>Status:</b> <span class="status-pill">${esc(t.status||"Pending")}</span><br><small>Order Time: ${t.createdAt?new Date(t.createdAt).toLocaleString():"—"}<br>Last update: ${t.updatedAt?new Date(t.updatedAt).toLocaleString():"—"}</small></div>`}catch(e){$("trackResult").innerHTML=`<div class="track-result">Tracking error: ${esc(e.message)}</div>`}
+}
 $("trackForm").onsubmit=e=>{e.preventDefault();checkTracking()};
+
 
 let heroIndex=0,heroCount=3;
 const heroTrack=$("heroTrack"),heroDots=$("heroDots");
-function renderHeroProducts(){const arr=Object.entries(products);const productSlides=arr.map(([id,p])=>{const img=productImage(p);const d=discountPercent(p),price=Number(p.price||0),final=finalPrice(p);return `<article class="hero-slide hero-product-slide"><img class="hero-product-img" src="${esc(img)}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5" onerror="this.onerror=null;this.src='./fnfy-logo.png'"><div class="hero-content" style="position:relative;z-index:2"><span class="hero-badge">${d?d+'% OFF':'FNFY PRODUCT'}</span><h1>${esc(p.name)}</h1><p>${esc(p.category||'Men’s Clothing')}</p><button class="btn white" data-hero-view="${esc(id)}">View / Buy</button></div></article>`;}).join('');heroTrack.innerHTML=`<article class="hero-slide"><div class="hero-content"><span class="hero-badge">NEW COLLECTION 2026</span><h1>Style that speaks for itself.</h1><p>Shirt, pant, denim, cargo and jersey.</p></div></article><article class="hero-slide"><div class="hero-content"><span class="hero-badge">NEW ARRIVALS</span><h1>Fresh styles.</h1><p>নতুন product, discount এবং available color/size.</p></div></article><article class="hero-slide"><div class="hero-content"><span class="hero-badge">ORDER YOUR WAY</span><h1>Website + WhatsApp</h1><p>Website থেকে order করুন অথবা WhatsApp-এ পাঠান।</p></div></article>${productSlides}`;heroCount=3+arr.length;heroDots.innerHTML=Array.from({length:heroCount},(_,i)=>`<span class="hero-dot ${i===heroIndex?'active':''}" data-slide="${i}"></span>`).join('');document.querySelectorAll('.hero-dot').forEach(d=>d.onclick=()=>showHero(Number(d.dataset.slide)));document.querySelectorAll('[data-hero-view]').forEach(b=>b.onclick=()=>openProduct(b.dataset.heroView));showHero(heroIndex);}
+function renderHeroProducts(){
+ const arr=Object.entries(products);
+ const productSlides=arr.map(([id,p])=>{
+   const img=productImage(p);
+   const d=discountPercent(p),price=Number(p.price||0),final=finalPrice(p);
+   return `<article class="hero-slide hero-product-slide"><img class="hero-product-img" src="${esc(img)}" onerror="this.onerror=null;this.src='./fnfy-logo.png'" alt="${esc(p.name)}"><div class="hero-content hero-product-content"><span class="hero-badge">${d?d+'% OFF':'FNFY PRODUCT'}</span><h1>${esc(p.name)}</h1><p>${esc(p.category||'Men’s Clothing')}</p><div class="hero-product-price">${d?`<span class="old-price">৳${price.toLocaleString()}</span> ৳${final.toLocaleString()}`:`৳${price.toLocaleString()}`}</div><button class="btn white" data-hero-view="${esc(id)}" style="margin-top:12px">View / Buy</button></div></article>`;
+ }).join('');
+ heroTrack.innerHTML=`<article class="hero-slide"><div class="hero-content"><span class="hero-badge">NEW COLLECTION 2026</span><h1>Style that speaks for itself.</h1><p>Shirt, pant, denim, cargo and jersey — product দেখুন, size/color বাছুন এবং সরাসরি order করুন।</p></div></article><article class="hero-slide"><div class="hero-content"><span class="hero-badge">NEW ARRIVALS</span><h1>Fresh styles. Premium look.</h1><p>নতুন product, ৪টি gallery image, discount এবং available color/size একসাথে দেখুন।</p></div></article><article class="hero-slide"><div class="hero-content"><span class="hero-badge">ORDER YOUR WAY</span><h1>Website + WhatsApp Order</h1><p>Website থেকে order করুন অথবা WhatsApp icon-এ tap করে সরাসরি order পাঠান।</p></div></article>${productSlides}`;
+ heroCount=3+arr.length; heroIndex=Math.min(heroIndex,heroCount-1);
+ heroDots.innerHTML=Array.from({length:heroCount},(_,i)=>`<span class="hero-dot ${i===heroIndex?'active':''}" data-slide="${i}"></span>`).join('');
+ document.querySelectorAll('.hero-dot').forEach(d=>d.onclick=()=>showHero(Number(d.dataset.slide)));
+ document.querySelectorAll('[data-hero-view]').forEach(b=>b.onclick=()=>openProduct(b.dataset.heroView));
+ showHero(heroIndex);
+}
 function showHero(i){heroIndex=((i%heroCount)+heroCount)%heroCount;if(heroTrack)heroTrack.style.transform=`translateX(-${heroIndex*100}%)`;document.querySelectorAll('.hero-dot').forEach((d,n)=>d.classList.toggle('active',n===heroIndex));}
 setInterval(()=>showHero(heroIndex+1),5000);
 updateCount();
 </script>
-
+<script>
+(function(){
+  const sel=document.getElementById("paymentMethod");
+  const info=document.getElementById("paymentInfo");
+  const tx=document.getElementById("transactionId");
+  if(!sel||!info)return;
+  const nums={bKash:"01965460567",Nagad:"01965460567",Rocket:"019654605676"};
+  function updatePaymentUI(){
+    const m=sel.value;
+    if(m==="COD"){
+      info.innerHTML="<b>Cash on Delivery</b><div style='margin-top:4px'>Payment will be collected on delivery.</div>";
+      if(tx){tx.required=false;tx.value="";}
+    }else{
+      info.innerHTML="<b>"+m+"</b><div style='margin-top:4px'>Send Money to: <strong>"+nums[m]+"</strong></div><div style='margin-top:4px;font-size:13px'>Payment করার পর Transaction ID দিন।</div>";
+      if(tx)tx.required=true;
+    }
+  }
+  sel.addEventListener("change",updatePaymentUI);
+  updatePaymentUI();
+})();
+</script>
 <script>
 (function(){
   const nav=document.getElementById('activeNav');
   const indicator=document.getElementById('activeIndicator');
   if(!nav||!indicator)return;
   const links=[...nav.querySelectorAll('a')];
-  function moveIndicator(link){if(window.innerWidth<900)return; const navRect=nav.getBoundingClientRect(),r=link.getBoundingClientRect(); indicator.style.left=(r.left-navRect.left)+'px'; indicator.style.width=r.width+'px';}
-  function setActive(link){links.forEach(a=>a.classList.toggle('active',a===link));moveIndicator(link);}
-  links.forEach(link=>link.addEventListener('click',function(e){e.preventDefault();const target=document.querySelector(link.getAttribute('href'));if(target){target.scrollIntoView({behavior:'smooth',block:'start'});}setActive(link);}));
-  function updateOnScroll(){const y=window.scrollY+120;let current=links[0];links.forEach(link=>{const target=document.querySelector(link.getAttribute('href'));if(target&&target.offsetTop<=y)current=link;});setActive(current);}
+  function moveIndicator(link){
+    const navRect=nav.getBoundingClientRect(),r=link.getBoundingClientRect();
+    indicator.style.left=(r.left-navRect.left+nav.scrollLeft)+'px';
+    indicator.style.width=r.width+'px';
+  }
+  function setActive(link){
+    links.forEach(a=>a.classList.toggle('active',a===link));
+    moveIndicator(link);
+  }
+  links.forEach(link=>link.addEventListener('click',function(){setActive(link);}));
+  function updateOnScroll(){
+    const y=window.scrollY+120;
+    let current=links[0];
+    links.forEach(link=>{const target=document.querySelector(link.getAttribute('href'));if(target&&target.offsetTop<=y)current=link;});
+    setActive(current);
+  }
   window.addEventListener('scroll',updateOnScroll,{passive:true});
   window.addEventListener('resize',()=>{const a=nav.querySelector('a.active')||links[0];moveIndicator(a);});
   requestAnimationFrame(()=>moveIndicator(links[0]));
 })();
 </script>
+
+<div class="order-success-overlay" id="orderSuccessOverlay" aria-hidden="true">
+  <div class="order-success-box">
+    <div class="order-success-check"></div>
+    <h3>Order Confirmed!</h3>
+    <p>আপনার order সফলভাবে save হয়েছে</p>
+  </div>
+</div>
+
+
+<script>
+/* Order confirmation animation — added only; existing order logic unchanged */
+(function(){
+  const msg=document.getElementById("orderMsg");
+  const overlay=document.getElementById("orderSuccessOverlay");
+  if(!msg||!overlay)return;
+  let timer;
+  const observer=new MutationObserver(function(){
+    const text=(msg.textContent||"").trim();
+    if(text.includes("Order সফল হয়েছে!")){
+      clearTimeout(timer);
+      overlay.classList.add("show");
+      overlay.setAttribute("aria-hidden","false");
+      timer=setTimeout(function(){
+        overlay.classList.remove("show");
+        overlay.setAttribute("aria-hidden","true");
+      },2200);
+    }
+  });
+  observer.observe(msg,{childList:true,subtree:true,characterData:true});
+  overlay.addEventListener("click",function(e){
+    if(e.target===overlay)overlay.classList.remove("show");
+  });
+})();
+</script>
+
+
+<!-- FNFY Animated Bulb -->
+<button class="fnfy-bulb-btn" id="fnfyBulbBtn" aria-label="Toggle bulb animation"><span class="fnfy-bulb">💡</span></button>
+
+<!-- FNFY Animated Admin Login -->
+<div class="fnfy-login-backdrop" id="fnfyLoginBackdrop" aria-hidden="true">
+  <div class="fnfy-login-card" role="dialog" aria-modal="true" aria-labelledby="fnfyLoginTitle">
+    <h2 id="fnfyLoginTitle">Welcome Back</h2>
+    <p>Admin panel-এ যেতে sign in করুন</p>
+    <input id="fnfyAdminEmail" type="email" autocomplete="username" placeholder="Admin email">
+    <input id="fnfyAdminPass" type="password" autocomplete="current-password" placeholder="Password">
+    <div class="fnfy-login-actions">
+      <button class="fnfy-login-submit" id="fnfyLoginSubmit">Sign In</button>
+      <button class="fnfy-login-close" id="fnfyLoginClose">Close</button>
+    </div>
+    <div class="fnfy-login-msg" id="fnfyLoginMsg"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const b=document.getElementById('fnfyBulbBtn');
+  if(!b)return;
+  b.addEventListener('click',()=>b.classList.toggle('on'));
+})();
+</script>
+
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import{getAuth,signInWithEmailAndPassword}from"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import{firebaseConfig,ADMIN_EMAIL}from"./firebase-config.js";
+const app=initializeApp(firebaseConfig),auth=getAuth(app);
+const backdrop=document.getElementById('fnfyLoginBackdrop'),email=document.getElementById('fnfyAdminEmail'),pass=document.getElementById('fnfyAdminPass'),msg=document.getElementById('fnfyLoginMsg'),submit=document.getElementById('fnfyLoginSubmit');
+function openLogin(){backdrop.classList.add('show');backdrop.setAttribute('aria-hidden','false');setTimeout(()=>email.focus(),150)}
+function closeLogin(){backdrop.classList.remove('show');backdrop.setAttribute('aria-hidden','true');msg.textContent='';}
+const loginBtn=document.createElement('button');loginBtn.className='fnfy-login-open';loginBtn.textContent='Admin Login';loginBtn.type='button';
+const headerActions=document.querySelector('.actions');
+if(headerActions)headerActions.appendChild(loginBtn); else document.body.appendChild(loginBtn);
+loginBtn.addEventListener('click',openLogin);
+document.getElementById('fnfyLoginClose').addEventListener('click',closeLogin);
+backdrop.addEventListener('click',e=>{if(e.target===backdrop)closeLogin()});
+pass.addEventListener('keydown',e=>{if(e.key==='Enter')submit.click()});
+submit.addEventListener('click',async()=>{
+  const em=email.value.trim(),pw=pass.value;
+  if(!em||!pw){msg.textContent='Email ও password দিন।';return}
+  if(ADMIN_EMAIL&&em.toLowerCase()!==ADMIN_EMAIL.toLowerCase()){msg.textContent='এই email admin email নয়।';return}
+  submit.disabled=true;submit.innerHTML='<span class="fnfy-login-spinner"></span>Signing in...';msg.textContent='';
+  try{await signInWithEmailAndPassword(auth,em,pw);location.href='./admin.html';}
+  catch(e){msg.textContent='Login failed: '+(e.code||e.message);submit.disabled=false;submit.textContent='Sign In';}
+});
+</script>
+
+</body></html>
