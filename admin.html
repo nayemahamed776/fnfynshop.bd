@@ -27,12 +27,12 @@ input,select,textarea{width:100%;padding:12px;margin:5px 0 10px;border:1px solid
 <div class="row"><input id="pp" type="number" min="0" placeholder="Price" required><input id="pdiscount" type="number" min="0" max="100" placeholder="Discount % (optional)"></div>
 <div class="row"><input id="pcol" placeholder="Colors: Black, Blue"><input id="psz" placeholder="Sizes: 28, 30, 32, 34"></div>
 <textarea id="pd" placeholder="Description"></textarea>
-<input id="pmodel" type="url" placeholder="3D Model URL (.glb / .gltf) — optional">
-<p class="msg">3D model URL না থাকলেও ৪টি angle image দিয়ে basic 360° view কাজ করবে।</p>
+<p class="msg">FNFY এখন Transparent PNG Fashion Model ও সাধারণ Product Gallery ব্যবহার করে। 3D Model প্রয়োজন নেই।</p>
 <input id="imgs" type="file" accept="image/*" multiple required><div class="preview" id="preview"></div>
 <p id="up" class="msg">Storage লাগবে না — image compressed হয়ে Realtime Database-এ save হবে.</p>
 <button id="add" type="submit">Add Product</button></form></div>
 
+<div class="card"><h2>Fashion Models — Transparent PNG</h2><p class="msg">PNG ফাইল ব্যবহার করুন, যাতে ছবির Background transparent থাকে। সর্বোচ্চ ৫টি Model যোগ করতে পারবেন। প্রতিটি Model-এর Look-এর সঙ্গে Product নির্বাচন করুন।</p><form id="mf"><input id="mn" placeholder="Model name (e.g. FNFY Look 01)" required><input id="mimg" type="file" accept="image/png" required><div class="preview" id="mpreview"></div><b>এই Look-এর Products</b><div id="modelProductChoices" class="msg">Products loading...</div><button id="madd" type="submit">Save Fashion Model</button></form><div id="modelList"></div><p id="modelMsg" class="msg"></p></div>
 <div class="card"><h2>📦 Orders</h2><div id="orderMsg" class="msg"></div><div class="table"><table><thead><tr><th>Order ID</th><th>Customer</th><th>Items</th><th>Total</th><th>Payment</th><th>Time</th><th>Status</th><th>Action</th></tr></thead><tbody id="orders"><tr><td colspan="8">Loading...</td></tr></tbody></table></div></div>
 <div class="card"><h2>🛍 Products</h2><div id="products">Loading...</div></div>
 </div></div>
@@ -45,9 +45,23 @@ import{firebaseConfig,ADMIN_EMAIL}from"./firebase-config.js";
 
 const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getDatabase(app),$=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+
+let adminProducts={};
+function onValueModels(){
+ onValue(ref(db,"products"),s=>{adminProducts=s.val()||{};renderModelProductChoices()});
+ onValue(ref(db,"fashionModels"),s=>{const d=s.val()||{};$("modelList").innerHTML=Object.entries(d).map(([id,m])=>`<div class="product"><img src="${esc(m.image)}"><div style="flex:1"><b>${esc(m.name)}</b><br><small>${(m.productIds||[]).length} products assigned</small></div><button class="danger" data-model-del="${esc(id)}">Delete</button></div>`).join("")||"No fashion models yet";document.querySelectorAll("[data-model-del]").forEach(b=>b.onclick=async()=>{if(confirm("Delete this fashion model?"))await remove(ref(db,"fashionModels/"+b.dataset.modelDel))})});
+}
+function renderModelProductChoices(){
+ const entries=Object.entries(adminProducts).filter(([id,p])=>!/\b(shoe|shoes|sneaker|footwear|sandal|boot)\b|জুতা/i.test(String(p.name||"")+" "+String(p.category||"")));
+ $("modelProductChoices").innerHTML=entries.length?entries.map(([id,p])=>`<label style="display:flex;gap:8px;align-items:center;margin:5px 0"><input type="checkbox" value="${esc(id)}" style="width:auto;margin:0"> ${esc(p.name)} — ৳${Number(p.price||0).toLocaleString()}</label>`).join(""):'No clothing products yet';
+}
+function readTransparentPng(file){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const max=720,scale=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.max(1,Math.round(im.width*scale));c.height=Math.max(1,Math.round(im.height*scale));c.getContext("2d").clearRect(0,0,c.width,c.height);c.getContext("2d").drawImage(im,0,0,c.width,c.height);resolve(c.toDataURL("image/png"))};im.onerror=reject;im.src=r.result};r.onerror=reject;r.readAsDataURL(file)})}
+$("mimg").onchange=async()=>{const f=$("mimg").files[0];if(!f)return;if(f.type!=="image/png"){ $("modelMsg").textContent="Please select a PNG file.";return;}const url=await readTransparentPng(f);$("mpreview").innerHTML=`<img src="${url}" style="width:110px;height:130px;object-fit:contain;background:#f3f3f3">`};
+$("mf").onsubmit=async e=>{e.preventDefault();const f=$("mimg").files[0];if(!f||f.type!=="image/png")return $("modelMsg").textContent="Transparent PNG file নির্বাচন করুন।";$("madd").disabled=true;try{const existing=await get(ref(db,"fashionModels"));if(Object.keys(existing.val()||{}).length>=5)throw Error("সর্বোচ্চ ৫টি Model রাখা যাবে।");const image=await readTransparentPng(f);const productIds=[...document.querySelectorAll("#modelProductChoices input:checked")].map(x=>x.value);await set(push(ref(db,"fashionModels")),{name:$("mn").value.trim(),image,productIds,createdAt:Date.now()});e.target.reset();$("mpreview").innerHTML="";$("modelMsg").textContent="Fashion Model Firebase-এ save হয়েছে।"}catch(err){$("modelMsg").textContent="Save হয়নি: "+err.message}finally{$("madd").disabled=false}};
+
 onAuthStateChanged(auth,u=>{
  if(u&&u.email?.toLowerCase()===ADMIN_EMAIL.toLowerCase()){
-  $("login").classList.add("hidden");$("panel").classList.remove("hidden");$("logout").classList.remove("hidden");loadProducts();loadOrders();
+  $("login").classList.add("hidden");$("panel").classList.remove("hidden");$("logout").classList.remove("hidden");loadProducts();loadOrders();onValueModels();
  }else if(u){$("msg").textContent="এই Gmail admin নয়: "+u.email;signOut(auth)}
 });
 $("loginBtn").onclick=async()=>{
@@ -109,7 +123,7 @@ $("pf").onsubmit=async e=>{
  try{
   const fs=[...$("imgs").files].slice(0,4);if(!fs.length)throw Error("Image নির্বাচন করুন");
   const images=[];for(let i=0;i<fs.length;i++){$("up").textContent=`Image ${i+1}/${fs.length} prepare হচ্ছে...`;images.push(await resizeImage(fs[i]))}
-  await set(push(ref(db,"products")),{name:$("pn").value.trim(),category:$("pc").value.trim(),price:Number($("pp").value),discountPercent:Math.max(0,Math.min(100,Number($("pdiscount").value||0))),colors:$("pcol").value.split(",").map(x=>x.trim()).filter(Boolean),sizes:$("psz").value.split(",").map(x=>x.trim()).filter(Boolean),description:$("pd").value.trim(),model3dUrl:$("pmodel").value.trim(),image:images[0],images,createdAt:Date.now()});
+  await set(push(ref(db,"products")),{name:$("pn").value.trim(),category:$("pc").value.trim(),price:Number($("pp").value),discountPercent:Math.max(0,Math.min(100,Number($("pdiscount").value||0))),colors:$("pcol").value.split(",").map(x=>x.trim()).filter(Boolean),sizes:$("psz").value.split(",").map(x=>x.trim()).filter(Boolean),description:$("pd").value.trim(),image:images[0],images,createdAt:Date.now()});
   e.target.reset();$("preview").innerHTML="";$("up").textContent="Product Firebase-এ save হয়েছে!";
  }catch(e){$("up").textContent="Product save হয়নি: "+e.message}
  finally{$("add").disabled=false}

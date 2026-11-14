@@ -44,6 +44,30 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 @keyframes orderPulse{0%{transform:scale(.55);box-shadow:0 0 0 0 rgba(37,211,102,.45)}70%{transform:scale(1.05);box-shadow:0 0 0 18px rgba(37,211,102,0)}100%{transform:scale(1);box-shadow:0 0 0 0 rgba(37,211,102,0)}}
 @keyframes orderCheck{0%{opacity:0;transform:scale(.4) rotate(-18deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
 
+
+/* FNFY reference-inspired fashion layout (no footwear section) */
+.hero[hidden]{display:none!important}
+.try-look,.hanger-section{background:#fff;border-radius:18px;padding:clamp(16px,3vw,30px);margin:18px 0 30px;box-shadow:0 8px 30px rgba(0,0,0,.045)}
+.section-kicker{font-size:10px;letter-spacing:3px;font-weight:800;color:#888}
+.look-heading{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:7px 0 18px}
+.look-heading h1,.look-heading h2{font-size:clamp(24px,4vw,38px);letter-spacing:1px;margin:0;font-weight:900}
+.look-heading p{color:#777;margin:6px 0 0;font-size:13px}
+.look-count{font-size:10px;letter-spacing:2px;color:#999;white-space:nowrap}
+.model-stage{min-height:340px;background:#f4f3f0;border-radius:14px;display:grid;grid-template-columns:minmax(0,1fr) minmax(210px,280px);align-items:center;gap:16px;padding:12px 22px;overflow:hidden}
+.model-main{height:330px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.model-main img{height:100%;max-width:100%;object-fit:contain;mix-blend-mode:multiply}
+.model-main-info{padding:15px}.model-main-info .model-label{font-size:10px;letter-spacing:2px;color:#888}.model-main-info h3{font-size:24px;margin:7px 0}.model-main-info p{font-size:13px;color:#777;line-height:1.6}
+.model-strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:14px 0 25px}
+.model-choice{border:1px solid #eee;background:#fafafa;border-radius:12px;min-height:135px;padding:7px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:.2s;color:#111}
+.model-choice img{height:105px;max-width:100%;object-fit:contain;mix-blend-mode:multiply}.model-choice span{font-size:11px;font-weight:700;margin-top:4px}
+.model-choice.active{border:2px solid #111;background:#f3f1ed;transform:translateY(-2px)}
+.model-stage-empty,.look-empty{padding:24px;text-align:center;color:#888;font-size:13px;grid-column:1/-1}
+.look-products-wrap{border-top:1px solid #eee;padding-top:18px}.look-products-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.look-products-title span{font-size:9px;letter-spacing:2px;color:#999}.look-products-title h2{font-size:22px;margin:3px 0}.text-link{border:0;background:none;text-decoration:underline;font-weight:800;font-size:11px;cursor:pointer}
+.look-products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.look-product{min-width:0;cursor:pointer}.look-product img{width:100%;height:155px;object-fit:contain;background:#f6f6f4;border-radius:10px}.look-product b{display:block;font-size:12px;margin-top:7px}.look-product .look-price{font-size:13px;font-weight:800;margin-top:4px}
+.hanger-rail{display:flex;gap:14px;overflow-x:auto;padding:4px 2px 14px;scroll-snap-type:x mandatory}.hanger-card{flex:0 0 175px;scroll-snap-align:start;cursor:pointer}.hanger-photo{height:190px;background:#f5f4f1;border-radius:12px;display:flex;align-items:center;justify-content:center;padding:10px;position:relative}.hanger-photo:before{content:"";position:absolute;top:9px;width:35px;height:12px;border-top:2px solid #b7b0a6;border-radius:50%}.hanger-photo img{max-width:100%;max-height:100%;object-fit:contain}.hanger-card b{display:block;font-size:12px;margin-top:8px}.hanger-card .look-price{font-size:13px;font-weight:800;margin-top:4px}
+@media(max-width:650px){.model-stage{grid-template-columns:1fr;gap:0;padding:8px;min-height:0}.model-main{height:285px}.model-main-info{text-align:center;padding:5px 12px 14px}.model-strip{gap:6px}.model-choice{min-height:100px;padding:4px}.model-choice img{height:76px}.model-choice span{font-size:10px}.look-products{grid-template-columns:repeat(2,minmax(0,1fr))}.look-product img{height:135px}.hanger-card{flex-basis:145px}.hanger-photo{height:165px}}
+
+.product-detail-layout{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}.product-detail-layout h2{margin:8px 0}.product-detail-layout .fnfy-360-stage{height:380px;background:#f6f6f4;border-radius:12px;display:flex;align-items:center;justify-content:center}.product-detail-layout .fnfy-360-stage img{width:100%;height:100%;object-fit:contain}.product-detail-layout .thumbs img{background:#f5f5f5;object-fit:contain}@media(max-width:600px){.product-detail-layout{grid-template-columns:1fr}.product-detail-layout .fnfy-360-stage{height:290px}}
 </style>
 
 <style id="fnfy-bulb-login-style">
@@ -66,8 +90,8 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 @media(max-width:520px){.fnfy-bulb-btn{left:14px;bottom:18px;width:50px;height:50px}.fnfy-login-open{padding:9px 12px;font-size:13px}}
 </style>
 
-<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-<style>.fnfy-3d-wrap{background:linear-gradient(145deg,#f8f8f8,#e9e9e9);border-radius:16px;overflow:hidden;margin:12px 0}.fnfy-view-tabs{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}.fnfy-view-tabs button{border:1px solid #ddd;background:#fff;color:#111;border-radius:20px;padding:9px 13px;font-weight:700}.fnfy-view-tabs button.active{background:#111;color:#fff}.fnfy-360-stage{height:340px;display:flex;align-items:center;justify-content:center;touch-action:pan-y;cursor:ew-resize;user-select:none}.fnfy-360-stage img{width:100%;height:100%;object-fit:contain;pointer-events:none}.fnfy-360-hint{text-align:center;color:#666;font-size:12px;padding:0 10px 12px}.fnfy-model{display:block;width:100%;height:390px;background:transparent}.fnfy-viewer-note{font-size:12px;color:#666;margin:4px 0 10px}@media(max-width:520px){.fnfy-360-stage{height:290px}.fnfy-model{height:330px}}</style>
+
+
 </head>
 <body>
 <header>
@@ -88,7 +112,7 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
   </div>
 </nav>
 
-<section class="hero" id="home" aria-label="FNFY New Collection slideshow"><div class="hero-track" id="heroTrack">
+<section class="hero" id="home" aria-label="FNFY New Collection slideshow" hidden><div class="hero-track" id="heroTrack">
   <article class="hero-slide"><div class="hero-content"><span class="hero-badge">NEW COLLECTION 2026</span><h1>Style that speaks for itself.</h1><p>Shirt, pant, denim, cargo and jersey — product দেখুন, size/color বাছুন এবং সরাসরি order করুন।</p></div></article>
   <article class="hero-slide"><div class="hero-content"><span class="hero-badge">NEW ARRIVALS</span><h1>Fresh styles. Premium look.</h1><p>নতুন product, ৪টি gallery image, discount এবং available color/size একসাথে দেখুন।</p></div></article>
   <article class="hero-slide"><div class="hero-content"><span class="hero-badge">ORDER YOUR WAY</span><h1>Website + WhatsApp Order</h1><p>Website থেকে order করুন অথবা WhatsApp icon-এ tap করে সরাসরি order পাঠান।</p></div></article>
@@ -96,6 +120,14 @@ input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radiu
 
 
 <main class="wrap">
+<section class="try-look" id="tryLookSection">
+  <div class="section-kicker">FNFY STYLE STUDIO</div>
+  <div class="look-heading"><div><h1>TRY THE LOOK</h1><p>একটি Model নির্বাচন করুন এবং তার Look-এর পোশাক দেখুন</p></div><span class="look-count" id="modelCount">FNFY COLLECTION</span></div>
+  <div class="model-stage" id="modelStage"><div class="model-stage-empty">Admin Panel থেকে Transparent PNG Fashion Model যোগ করুন।</div></div>
+  <div class="model-strip" id="modelStrip"></div>
+  <div class="look-products-wrap"><div class="look-products-title"><div><span>CURATED OUTFIT</span><h2>IN THIS LOOK</h2></div><button class="text-link" id="viewLookProducts" type="button">VIEW ALL</button></div><div class="look-products" id="lookProducts"><div class="look-empty">Model নির্বাচন করলে পোশাক এখানে দেখা যাবে।</div></div></div>
+</section>
+<section class="hanger-section" id="hangerSection"><div class="section-kicker">SHOP THE COLLECTION</div><div class="look-heading"><div><h2>THE COLLECTION</h2><p>Shirts, Pants & everyday essentials</p></div><span class="look-count">FNFY MEN</span></div><div class="hanger-rail" id="hangerRail"><div class="look-empty">Loading collection...</div></div></section>
 <h2>Track Your Order</h2>
 <div class="track-card"><form id="trackForm"><input id="trackId" placeholder="Order ID দিন" required><button class="btn" type="submit">Check Status</button></form><div id="trackResult"></div></div>
 
@@ -159,7 +191,9 @@ const DB_URL=String(firebaseConfig.databaseURL||"").replace(/\/$/,"");
 async function restGet(path){const r=await fetch(`${DB_URL}/${path}.json`);if(!r.ok)throw Error(`HTTP ${r.status}`);return await r.json()}
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
-let products={},cart=JSON.parse(localStorage.getItem("fnfy_cart")||"[]"),filter="All",checkoutItems=[],checkoutMode="cart";
+let products={},fashionModels={},activeFashionModel="",cart=JSON.parse(localStorage.getItem("fnfy_cart")||"[]"),filter="All",checkoutItems=[],checkoutMode="cart";
+const isFootwear=p=>/\b(shoe|shoes|sneaker|sneakers|footwear|sandal|sandals|boot|boots)\b|জুতা/i.test(String(p?.name||"")+" "+String(p?.category||""));
+const clothingEntries=()=>Object.entries(products).filter(([id,p])=>!isFootwear(p));
 function discountPercent(p){return Math.max(0,Math.min(100,Number(p.discountPercent||p.discount||0)));}
 function finalPrice(p){const price=Number(p.price||0),d=discountPercent(p);return Math.round(price*(1-d/100));}
 function priceHtml(p){const d=discountPercent(p),price=Number(p.price||0),final=finalPrice(p);return d>0?`<div class="price"><span class="old-price">৳${price.toLocaleString()}</span><span class="new-price">৳${final.toLocaleString()}</span><br><span class="discount-badge">${d}% OFF</span></div>`:`<div class="price">৳${price.toLocaleString()}</div>`;}
@@ -169,56 +203,58 @@ function updateCount(){$("cartCount").textContent=cart.reduce((a,x)=>a+x.qty,0)}
 
 function productImage(p){return p?.images?.[0]?.image||p?.images?.[0]||p?.image||"./fnfy-logo.png";}
 function renderProducts(){
- const arr=Object.entries(products).filter(([id,p])=>filter==="All"||String(p.category||"")===filter);
+ const arr=clothingEntries().filter(([id,p])=>filter==="All"||String(p.category||"")===filter);
  $("count").textContent=`(${arr.length})`;
  $("products").innerHTML=arr.length?arr.map(([id,p])=>`
  <div class="card"><img class="pic" src="${esc(productImage(p))}" onerror="this.src='./assets/fnfy-logo.png'">
  <div class="pad"><b>${esc(p.name)}</b>${priceHtml(p)}<div class="small">${esc(p.category||"")}</div>
  <button class="btn" data-view="${esc(id)}" style="margin-top:9px">View / Buy</button></div></div>`).join(""):'<div class="empty">কোনো product নেই।</div>';
  document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>openProduct(b.dataset.view));
- const cats=["All",...new Set(Object.values(products).map(p=>p.category).filter(Boolean))];
+ const cats=["All",...new Set(clothingEntries().map(([id,p])=>p.category).filter(Boolean))];
  $("filters").innerHTML=cats.map(c=>`<button class="${filter===c?"active":""}" data-cat="${esc(c)}">${esc(c)}</button>`).join("");
  document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{filter=b.dataset.cat;renderProducts()});
 }
+function renderFashionModels(){
+ const models=Object.entries(fashionModels||{});
+ $("modelCount").textContent=`${models.length} FNFY MODELS`;
+ if(!models.length){$("modelStage").innerHTML='<div class="model-stage-empty">Admin Panel → Fashion Models থেকে Transparent PNG Model যোগ করুন।</div>';$("modelStrip").innerHTML="";$("lookProducts").innerHTML='<div class="look-empty">এখনো Fashion Model যোগ করা হয়নি।</div>';return;}
+ if(!activeFashionModel||!fashionModels[activeFashionModel])activeFashionModel=models[0][0];
+ const [id,m]=[activeFashionModel,fashionModels[activeFashionModel]];
+ $("modelStage").innerHTML=`<div class="model-main"><img src="${esc(m.image)}" alt="${esc(m.name||"FNFY Model")}"></div><div class="model-main-info"><span class="model-label">FNFY STYLE STUDIO</span><h3>${esc(m.name||"FNFY Model")}</h3><p>এই Look-এর Shirt ও Pant দেখুন। আপনার পছন্দের Size ও Color বেছে অর্ডার করুন।</p><button class="btn" type="button" id="shopThisLook">SHOP THIS LOOK</button></div>`;
+ $("modelStrip").innerHTML=models.map(([mid,x])=>`<button type="button" class="model-choice ${mid===id?"active":""}" data-model="${esc(mid)}"><img src="${esc(x.image)}" alt="${esc(x.name||"Model")}"><span>${esc(x.name||"FNFY Model")}</span></button>`).join("");
+ document.querySelectorAll("[data-model]").forEach(b=>b.onclick=()=>{activeFashionModel=b.dataset.model;renderFashionModels()});
+ const ids=Array.isArray(m.productIds)?m.productIds:[];
+ let outfit=ids.length?ids.map(pid=>[pid,products[pid]]).filter(([pid,p])=>p&&!isFootwear(p)):clothingEntries().slice(0,4);
+ $("lookProducts").innerHTML=outfit.length?outfit.slice(0,4).map(([pid,p])=>`<div class="look-product" data-look-product="${esc(pid)}"><img src="${esc(productImage(p))}" alt="${esc(p.name)}"><b>${esc(p.name)}</b><div class="look-price">৳${finalPrice(p).toLocaleString()}</div></div>`).join(""):'<div class="look-empty">এই Look-এর জন্য এখনো Shirt/Pant assign করা হয়নি। Admin Panel থেকে Product নির্বাচন করুন।</div>';
+ document.querySelectorAll("[data-look-product]").forEach(el=>el.onclick=()=>openProduct(el.dataset.lookProduct));
+ $("shopThisLook").onclick=()=>document.getElementById("lookProducts").scrollIntoView({behavior:"smooth",block:"center"});
+}
+function renderHangerRail(){
+ const arr=clothingEntries();
+ $("hangerRail").innerHTML=arr.length?arr.map(([id,p])=>`<div class="hanger-card" data-hanger="${esc(id)}"><div class="hanger-photo"><img src="${esc(productImage(p))}" alt="${esc(p.name)}"></div><b>${esc(p.name)}</b><div class="look-price">৳${finalPrice(p).toLocaleString()}</div></div>`).join(""):'<div class="look-empty">কোনো Shirt বা Pant product নেই।</div>';
+ document.querySelectorAll("[data-hanger]").forEach(el=>el.onclick=()=>openProduct(el.dataset.hanger));
+}
+onValue(ref(db,"fashionModels"),s=>{fashionModels=s.val()||{};renderFashionModels()},e=>{$("modelStage").textContent="Fashion Models load হয়নি: "+e.message});
+$("viewLookProducts").onclick=()=>{$("productsSection").scrollIntoView({behavior:"smooth"});};
 let productsRealtime=false;
-onValue(ref(db,"products"),s=>{productsRealtime=true;products=s.val()||{};renderProducts();renderHeroProducts()},e=>{$("products").innerHTML=`<div class="empty">Products load হয়নি: ${esc(e.message)}</div>`});
-setTimeout(async()=>{if(productsRealtime)return;try{products=await restGet("products")||{};renderProducts();renderHeroProducts()}catch(e){$("products").innerHTML=`<div class="empty">Products load হয়নি: ${esc(e.message)}</div>`}},3500);
+onValue(ref(db,"products"),s=>{productsRealtime=true;products=s.val()||{};renderProducts();renderHeroProducts();renderHangerRail();renderFashionModels()},e=>{$("products").innerHTML=`<div class="empty">Products load হয়নি: ${esc(e.message)}</div>`});
+setTimeout(async()=>{if(productsRealtime)return;try{products=await restGet("products")||{};renderProducts();renderHeroProducts();renderHangerRail();renderFashionModels()}catch(e){$("products").innerHTML=`<div class="empty">Products load হয়নি: ${esc(e.message)}</div>`}},3500);
 
 function openProduct(id){
- const p=products[id];if(!p)return;
+ const p=products[id];if(!p||isFootwear(p))return;
  const imgs=p.images?.length?p.images:[p.image].filter(Boolean);
  $("productDetail").innerHTML=`
- <div class="fnfy-view-tabs"><button type="button" class="active" id="view360Tab">360° Photos</button><button type="button" id="view3dTab">3D Product</button><button type="button" id="viewModelTab">Fashion Model</button></div>
- <div class="fnfy-3d-wrap" id="fnfy360Panel"><div class="fnfy-360-stage" id="fnfy360Stage"><img id="mainImg" src="${esc(imgs[0]||"./assets/fnfy-logo.png")}" alt="${esc(p.name)}"></div><div class="fnfy-360-hint">ছবির উপর আঙুল/মাউস দিয়ে ডানে-বামে টানুন — ${imgs.length}টি angle image থাকলে ঘুরিয়ে দেখা যাবে</div></div>
- <div class="fnfy-3d-wrap" id="fnfy3dPanel" style="display:none"><model-viewer class="fnfy-model" src="${esc(p.model3dUrl || (/pant|trouser|jeans/i.test(String(p.category||'')+' '+String(p.name||''))?'./assets/models/fnfy-pant.glb':'./assets/models/fnfy-shirt.glb'))}" camera-controls auto-rotate rotation-per-second="18deg" shadow-intensity="1" exposure="1" environment-image="neutral" alt="${esc(p.name)} 3D model"></model-viewer><div class="fnfy-360-hint">আঙুল/মাউস দিয়ে টেনে 3D পণ্য ঘোরান। Pinch/scroll করে zoom করুন।</div></div>
- <div class="fnfy-3d-wrap" id="fnfyModelPanel" style="display:none"><model-viewer class="fnfy-model" src="./assets/models/fnfy-fashion-model.glb" camera-controls auto-rotate rotation-per-second="12deg" shadow-intensity="1" exposure="1" environment-image="neutral" alt="FNFY fashion mannequin wearing shirt and pants"></model-viewer><div class="fnfy-360-hint">FNFY 3D fashion mannequin — ঘুরিয়ে পোশাকের সামনের ও পাশের দিক দেখুন।</div></div>
- <div class="thumbs">${imgs.map((x,i)=>`<img src="${esc(x)}" data-img-index="${i}" alt="Product angle ${i+1}">`).join("")}</div>
- <div class="fnfy-viewer-note">3D Shirt, Pant ও fashion model-এর demo model যোগ করা হয়েছে। Admin থেকে কোনো product-এর নিজস্ব GLB URL দিলে সেটিই দেখাবে।</div>
- <h2>${esc(p.name)}</h2>${priceHtml(p)}<p>${esc(p.description||"")}</p>
+ <div class="product-detail-layout"><div><div class="fnfy-360-stage" id="fnfy360Stage"><img id="mainImg" src="${esc(imgs[0]||"./assets/fnfy-logo.png")}" alt="${esc(p.name)}"></div><div class="thumbs">${imgs.map((x,i)=>`<img src="${esc(x)}" data-img-index="${i}" alt="Product image ${i+1}">`).join("")}</div></div>
+ <div><div class="section-kicker">FNFY MEN'S COLLECTION</div><h2>${esc(p.name)}</h2>${priceHtml(p)}<p>${esc(p.description||"")}</p>
  <label>Size</label><select id="selSize">${(p.sizes||["28","30","32","34"]).map(x=>`<option>${esc(x)}</option>`).join("")}</select>
  <label>Color</label><select id="selColor">${(p.colors||["Default"]).map(x=>`<option>${esc(x)}</option>`).join("")}</select>
  <label>Quantity</label><input id="selQty" type="number" min="1" value="1">
- <div class="row" style="margin-top:10px"><button class="btn" id="addCart" type="button">Add to Cart</button><button class="btn wa" id="buyNow" type="button">Buy Now</button></div>`;
+ <div class="row" style="margin-top:10px"><button class="btn" id="addCart" type="button">Add to Cart</button><button class="btn wa" id="buyNow" type="button">Buy Now</button></div></div></div>`;
  $("productModal").classList.add("show");
- const stage=$("fnfy360Stage"),mainImg=$("mainImg");let angle=0,startX=null,lastX=null;
- const showAngle=i=>{if(imgs.length)mainImg.src=imgs[(i+imgs.length)%imgs.length]};
- document.querySelectorAll("[data-img-index]").forEach(x=>x.onclick=()=>{angle=Number(x.dataset.imgIndex);showAngle(angle)});
- const rotateStart=e=>{startX=e.touches?e.touches[0].clientX:e.clientX;lastX=startX};
- const rotateMove=e=>{if(startX===null)return;const x=e.touches?e.touches[0].clientX:e.clientX;if(Math.abs(x-lastX)>12){angle=(angle+(x<lastX?1:-1)+imgs.length)%imgs.length;showAngle(angle);lastX=x}if(e.cancelable)e.preventDefault()};
- const rotateEnd=()=>{startX=null;lastX=null};
- stage.addEventListener("mousedown",rotateStart);window.addEventListener("mousemove",rotateMove);window.addEventListener("mouseup",rotateEnd);stage.addEventListener("touchstart",rotateStart,{passive:true});stage.addEventListener("touchmove",rotateMove,{passive:false});stage.addEventListener("touchend",rotateEnd);
- const setProductView=which=>{const panels={"360":"fnfy360Panel","3d":"fnfy3dPanel",model:"fnfyModelPanel"},tabs={"360":"view360Tab","3d":"view3dTab",model:"viewModelTab"};Object.entries(panels).forEach(([k,id])=>$(id).style.display=k===which?"block":"none");Object.entries(tabs).forEach(([k,id])=>$(id).classList.toggle("active",k===which))};
- $("view360Tab").onclick=()=>setProductView("360");$("view3dTab").onclick=()=>setProductView("3d");$("viewModelTab").onclick=()=>setProductView("model");
- $("addCart").onclick=()=>{
- const item={id,name:p.name,price:finalPrice(p),originalPrice:Number(p.price||0),discountPercent:discountPercent(p),image:productImage(p),size:$("selSize").value,color:$("selColor").value,qty:Number($("selQty").value)||1};
- if(!item.size||!item.color)return alert("Color ও Size নির্বাচন করুন।");
- cart.push(item);saveCart();$("productModal").classList.remove("show");alert("Product Cart-এ save হয়েছে।");
-};
-$("buyNow").onclick=()=>{
- const item={id,name:p.name,price:finalPrice(p),originalPrice:Number(p.price||0),discountPercent:discountPercent(p),image:productImage(p),size:$("selSize").value,color:$("selColor").value,qty:Number($("selQty").value)||1};
- if(!item.size||!item.color)return alert("Color ও Size নির্বাচন করুন।");
- checkoutItems=[item];checkoutMode="buy";$("productModal").classList.remove("show");$("cartModal").classList.add("show");renderCart();
-};
+ document.querySelectorAll("[data-img-index]").forEach(x=>x.onclick=()=>$("mainImg").src=imgs[Number(x.dataset.imgIndex)]);
+ const itemNow=()=>({id,name:p.name,price:finalPrice(p),originalPrice:Number(p.price||0),discountPercent:discountPercent(p),image:productImage(p),size:$("selSize").value,color:$("selColor").value,qty:Math.max(1,Number($("selQty").value)||1)});
+ $("addCart").onclick=()=>{const item=itemNow();if(!item.size||!item.color)return alert("Color ও Size নির্বাচন করুন।");cart.push(item);saveCart();$("productModal").classList.remove("show");alert("Product Cart-এ save হয়েছে।")};
+ $("buyNow").onclick=()=>{const item=itemNow();if(!item.size||!item.color)return alert("Color ও Size নির্বাচন করুন।");checkoutItems=[item];checkoutMode="buy";$("productModal").classList.remove("show");$("cartModal").classList.add("show");renderCart()};
 }
 
 function activeCheckoutItems(){return checkoutMode==="buy"?checkoutItems:cart;}
@@ -279,7 +315,7 @@ $("trackForm").onsubmit=e=>{e.preventDefault();checkTracking()};
 let heroIndex=0,heroCount=3;
 const heroTrack=$("heroTrack"),heroDots=$("heroDots");
 function renderHeroProducts(){
- const arr=Object.entries(products);
+ const arr=clothingEntries();
  const productSlides=arr.map(([id,p])=>{
    const img=productImage(p);
    const d=discountPercent(p),price=Number(p.price||0),final=finalPrice(p);
