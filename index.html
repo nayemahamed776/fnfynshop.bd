@@ -188,11 +188,12 @@ function openProduct(id){
  const p=products[id];if(!p)return;
  const imgs=p.images?.length?p.images:[p.image].filter(Boolean);
  $("productDetail").innerHTML=`
- <div class="fnfy-view-tabs"><button type="button" class="active" id="view360Tab">360° Product</button><button type="button" id="view3dTab">3D Model</button></div>
+ <div class="fnfy-view-tabs"><button type="button" class="active" id="view360Tab">360° Photos</button><button type="button" id="view3dTab">3D Product</button><button type="button" id="viewModelTab">Fashion Model</button></div>
  <div class="fnfy-3d-wrap" id="fnfy360Panel"><div class="fnfy-360-stage" id="fnfy360Stage"><img id="mainImg" src="${esc(imgs[0]||"./assets/fnfy-logo.png")}" alt="${esc(p.name)}"></div><div class="fnfy-360-hint">ছবির উপর আঙুল/মাউস দিয়ে ডানে-বামে টানুন — ${imgs.length}টি angle image থাকলে ঘুরিয়ে দেখা যাবে</div></div>
- <div class="fnfy-3d-wrap" id="fnfy3dPanel" style="display:none">${p.model3dUrl?`<model-viewer class="fnfy-model" src="${esc(p.model3dUrl)}" camera-controls auto-rotate rotation-per-second="18deg" shadow-intensity="1" exposure="1" environment-image="neutral" alt="${esc(p.name)} 3D model"></model-viewer>`:`<div style="padding:24px;text-align:center"><b>3D Model এখনো যোগ করা হয়নি</b><p class="small">Admin Panel থেকে এই product-এর GLB/GLTF model URL যোগ করুন।</p></div>`}</div>
+ <div class="fnfy-3d-wrap" id="fnfy3dPanel" style="display:none"><model-viewer class="fnfy-model" src="${esc(p.model3dUrl || (/pant|trouser|jeans/i.test(String(p.category||'')+' '+String(p.name||''))?'./assets/models/fnfy-pant.glb':'./assets/models/fnfy-shirt.glb'))}" camera-controls auto-rotate rotation-per-second="18deg" shadow-intensity="1" exposure="1" environment-image="neutral" alt="${esc(p.name)} 3D model"></model-viewer><div class="fnfy-360-hint">আঙুল/মাউস দিয়ে টেনে 3D পণ্য ঘোরান। Pinch/scroll করে zoom করুন।</div></div>
+ <div class="fnfy-3d-wrap" id="fnfyModelPanel" style="display:none"><model-viewer class="fnfy-model" src="./assets/models/fnfy-fashion-model.glb" camera-controls auto-rotate rotation-per-second="12deg" shadow-intensity="1" exposure="1" environment-image="neutral" alt="FNFY fashion mannequin wearing shirt and pants"></model-viewer><div class="fnfy-360-hint">FNFY 3D fashion mannequin — ঘুরিয়ে পোশাকের সামনের ও পাশের দিক দেখুন।</div></div>
  <div class="thumbs">${imgs.map((x,i)=>`<img src="${esc(x)}" data-img-index="${i}" alt="Product angle ${i+1}">`).join("")}</div>
- <div class="fnfy-viewer-note">৩৬০° ছবির ভিউয়ের জন্য বিভিন্ন দিক থেকে তোলা ছবি ব্যবহার করুন। পূর্ণ 3D rotation-এর জন্য GLB/GLTF ফাইল প্রয়োজন।</div>
+ <div class="fnfy-viewer-note">3D Shirt, Pant ও fashion model-এর demo model যোগ করা হয়েছে। Admin থেকে কোনো product-এর নিজস্ব GLB URL দিলে সেটিই দেখাবে।</div>
  <h2>${esc(p.name)}</h2>${priceHtml(p)}<p>${esc(p.description||"")}</p>
  <label>Size</label><select id="selSize">${(p.sizes||["28","30","32","34"]).map(x=>`<option>${esc(x)}</option>`).join("")}</select>
  <label>Color</label><select id="selColor">${(p.colors||["Default"]).map(x=>`<option>${esc(x)}</option>`).join("")}</select>
@@ -206,8 +207,8 @@ function openProduct(id){
  const rotateMove=e=>{if(startX===null)return;const x=e.touches?e.touches[0].clientX:e.clientX;if(Math.abs(x-lastX)>12){angle=(angle+(x<lastX?1:-1)+imgs.length)%imgs.length;showAngle(angle);lastX=x}if(e.cancelable)e.preventDefault()};
  const rotateEnd=()=>{startX=null;lastX=null};
  stage.addEventListener("mousedown",rotateStart);window.addEventListener("mousemove",rotateMove);window.addEventListener("mouseup",rotateEnd);stage.addEventListener("touchstart",rotateStart,{passive:true});stage.addEventListener("touchmove",rotateMove,{passive:false});stage.addEventListener("touchend",rotateEnd);
- $("view360Tab").onclick=()=>{$("fnfy360Panel").style.display="block";$("fnfy3dPanel").style.display="none";$("view360Tab").classList.add("active");$("view3dTab").classList.remove("active")};
- $("view3dTab").onclick=()=>{$("fnfy360Panel").style.display="none";$("fnfy3dPanel").style.display="block";$("view3dTab").classList.add("active");$("view360Tab").classList.remove("active")};
+ const setProductView=which=>{const panels={"360":"fnfy360Panel","3d":"fnfy3dPanel",model:"fnfyModelPanel"},tabs={"360":"view360Tab","3d":"view3dTab",model:"viewModelTab"};Object.entries(panels).forEach(([k,id])=>$(id).style.display=k===which?"block":"none");Object.entries(tabs).forEach(([k,id])=>$(id).classList.toggle("active",k===which))};
+ $("view360Tab").onclick=()=>setProductView("360");$("view3dTab").onclick=()=>setProductView("3d");$("viewModelTab").onclick=()=>setProductView("model");
  $("addCart").onclick=()=>{
  const item={id,name:p.name,price:finalPrice(p),originalPrice:Number(p.price||0),discountPercent:discountPercent(p),image:productImage(p),size:$("selSize").value,color:$("selColor").value,qty:Number($("selQty").value)||1};
  if(!item.size||!item.color)return alert("Color ও Size নির্বাচন করুন।");
