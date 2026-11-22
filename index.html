@@ -1,12 +1,462 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NORTHSTREET | Streetwear & Sneakers 2026</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VELOUR — Floating Glass Fashion</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{--mut:rgba(255,255,255,.72);--line:rgba(255,255,255,.28)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{min-height:100vh;color:#fff;font:400 14px/1.5 Inter,system-ui,sans-serif;background:#120d2e;overflow-x:hidden}
+button{font:inherit;color:inherit;cursor:pointer}
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:linear-gradient(135deg,#140f33,#2b1456 48%,#0d3b57)}
+.orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;animation:dr 16s ease-in-out infinite alternate}
+@keyframes dr{to{transform:translate(60px,-40px) scale(1.15)}}
+.glass{background:linear-gradient(135deg,rgba(255,255,255,.22),rgba(255,255,255,.06));border:1px solid var(--line);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 16px 40px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.4)}
+svg.art,img.art{width:100%;height:auto;display:block;filter:drop-shadow(0 14px 12px rgba(0,0,0,.28))}
+.empty{color:var(--mut);text-align:center;margin-top:30px}
+.wrap{width:min(1100px,92vw);margin:0 auto}
+
+/* nav */
+.nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);width:min(1100px,94vw);z-index:60;display:flex;align-items:center;gap:24px;padding:10px 12px 10px 24px;border-radius:50px}
+.logo{font:600 20px 'Playfair Display',serif;letter-spacing:6px}
+.nav a{color:var(--mut);text-decoration:none;font-size:13px;transition:.2s}
+.nav a:hover{color:#fff}
+.sp{flex:1}
+.pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);border:1px solid var(--line);border-radius:30px;padding:8px 16px;font-size:13px}
+.pill:hover{background:rgba(255,255,255,.28)}
+.pill b{background:#fff;color:#1b1340;border-radius:20px;padding:0 8px;font-weight:600;font-size:12px}
+.ico{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#fff;color:#1b1340;border:0;border-radius:40px;padding:13px 28px;font-weight:600;text-decoration:none;transition:.2s}
+.btn:hover{transform:translateY(-2px) scale(1.03)}
+.btn.g{background:rgba(255,255,255,.16);color:#fff;border:1px solid var(--line)}
+.btn.sm{padding:9px 20px;font-size:13px}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn.full{width:100%}
+.rb{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.14);font-size:16px}
+.rb:hover{background:#fff;color:#1b1340}
+
+/* hero */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:10px;padding:110px 0 40px}
+.eb{color:var(--mut);margin-bottom:12px}
+h1{font:500 clamp(40px,6vw,72px)/1.05 'Playfair Display',serif;margin-bottom:18px}
+h1 em{font-style:italic;color:#ffd0e6}
+.lead{color:var(--mut);max-width:420px;line-height:1.7;margin-bottom:28px}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+.stage{position:relative;perspective:1000px;height:540px;display:grid;place-items:center}
+.scene{position:relative;width:420px;height:440px;transform-style:preserve-3d;transition:transform .2s ease-out}
+.ring{position:absolute;left:50%;top:50%;width:420px;height:420px;margin:-210px 0 0 -210px;border-radius:50%;border:1.5px solid rgba(255,255,255,.4);transform:rotateX(74deg);animation:rs 14s linear infinite}
+.ring::after{content:'';position:absolute;top:-7px;left:50%;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:#fff;box-shadow:0 0 14px #fff}
+@keyframes rs{to{transform:rotateX(74deg) rotateZ(360deg)}}
+.f{transform:translate3d(0,0,var(--z));animation:fl 6s ease-in-out infinite;animation-delay:var(--d,0s)}
+@keyframes fl{0%,100%{transform:translate3d(0,0,var(--z))}50%{transform:translate3d(0,-12px,var(--z))}}
+.disc{position:absolute;left:50%;top:50%;width:330px;height:330px;margin:-165px 0 0 -165px;border-radius:50%;background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.55),rgba(255,255,255,.18) 60%,rgba(150,190,255,.25));border:1px solid rgba(255,255,255,.45);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 28px 60px rgba(0,0,0,.38),inset 0 0 50px rgba(255,255,255,.2),inset 0 1px 0 rgba(255,255,255,.6)}
+.disc::after{content:'';position:absolute;inset:20px;border-radius:50%;border:1px dashed rgba(255,255,255,.3)}
+.prod{position:absolute;left:50%;top:50%;width:250px;height:290px;margin:-145px 0 0 -125px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer}
+.prod>*{animation:pop .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes pop{from{opacity:0;transform:scale(.88)}}
+.prod svg.art,.prod img.art{width:170px}
+.prod .n{font-weight:500;font-size:15px;margin-top:6px}
+.prod .p{color:rgba(255,255,255,.85)}
+.chip{position:absolute;display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:16px;font-size:12px;white-space:nowrap}
+.sph{position:absolute;border-radius:50%;background:radial-gradient(circle at 30% 28%,rgba(255,255,255,.95),rgba(255,255,255,.18) 38%,rgba(130,190,255,.3) 70%);border:1px solid rgba(255,255,255,.4);box-shadow:0 12px 24px rgba(0,0,0,.25)}
+.fctl{position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:12px}
+
+/* shop */
+.sec{padding:80px 0}
+.sec h2{font:500 clamp(30px,4vw,46px)/1.1 'Playfair Display',serif}
+.lead2{color:var(--mut);margin-top:6px}
+.filters,.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 30px}
+.tabs{margin:22px 0 0}
+.filters button,.tabs button{background:rgba(255,255,255,.1);border:1px solid var(--line);border-radius:30px;padding:7px 18px;font-size:12px}
+.filters button.on,.filters button:hover,.tabs button.on,.tabs button:hover{background:#fff;color:#1b1340;border-color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:24px;perspective:1000px}
+.card{position:relative;padding:16px;cursor:pointer;transform-style:preserve-3d;transition:transform .2s ease-out;animation:up .6s backwards;animation-delay:calc(var(--i)*60ms)}
+@keyframes up{from{opacity:0;transform:translateY(40px)}}
+.card .cg{position:absolute;inset:0;border-radius:24px}
+.card .pic{position:relative;padding:10px 22px 0;transform:translateZ(50px)}
+.card .pic::before{content:'';position:absolute;left:50%;top:50%;width:85%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.38),rgba(255,255,255,0) 70%)}
+.card .pic .art{position:relative}
+.card h3{position:relative;font-weight:500;font-size:14px;margin-top:10px;transform:translateZ(26px)}
+.card .row{position:relative;display:flex;justify-content:space-between;align-items:center;margin-top:4px;transform:translateZ(26px)}
+.card .row span{color:var(--mut)}
+.card.out{opacity:.6}
+.badge{position:absolute;top:14px;left:14px;z-index:2;font-size:11px;background:#fff;color:#1b1340;padding:2px 10px;border-radius:20px;font-weight:500;transform:translateZ(60px)}
+.add{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:5px 14px;font-size:12px}
+.add:hover{background:#fff;color:#1b1340}
+
+/* looks */
+.lkb{display:grid;grid-template-columns:1fr 1fr;border-radius:30px;overflow:hidden;margin-top:24px}
+.lk-fig{position:relative;display:grid;place-items:center;padding:30px 10px;min-height:470px}
+.lk-fig::before{content:'';position:absolute;width:310px;height:310px;border-radius:50%;background:radial-gradient(circle at 35% 28%,rgba(255,255,255,.42),rgba(255,255,255,.06) 65%);border:1px solid var(--line)}
+.figw{position:relative;width:190px;animation:bob 6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-10px)}}
+.figw svg,.figw img{width:100%;height:auto;display:block}
+.lk-side{padding:30px;border-left:1px solid var(--line);display:flex;flex-direction:column}
+.lk-side h4{font-weight:500;color:var(--mut);margin-bottom:6px;font-size:12px;letter-spacing:1px}
+.lit{display:grid;grid-template-columns:54px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.th{background:rgba(255,255,255,.24);border-radius:12px;padding:4px}
+.th svg.art,.th img.art{filter:none}
+.lit span{display:block;font-weight:500;font-size:13px}
+.lit small{display:block;color:var(--mut);font-size:12px}
+.lit button{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.12)}
+.lit button:hover{background:#fff;color:#1b1340}
+.lk-tot{margin-top:auto;padding-top:18px}
+.lk-tot .r{display:flex;justify-content:space-between;margin-bottom:12px}
+
+/* product view */
+.pv{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:16px;background:rgba(10,6,30,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+.pv.open{opacity:1;visibility:visible}
+.pvb{position:relative;width:min(900px,100%);max-height:92vh;overflow:auto;border-radius:30px;display:grid;grid-template-columns:1.1fr 1fr;gap:10px;padding:30px;transform:translateY(24px) scale(.97);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.pv.open .pvb{transform:none}
+.pv-x{position:absolute;top:16px;right:22px;z-index:2;background:none;border:0;font-size:13px}
+.pv-art{perspective:1100px;display:grid;place-items:center;min-height:320px}
+.tilt{width:min(300px,70vw);transition:transform .2s ease-out}
+.flip{position:relative;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.flip.back{transform:rotateY(180deg)}
+.face{backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.face.bk{position:absolute;inset:0;transform:rotateY(180deg)}
+.pv-info{align-self:center}
+.pv-info small{color:var(--mut)}
+.pv-info h3{font:500 28px/1.15 'Playfair Display',serif;margin:6px 0}
+.pr{font-size:18px;margin-bottom:16px}
+.seg{display:flex;gap:16px;margin-bottom:12px}
+.seg button{background:none;border:0;border-bottom:1px solid transparent;padding:2px 0;color:var(--mut)}
+.seg button.on{color:#fff;border-color:#fff}
+.sizes{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.sizes button{min-width:36px;height:36px;padding:0 10px;border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.1);font-size:13px}
+.sizes button.on{background:#fff;color:#1b1340;border-color:#fff}
+.pvm{margin-top:12px;color:var(--mut);font-size:13px}
+
+/* cart */
+.dr{position:fixed;top:12px;right:12px;bottom:12px;width:min(400px,calc(100% - 24px));z-index:100;border-radius:26px;padding:22px;display:flex;flex-direction:column;background:linear-gradient(135deg,rgba(45,32,100,.8),rgba(20,14,50,.85));backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);transform:translateX(120%);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.dr.open{transform:none}
+.dr-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.dr-h h3{font:500 22px 'Playfair Display',serif}
+.dr-h button{background:none;border:0;font-size:26px}
+#cItems{flex:1;overflow:auto}
+.ci{display:grid;grid-template-columns:56px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.ci b{display:block;font-weight:500;font-size:13px}
+.ci small{color:var(--mut)}
+.q{display:flex;align-items:center;gap:8px}
+.q button{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.12)}
+.chk input{width:100%;background:rgba(255,255,255,.12);border:1px solid var(--line);border-radius:12px;padding:11px 12px;color:#fff;font:inherit;margin-bottom:8px;outline:none}
+.chk input:focus{border-color:#fff}
+.chk input::placeholder{color:rgba(255,255,255,.55)}
+.tot{display:flex;justify-content:space-between;font-weight:600;margin:10px 0 12px}
+.toast{position:fixed;bottom:28px;left:50%;transform:translate(-50%,16px);background:#fff;color:#1b1340;padding:10px 22px;border-radius:30px;font-weight:500;opacity:0;transition:.3s;z-index:200;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+footer{padding:40px 0;text-align:center;color:var(--mut);font-size:13px}
+footer a{color:inherit}
+
+@media(max-width:900px){
+  .nav a{display:none}
+  .hero{grid-template-columns:1fr;text-align:center;padding-top:100px}
+  .lead{margin-inline:auto}.ctas{justify-content:center}
+  .stage{transform:scale(.82);margin:-30px 0}
+  .lkb,.pvb{grid-template-columns:1fr}
+  .lk-side{border-left:0;border-top:1px solid var(--line)}
+}
+@media(max-width:520px){.stage{transform:scale(.7);margin:-60px 0}}
+@media(prefers-reduced-motion:reduce){.f,.orb,.ring,.figw{animation:none}}
+</style>
+</head>
+<body>
+
+<div class="bg">
+  <div class="orb" style="width:380px;height:380px;background:#ff5fa2;top:-80px;right:8%"></div>
+  <div class="orb" style="width:440px;height:440px;background:#36c5ff;bottom:-140px;left:-80px;animation-delay:-5s"></div>
+  <div class="orb" style="width:260px;height:260px;background:#8b5cff;top:45%;left:46%;animation-delay:-9s"></div>
+</div>
+
+<header class="nav glass">
+  <div class="logo">VELOUR</div>
+  <a href="#home">Home</a><a href="#shop">Shop</a><a href="#looks">Looks</a>
+  <span class="sp"></span>
+  <button class="pill" id="bagBtn"><svg class="ico" viewBox="0 0 24 24"><path d="M6 7h12l1 13H5L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>Bag <b id="bagN">0</b></button>
+</header>
+
+<main class="wrap">
+  <section class="hero" id="home" data-hero>
+    <div>
+      <p class="eb">Winter collection 2026</p>
+      <h1>Fashion that <em>floats</em> in light</h1>
+      <p class="lead">Soft fabrics, glass-clear details. Move your cursor and watch the collection drift.</p>
+      <div class="ctas"><a class="btn" href="#shop">Shop the drop →</a><a class="btn g" href="#looks">Try the look</a></div>
+    </div>
+    <div class="stage">
+      <div class="scene" id="scene">
+        <div class="ring"></div>
+        <div class="disc f" style="--z:0px"></div>
+        <div class="prod f" id="prod" style="--z:70px;--d:-1.5s"></div>
+        <div class="glass chip f" style="--z:110px;--d:-2s;top:50px;right:-24px"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>4.9 rating</div>
+        <div class="glass chip f" style="--z:90px;--d:-4s;bottom:60px;left:-30px"><svg class="ico" viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>Free delivery</div>
+        <div class="sph f" style="--z:130px;--d:-1s;width:64px;height:64px;top:20px;left:24px"></div>
+        <div class="sph f" style="--z:70px;--d:-3s;width:36px;height:36px;bottom:30px;right:40px"></div>
+      </div>
+      <div class="fctl"><button class="rb" id="fPrev" aria-label="Previous">←</button><button class="btn g sm" id="fView">View product</button><button class="rb" id="fNext" aria-label="Next">→</button></div>
+    </div>
+  </section>
+
+  <section class="sec" id="shop">
+    <h2>The collection</h2>
+    <p class="lead2">Heavyweight fabrics, oversized cuts. Limited stock.</p>
+    <div class="filters" id="filters"></div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="sec" id="looks">
+    <h2>Try the look</h2>
+    <p class="lead2">Styled head to toe. Pick a look and add every piece in one tap.</p>
+    <div class="tabs" id="lkTabs"></div>
+    <div class="lkb glass"><div class="lk-fig" id="lkFig"></div><aside class="lk-side" id="lkSide"></aside></div>
+  </section>
+</main>
+
+<footer>© 2026 VELOUR · <a href="admin.html">Admin</a></footer>
+
+<div class="pv" id="pv">
+  <div class="pvb glass">
+    <button class="pv-x" id="pvX">Close ✕</button>
+    <div class="pv-art" id="pvArt"></div>
+    <div class="pv-info" id="pvInfo"></div>
+  </div>
+</div>
+
+<aside class="dr" id="drawer">
+  <div class="dr-h"><h3>Your bag (<span id="cCount">0</span>)</h3><button id="dClose" aria-label="Close">×</button></div>
+  <div id="cItems"></div>
+  <div class="chk" id="chk">
+    <input id="fName" placeholder="Full name">
+    <input id="fPhone" placeholder="Phone (01XXXXXXXXX)" inputmode="numeric">
+    <input id="fAddr" placeholder="Delivery address">
+    <div class="tot"><span>Total</span><span id="cTotal">৳0</span></div>
+    <button class="btn full" id="place">Place order · Cash on delivery</button>
+  </div>
+</aside>
+<div class="toast" id="toast"></div>
+
+<script src="db.js"></script>
+<script>
+let db = loadDB();
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const byId = id => db.products.find(p => p.id === id);
+const live = () => db.products.filter(p => p.active);
+
+/* ---------- garment art (SVG) ---------- */
+const shade = (c,a) => { const n = parseInt(c.slice(1),16), f = v => Math.round(a < 0 ? v*(1+a) : v+(255-v)*a);
+  return '#' + [n>>16,(n>>8)&255,n&255].map(f).map(v => v.toString(16).padStart(2,'0')).join(''); };
+const ink = c => { const n = parseInt(c.slice(1),16); return (((n>>16)*299+((n>>8)&255)*587+(n&255)*114)/1000 > 150) ? '#1a1a1a' : '#f4f4f4'; };
+
+function inner(p, back){
+  const c = p.color, d = shade(c,-.2), k = ink(c);
+  const tx = (y,s,sp) => `<text x="100" y="${y}" text-anchor="middle" font-family="Playfair Display,Georgia,serif" font-weight="600" font-size="${s}" letter-spacing="${sp}" fill="${k}" opacity=".9">VELOUR</text>`;
+  const body = `<path d="M60 48H140L152 62V208Q100 216 48 208V62Z" fill="${c}"/>
+    <path d="M58 50L38 62L20 186L46 192L54 124Z" fill="${c}"/>
+    <path d="M142 50L162 62L180 186L154 192L146 124Z" fill="${c}"/>
+    <path d="M20 186L46 192L45 201L18 195ZM180 186L154 192L155 201L182 195Z" fill="${d}"/>
+    <path d="M48 202Q100 210 152 202V211Q100 219 48 211Z" fill="${d}"/>
+    <path d="M54 124V204M146 124V204" stroke="rgba(0,0,0,.1)" fill="none"/>`;
+  switch(p.type){
+    case 'hoodie': return body + (back
+      ? `<path d="M66 52C62 14 138 14 134 52C126 44 74 44 66 52Z" fill="${shade(c,-.08)}"/>${tx(112,20,4)}`
+      : `<path d="M66 52C62 14 138 14 134 52C126 40 74 40 66 52Z" fill="${shade(c,-.08)}"/>
+         <path d="M74 46C78 80 122 80 126 46C118 34 82 34 74 46Z" fill="${d}"/>
+         <path d="M91 70L89 106M109 70L111 106" stroke="${k}" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+         <path d="M68 150H132L140 192H60Z" fill="none" stroke="rgba(0,0,0,.14)" stroke-width="2"/>`);
+    case 'sweater': return body + `<path d="M72 48C80 70 120 70 128 48" fill="none" stroke="${d}" stroke-width="8"/>`;
+    case 'jacket': return body + `<path d="M68 48L100 78L132 48L140 42L112 32H88L60 42Z" fill="${d}"/>` + (back ? tx(120,15,3)
+      : `<path d="M100 78V210" stroke="${k}" stroke-width="2" stroke-dasharray="3 2" fill="none"/><path d="M62 150H84M138 150H116" stroke="rgba(0,0,0,.28)" stroke-width="2.5" stroke-linecap="round"/>`);
+    case 'tee': return `<path d="M64 42L28 64L46 98L66 86V204Q100 210 134 204V86L154 98L172 64L136 42C128 58 72 58 64 42Z" fill="${c}"/>
+      <path d="M74 44C82 ${back?52:64} 118 ${back?52:64} 126 44" fill="none" stroke="${d}" stroke-width="5"/>
+      <path d="M66 198Q100 204 134 198" stroke="rgba(0,0,0,.12)" fill="none"/>` + (back ? tx(112,20,4) : tx(100,10,3));
+    case 'pants': return `<path d="M62 22H138L152 232H108L100 96L92 232H48Z" fill="${c}"/>
+      <path d="M62 22H138V34H62Z" fill="${d}"/>` + (back
+      ? `<path d="M72 48H98M102 48H128" stroke="rgba(0,0,0,.2)" fill="none"/>`
+      : `<path d="M100 34V96M70 44Q78 64 78 74M130 44Q122 64 122 74" stroke="rgba(0,0,0,.2)" fill="none"/>`) +
+      `<path d="M49 222H93M107 222H151" stroke="rgba(0,0,0,.12)" fill="none"/>`;
+    case 'cap': return `<path d="M44 150C44 84 156 84 156 150Z" fill="${c}"/>
+      <path d="M34 150Q100 184 166 150L162 160Q100 198 38 160Z" fill="${d}"/><circle cx="100" cy="92" r="4" fill="${d}"/>`;
+    case 'shoe': default: return `<path d="M20 152C20 128 54 124 76 108L98 124C122 132 164 132 182 154L184 178H18Z" fill="${c}" stroke="rgba(0,0,0,.18)"/>
+      <path d="M12 178H190V190Q100 198 12 190Z" fill="${shade(c,-.08)}" stroke="rgba(0,0,0,.18)"/>
+      <path d="M84 116L94 106M94 124L106 114M104 130L116 120M52 156Q100 146 150 160" stroke="rgba(0,0,0,.25)" fill="none" stroke-width="2"/>`;
+  }
+}
+function art(p, o = {}){
+  if(p.img) return `<img class="art" src="${esc((o.back && p.imgBack) || p.img)}" alt="" draggable="false">`;
+  return `<svg class="art" viewBox="0 -20 200 270" xmlns="http://www.w3.org/2000/svg">${inner(p, o.back)}</svg>`;
+}
+function figure(look){
+  const its = look.items.map(byId).filter(p => p && p.active);
+  const pick = (...t) => its.find(p => t.includes(p.type));
+  const top = pick('hoodie','sweater','jacket','tee'), pants = pick('pants'), shoe = pick('shoe'), cap = pick('cap');
+  const sk = look.skin || '#c8a07c';
+  const G = (p, tf) => p ? `<g transform="${tf}">${inner(p)}</g>` : '';
+  return `<svg viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 14px 12px rgba(0,0,0,.3))">
+    <ellipse cx="100" cy="392" rx="62" ry="6" fill="rgba(0,0,0,.2)"/>
+    <path d="M50 122L38 216L54 219L66 128ZM150 122L162 216L146 219L134 128Z" fill="${sk}"/>
+    <rect x="91" y="68" width="18" height="30" rx="6" fill="${sk}"/>
+    ${G(pants,'translate(30 190) scale(.7)')}${G(shoe,'translate(97 322) scale(-.3 .3)')}${G(shoe,'translate(103 322) scale(.3)')}${G(top,'translate(25 62) scale(.75)')}
+    <circle cx="100" cy="50" r="22" fill="${sk}"/>
+    <path d="M78 46C78 24 122 24 122 46C112 38 88 38 78 46Z" fill="#1b1b1b"/>
+    ${cap ? `<path d="M76 44C76 18 124 18 124 44Z" fill="${cap.color}"/><path d="M72 44Q100 54 128 44L126 49Q100 60 74 49Z" fill="${shade(cap.color,-.25)}"/>` : ''}
+  </svg>`;
+}
+
+/* ---------- hero ---------- */
+let fi = 0;
+function renderHero(){
+  const L = live();
+  if(!L.length){ $('#prod').innerHTML = ''; return; }
+  fi = ((fi % L.length) + L.length) % L.length;
+  const p = L[fi];
+  $('#prod').innerHTML = `${art(p)}<span class="n">${esc(p.name)}</span><span class="p">${fmt(p.price)}</span>`;
+}
+const hero = $('[data-hero]'), scene = $('#scene');
+hero.addEventListener('pointermove', e => {
+  const r = hero.getBoundingClientRect(), x = (e.clientX - r.left)/r.width - .5, y = (e.clientY - r.top)/r.height - .5;
+  scene.style.transform = `rotateY(${Math.round(x*34)}deg) rotateX(${Math.round(-y*24)}deg)`;
+});
+hero.addEventListener('pointerleave', () => scene.style.transform = '');
+$('#fPrev').onclick = () => { fi--; renderHero(); };
+$('#fNext').onclick = () => { fi++; renderHero(); };
+const openFeatured = () => { const p = live()[fi]; if(p) openProduct(p.id); };
+$('#fView').onclick = openFeatured;
+$('#prod').onclick = openFeatured;
+
+/* ---------- shop grid ---------- */
+let filter = 'All';
+function renderGrid(){
+  const cats = ['All', ...new Set(live().map(p => p.cat))];
+  if(!cats.includes(filter)) filter = 'All';
+  $('#filters').innerHTML = cats.map(c => `<button class="${c === filter ? 'on' : ''}" data-cat="${esc(c)}">${esc(c)}</button>`).join('');
+  $('#grid').innerHTML = live().filter(p => filter === 'All' || p.cat === filter).map((p,i) => `
+    <article class="card ${p.stock < 1 ? 'out' : ''}" data-id="${p.id}" style="--i:${i}">
+      <div class="cg glass"></div>
+      ${p.stock < 1 ? '<span class="badge">Sold out</span>' : p.stock <= 5 ? '<span class="badge">Low stock</span>' : ''}
+      <div class="pic">${art(p)}</div>
+      <h3>${esc(p.name)}</h3>
+      <div class="row"><span>${fmt(p.price)}</span><button class="add" data-add="${p.id}">Add +</button></div>
+    </article>`).join('');
+  document.querySelectorAll('.card').forEach(c => {
+    c.onpointermove = e => { const r = c.getBoundingClientRect(), x = (e.clientX - r.left)/r.width - .5, y = (e.clientY - r.top)/r.height - .5;
+      c.style.transform = `rotateY(${x*16}deg) rotateX(${-y*16}deg) translateZ(8px)`; };
+    c.onpointerleave = () => c.style.transform = '';
+  });
+}
+$('#filters').addEventListener('click', e => { const b = e.target.closest('[data-cat]'); if(b){ filter = b.dataset.cat; renderGrid(); } });
+$('#grid').addEventListener('click', e => {
+  const a = e.target.closest('[data-add]'); if(a){ addToCart(+a.dataset.add); return; }
+  const c = e.target.closest('.card'); if(c) openProduct(+c.dataset.id);
+});
+
+/* ---------- product view ---------- */
+const pv = $('#pv'), pvArt = $('#pvArt');
+let cur = null, size = null;
+function openProduct(id){
+  const p = byId(id); if(!p) return;
+  cur = p; size = defSize(p);
+  pvArt.innerHTML = `<div class="tilt" id="tilt"><div class="flip" id="flip"><div class="face">${art(p)}</div><div class="face bk">${art(p,{back:true})}</div></div></div>`;
+  $('#pvInfo').innerHTML = `<small>${esc(p.cat)}</small><h3>${esc(p.name)}</h3><div class="pr">${fmt(p.price)}</div>
+    <div class="seg"><button class="on" data-side="front">Front</button><button data-side="back">Back</button></div>
+    <div class="sizes">${SIZES(p).map(s => `<button class="${s === size ? 'on' : ''}" data-size="${s}">${s}</button>`).join('')}</div>
+    <button class="btn full" id="pvBuy" ${p.stock < 1 ? 'disabled' : ''}>${p.stock < 1 ? 'Sold out' : 'Add to bag'}</button>
+    <div class="pvm">${p.stock > 0 && p.stock <= 5 ? 'Only ' + p.stock + ' left' : p.stock > 0 ? 'In stock' : ''}</div>`;
+  pv.classList.add('open'); document.body.style.overflow = 'hidden';
+}
+function closePv(){ pv.classList.remove('open'); document.body.style.overflow = ''; }
+pv.addEventListener('click', e => {
+  if(e.target === pv){ closePv(); return; }
+  const t = e.target.closest('button'); if(!t) return;
+  if(t.id === 'pvX') closePv();
+  else if(t.dataset.side){ $('#flip').classList.toggle('back', t.dataset.side === 'back'); pv.querySelectorAll('.seg button').forEach(b => b.classList.toggle('on', b === t)); }
+  else if(t.dataset.size){ size = t.dataset.size; pv.querySelectorAll('.sizes button').forEach(b => b.classList.toggle('on', b === t)); }
+  else if(t.id === 'pvBuy') addToCart(cur.id, size);
+});
+pvArt.addEventListener('pointermove', e => {
+  const t = $('#tilt'); if(!t) return;
+  const r = pvArt.getBoundingClientRect(), x = (e.clientX - r.left)/r.width - .5, y = (e.clientY - r.top)/r.height - .5;
+  t.style.transform = `rotateY(${x*24}deg) rotateX(${-y*10}deg)`;
+});
+pvArt.addEventListener('pointerleave', () => { const t = $('#tilt'); if(t) t.style.transform = ''; });
+
+/* ---------- looks ---------- */
+let li = 0;
+function renderLooks(){
+  const L = db.looks;
+  $('#looks').style.display = L.length ? '' : 'none';
+  if(!L.length) return;
+  li = Math.max(0, Math.min(li, L.length - 1));
+  const l = L[li], its = l.items.map(byId).filter(p => p && p.active);
+  $('#lkTabs').innerHTML = L.map((x,i) => `<button class="${i === li ? 'on' : ''}" data-i="${i}">${esc(x.name)}</button>`).join('');
+  $('#lkFig').innerHTML = `<div class="figw">${l.img ? `<img src="${esc(l.img)}" alt="">` : figure(l)}</div>`;
+  $('#lkSide').innerHTML = `<h4>In this look</h4>` + its.map(p => `<div class="lit"><div class="th">${art(p)}</div><div><span>${esc(p.name)}</span><small>${esc(p.cat)} · ${fmt(p.price)}</small></div><button data-add="${p.id}" aria-label="Add">+</button></div>`).join('') +
+    `<div class="lk-tot"><div class="r"><span>Complete the look</span><b>${fmt(its.reduce((s,p) => s + p.price, 0))}</b></div><button class="btn full" id="lkAll">Add full look to bag →</button></div>`;
+}
+$('#lkTabs').addEventListener('click', e => { const b = e.target.closest('[data-i]'); if(b){ li = +b.dataset.i; renderLooks(); } });
+$('#lkSide').addEventListener('click', e => {
+  const b = e.target.closest('button'); if(!b) return;
+  if(b.dataset.add) addToCart(+b.dataset.add);
+  if(b.id === 'lkAll'){ db.looks[li].items.forEach(id => { const p = byId(id); if(p && p.active) addToCart(id, null, true); }); toast('Full look added ✓'); }
+});
+
+/* ---------- cart + checkout ---------- */
+let cart = []; try{ cart = JSON.parse(localStorage.getItem('velour_cart') || '[]'); }catch(e){}
+const saveCart = () => { try{ localStorage.setItem('velour_cart', JSON.stringify(cart)); }catch(e){} };
+let tt; function toast(m){ const el = $('#toast'); el.textContent = m; el.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => el.classList.remove('show'), 1600); }
+function addToCart(pid, sz, quiet){
+  const p = byId(pid); if(!p || p.stock < 1){ toast('Sold out'); return; }
+  sz = sz || defSize(p);
+  const inCart = cart.filter(c => c.pid === pid).reduce((s,c) => s + c.qty, 0);
+  if(inCart >= p.stock){ toast('Stock limit reached'); return; }
+  const ex = cart.find(c => c.pid === pid && c.size === sz);
+  if(ex) ex.qty++; else cart.push({pid, size:sz, qty:1});
+  saveCart(); renderCart(); if(!quiet) toast('Added to bag ✓ (' + sz + ')');
+}
+function renderCart(){
+  cart = cart.filter(c => byId(c.pid));
+  let total = 0, count = 0;
+  $('#cItems').innerHTML = cart.length ? cart.map((c,i) => { const p = byId(c.pid); total += p.price * c.qty; count += c.qty;
+    return `<div class="ci"><div class="th">${art(p)}</div><div><b>${esc(p.name)}</b><small>Size ${esc(c.size)} · ${fmt(p.price)}</small></div>
+      <div class="q"><button data-q="-1" data-i="${i}">−</button><span>${c.qty}</span><button data-q="1" data-i="${i}">+</button></div></div>`; }).join('') : '<p class="empty">Your bag is empty.</p>';
+  $('#cTotal').textContent = fmt(total); $('#cCount').textContent = count; $('#bagN').textContent = count;
+  $('#chk').style.display = cart.length ? 'block' : 'none';
+}
+$('#cItems').addEventListener('click', e => {
+  const t = e.target.closest('[data-q]'); if(!t) return;
+  const i = +t.dataset.i, c = cart[i], p = byId(c.pid), n = c.qty + +t.dataset.q;
+  if(n < 1) cart.splice(i,1); else if(n <= p.stock) c.qty = n;
+  saveCart(); renderCart();
+});
+$('#bagBtn').onclick = () => $('#drawer').classList.add('open');
+$('#dClose').onclick = () => $('#drawer').classList.remove('open');
+$('#place').onclick = () => {
+  const name = $('#fName').value.trim(), phone = $('#fPhone').value.trim(), addr = $('#fAddr').value.trim();
+  if(!name || !/^01\d{9}$/.test(phone) || !addr){ toast('Enter name, valid phone (01XXXXXXXXX) and address'); return; }
+  db = loadDB();
+  const lines = [];
+  for(const c of cart){
+    const p = db.products.find(x => x.id === c.pid);
+    if(!p || p.stock < c.qty){ toast((p ? p.name : 'An item') + ' is out of stock'); renderAll(); return; }
+    lines.push({pid:p.id, name:p.name, size:c.size, qty:c.qty, price:p.price});
+  }
+  lines.forEach(l => db.products.find(x => x.id === l.pid).stock -= l.qty);
+  db.orders.unshift({id:nextOrderId(db), customer:name, phone, address:addr, pay:'COD', items:lines,
+    total:lines.reduce((s,l) => s + l.price * l.qty, 0), status:'Pending', date:new Date().toISOString()});
+  saveDB(db); cart = []; saveCart(); renderAll();
+  $('#drawer').classList.remove('open'); toast('Order placed ✓ Thank you!');
+};
+
+/* ---------- boot ---------- */
+function renderAll(){ renderHero(); renderGrid(); renderLooks(); renderCart(); }
+addEventListener('storage', e => { if(e.key === KEY){ db = loadDB(); renderAll(); } });
+addEventListener('keydown', e => { if(e.key === 'Escape'){ closePv(); $('#drawer').classList.remove('open'); } });
+renderAll();
+</script>
+</body>
 </html>
